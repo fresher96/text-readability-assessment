@@ -18,7 +18,7 @@ public class Prototype
 
 		path = "../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/test-dir/";
 		prototype.processDir(path);
-
+		
 //		path = "../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/test-dir/";
 //		prototype.processDir(path);
 	
@@ -88,23 +88,28 @@ public class Prototype
 		traditionalFeatureSet.addAllFeatures();
 		featureExtractor.featureSetList.add(traditionalFeatureSet);
 		
-		TraditionalFeatureSet testFeatureSet = new TraditionalFeatureSet("test_feature_set");
-		testFeatureSet.addAllFeatures();
-		testFeatureSet.removeAllFeatures();
-		testFeatureSet.addWordCountFeature();
-		featureExtractor.featureSetList.add(testFeatureSet);
+		//TraditionalFeatureSet testFeatureSet = new TraditionalFeatureSet("test_feature_set");
+		//testFeatureSet.addAllFeatures();
+		//testFeatureSet.removeAllFeatures();
+		//testFeatureSet.addWordCountFeature();
+		//featureExtractor.featureSetList.add(testFeatureSet);
 		
 		
-		featuresCsvFile.print("document,");
-		for(FeatureSet featureSet : featureExtractor.featureSetList)
-		{
-			List<String> addedFeatures = featureSet.addedFeatures();
-			for(String feature : addedFeatures)
-			{
-				featuresCsvFile.print(featureSet.getName() + ",");
-			}
-		}
-		featuresCsvFile.println("label");
+		
+		
+		
+		
+		// writing CSV file headers
+//		featuresCsvFile.print("document,");
+//		for(FeatureSet featureSet : featureExtractor.featureSetList)
+//		{
+//			List<String> addedFeatures = featureSet.addedFeatures();
+//			for(String feature : addedFeatures)
+//			{
+//				featuresCsvFile.print(featureSet.getName() + ",");
+//			}
+//		}
+//		featuresCsvFile.println("label");
 		
 		
 		
@@ -174,15 +179,6 @@ public class Prototype
 		}
 	}
 }
-
-
-class A{
-
-}
-
-
-
-
 
 
 
