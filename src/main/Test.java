@@ -1,5 +1,7 @@
 package main;
 
+import shared.Debugger;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -8,33 +10,7 @@ import java.util.*;
 public class Test
 {
 	public static void main(String[] args) throws IOException {
-		
-		String path = "../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/test-dir/";
-		
-		File folder = new File(path);
-		File[] listOfFiles = folder.listFiles();
-		
-		for (File file : listOfFiles)
-		{
-			if (file.isFile() && file.getName().endsWith(".txt"))
-			{
-				//System.out.println(file.getName());
-				//System.out.println(file.getPath());
-				
-				FileReader fileReader = new FileReader(file);
-				//List<String> lines = Files.readAllLines(Paths.get("file"), StandardCharsets.UTF_8);
-				List<String> lines = Files.readAllLines(Paths.get(file.getPath()));
-				for (String line : lines)
-				{
-					//System.out.println("\"" + line + "\"");
-					
-				}
-			}
-			
-			
-		}
-		
-		
+	
 	}
 	
 	private static void writeConfigFile() throws IOException {
