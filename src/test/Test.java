@@ -17,6 +17,9 @@ import edu.stanford.nlp.semgraph.SemanticGraphEdge;
 import edu.stanford.nlp.trees.GrammaticalRelation;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations;
+import edu.stanford.nlp.trees.tregex.TregexMatcher;
+import edu.stanford.nlp.trees.tregex.TregexPattern;
+import edu.stanford.nlp.trees.tregex.TregexPatternCompiler;
 import edu.stanford.nlp.util.CoreMap;
 
 import shared.Debugger;
@@ -108,8 +111,44 @@ public class Test
 		Map<Integer, CorefChain> graph = document.get(CorefCoreAnnotations.CorefChainAnnotation.class);
 	}
 	
+	private static void tregexTest() {
+		String text = "We use it when a girl in our dorm is acting like a spoiled child.";
+		
+		Properties props = new Properties();
+		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse");
+		
+		Annotation document = new Annotation(text);
+		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+		pipeline.annotate(document);
+		
+		List<CoreMap> sentences = document.get(SentencesAnnotation.class);
+		CoreMap sentence = sentences.get(0);
+		Tree tree = sentence.get(TreeCoreAnnotations.TreeAnnotation.class);
+		
+		//tree.printLocalTree();
+		tree.pennPrint();
+		//System.out.println(tree);
+		
+		String pattern = "S|SINV|SQ < (VP <# MD|VBD|VBP|VBZ)";
+		TregexPatternCompiler tpc = new TregexPatternCompiler();
+		TregexPattern p0 = tpc.compile(pattern);
+		TregexMatcher m0 = p0.matcher(tree);
+		
+		int count = 0;
+		while(m0.find())
+		{
+			m0.getMatch().pennPrint();
+			count++;
+		}
+		
+		// expected 2
+		System.out.println("count = " + count);
+	}
+	
+	
 	public static void main(String[] args) throws IOException {
-		nlpTest();
+		//nlpTest();
+		tregexTest();
 	}
 	
 	
