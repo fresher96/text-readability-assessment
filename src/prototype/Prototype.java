@@ -30,7 +30,7 @@ public class Prototype
 	
 	private void process() throws IOException {
 		
-		maxNumberOfFilesToProcess = 10;
+		maxNumberOfFilesToProcess = 3;
 		
 		System.out.printf("\n\n");
 		
@@ -107,7 +107,7 @@ public class Prototype
 	
 	
 	FeatureExtractor featureExtractor = new FeatureExtractor();
-	PrintStream featuresCsvFile = new PrintStream("features.csv");
+	PrintStream featuresCsvFile = new PrintStream("etc/features.csv");
 	int maxNumberOfFilesToProcess = 3;
 	
 	public Prototype() throws FileNotFoundException {
