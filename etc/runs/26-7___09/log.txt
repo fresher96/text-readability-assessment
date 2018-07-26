@@ -1,0 +1,636 @@
+"C:\Program Files\Java\jdk1.8.0_144\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.1.6\lib\idea_rt.jar=53064:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.1.6\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files\Java\jdk1.8.0_144\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\rt.jar;D:\work space\code\out\production\code;D:\work space\code\libs\stanford-corenlp-3.5.1.jar;D:\work space\code\libs\stanford-corenlp-3.5.1-models.jar" prototype.Prototype
+Adding annotator tokenize
+TokenizerAnnotator: No tokenizer type provided. Defaulting to PTBTokenizer.
+Adding annotator ssplit
+Adding annotator pos
+Reading POS tagger model from edu/stanford/nlp/models/pos-tagger/english-left3words/english-left3words-distsim.tagger ... done [1.9 sec].
+Adding annotator lemma
+Adding annotator parse
+Loading parser from serialized file edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz ...done [0.5 sec].
+process: Amazon-ele.txt
+process: Amsterdam-ele.txt
+process: Anita-ele.txt
+process: Arctic mapping-ele.txt
+process: Banksy-ele.txt
+process: Billionaires-ele.txt
+process: Blackberry-ele.txt
+process: Bolivia-ele.txt
+process: Bonus pay-ele.txt
+process: Brazil-ele.txt
+process: Cigarettes-ele.txt
+process: climate change -ele.txt
+process: Coal to challenge oil-ele.txt
+process: Copyright-ele.txt
+process: Crowdfunding-ele.txt
+process: Denmark-ele.txt
+process: Everest-ele.txt
+process: Exercise-ele.txt
+process: Facebook deserted by millions of users-ele.txt
+process: False memory-ele.txt
+process: Ferguson-ele.txt
+process: Fitness-ele.txt
+process: Food shortages-ele.txt
+process: Gangs-ele.txt
+process: Gorillas and oil-ele.txt
+process: Greeks and drugs-ele.txt
+process: Hillsborough-ele.txt
+process: Insects-ele.txt
+process: Japan menu-ele.txt
+process: Japan-ele.txt
+process: Kashmir-ele.txt
+process: Kate and William-ele.txt
+process: Kenya-ele.txt
+process: Liberia-ele.txt
+process: Lie detector-ele.txt
+process: Life expectancy-ele.txt
+process: Life on Mars-ele.txt
+process: Loterry-ele.txt
+process: Malala-ele.txt
+process: Meteorite-ele.txt
+process: Midlife crisis-ele.txt
+process: Murderers beware-ele.txt
+process: Nelson Mandela-ele.txt
+process: Nepal-ele.txt
+process: Norwegian sun-ele.txt
+process: NSA 2-ele.txt
+process: NSA scandal-ele.txt
+process: Obama-ele.txt
+process: Old age-ele.txt
+process: Organs-ele.txt
+process: Pope-ele.txt
+process: Prince Harry-ele.txt
+process: Rats-ele.txt
+process: Richard III-ele.txt
+process: Royal Baby-ele.txt
+process: Skydiver-ele.txt
+process: Spain-ele.txt
+process: Starbucks-ele.txt
+process: Superbugs-ele.txt
+process: Swedish prisons-ele.txt
+process: Syria-ele.txt
+process: Teff-ele.txt
+process: Thatcher-ele.txt
+process: US shutdown-ele.txt
+process: Violence-ele.txt
+process: WNL 101 year old bottle message-ele.txt
+process: WNL A good night sleep-ele.txt
+process: WNL Apple-ele.txt
+process: WNL Arctic Ramadan-ele.txt
+process: WNL Are MOOCs the future-ele.txt
+process: WNL are you a bad boyfriend-ele.txt
+process: WNL Bangladesh factory owners-ele.txt
+process: WNL Bangladeshi organization-ele.txt
+process: WNL Barack Obama-ele.txt
+process: WNL Basic phone logs-ele.txt
+process: WNL Billionaires-ele.txt
+process: WNL Black Friday-ele.txt
+process: WNL Bogus Allergy-ele.txt
+process: WNL Bright Future-ele.txt
+process: WNL Brown bears-ele.txt
+process: WNL Calais Migrants-ele.txt
+process: WNL Can the US-ele.txt
+process: WNL Canadian Pair-ele.txt
+process: WNL Castaway-ele.txt
+process: WNL Changing India-ele.txt
+process: WNL Coloring Books-ele.txt
+process: WNL Criminal Links-ele.txt
+process: WNL Cuba-ele.txt
+process: WNL David Bowie-ele.txt
+process: WNL David Mitchell-ele.txt
+process: WNL Drowning in rubbish-ele.txt
+process: WNL EU Pollution-ele.txt
+process: WNL Experience-ele.txt
+process: WNL Extinction-ele.txt
+process: WNL Extreme heat-ele.txt
+process: WNL FIFA-ele.txt
+process: WNL Fifth of young adults-ele.txt
+process: WNL First female coach-ele.txt
+process: WNL First high resolution images-ele.txt
+process: WNL Five jobs-ele.txt
+process: WNL Four new elements-ele.txt
+process: WNL Glastonbury-ele.txt
+process: WNL Goodbye fish and chips-ele.txt
+process: WNL Google boss-ele.txt
+process: WNL Google car-ele.txt
+process: WNL How downtown Abbey-ele.txt
+process: WNL I confused my numbers-ele.txt
+process: WNL Icebucket challenge-ele.txt
+process: WNL Icelandic names-ele.txt
+process: WNL In flight-ele.txt
+process: WNL India's rich-ele.txt
+process: WNL Inky the octopus-ele.txt
+process: WNL Inventions-ele.txt
+process: WNL Japan-ele.txt
+process: WNL JMW Turner-ele.txt
+process: WNL John Lewis-ele.txt
+process: WNL Kate Bush-ele.txt
+process: WNL Kiruna-ele.txt
+process: WNL Lego movie-ele.txt
+process: WNL Loneliness-ele.txt
+process: WNL Love hormonw-ele.txt
+process: WNL Making a killing-ele.txt
+process: WNL Man falls-ele.txt
+process: WNL Mars-ele.txt
+process: WNL Men in black-ele.txt
+process: WNL Mirrors-ele.txt
+process: WNL Morocco-ele.txt
+process: WNL Music-ele.txt
+process: WNL Mystery Shopper-ele.txt
+process: WNL NASA Astronaut-ele.txt
+process: WNL Neuroscientists-ele.txt
+process: WNL New Orleans-ele.txt
+process: WNL Nigerian low tech-ele.txt
+process: WNL Noise pollution -ele.txt
+process: WNL Novel way-ele.txt
+Jul 26, 2018 8:25:13 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+1C, decimal: 28)
+process: WNL On the trail-ele.txt
+process: WNL Organic Food-ele.txt
+process: WNL Pacific Islanders-ele.txt
+process: WNL Pizza chain-ele.txt
+process: WNL Planet-ele.txt
+Jul 26, 2018 8:25:22 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL Poverty-ele.txt
+process: WNL Revolution-ele.txt
+Jul 26, 2018 8:25:27 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL Rwanda-ele.txt
+process: WNL Satnav-ele.txt
+process: WNL Scarlett-ele.txt
+Jul 26, 2018 8:25:31 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL School Sports-ele.txt
+process: WNL School-ele.txt
+process: WNL Scientist-ele.txt
+process: WNL Scottish referendum-ele.txt
+process: WNL SeaWorld-ele.txt
+process: WNL Shakespeare-ele.txt
+process: WNL shark-ele.txt
+process: WNL Ships noise-ele.txt
+process: WNL Shocking-ele.txt
+process: WNL Shops-ele.txt
+process: WNL six well paid jobs-ele.txt
+process: WNL Six year olds-ele.txt
+process: WNL Spain Robin Hood-ele.txt
+process: WNL Spain Wetlands-ele.txt
+Jul 26, 2018 8:25:59 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL Star Wars-ele.txt
+process: WNL Still no flying cars-ele.txt
+process: WNL Swarthy caveman-ele.txt
+process: WNL Switched Babies-ele.txt
+process: WNL Ten ideas-ele.txt
+process: WNL The age of music-ele.txt
+process: WNL The Greek island-ele.txt
+Jul 26, 2018 8:26:12 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable: (U+8, decimal: 8)
+process: WNL The last-ele.txt
+process: WNL The lightweight-ele.txt
+process: WNL The millenials-ele.txt
+process: WNL Tributes-ele.txt
+process: WNL Use of e-cig-ele.txt
+process: WNL Vienna-ele.txt
+process: WNL Waiters-ele.txt
+Jul 26, 2018 8:26:24 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+1, decimal: 1)
+process: WNL Ways Facebook changed-ele.txt
+process: WNL We must-ele.txt
+process: WNL Wealth therapy-ele.txt
+process: WNL What does Apple-ele.txt
+Jul 26, 2018 8:26:35 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+1, decimal: 1)
+process: WNL What is world's-ele.txt
+process: WNL What's the secret-ele.txt
+process: WNL Who can stop Trump-ele.txt
+process: WNL Who invented-ele.txt
+process: WNL Why are people so wrong-ele.txt
+process: WNL Why we should -ele.txt
+process: WNL Why you should start work at 10-ele.txt
+process: WNL Will drones-ele.txt
+process: WNL Winter-ele.txt
+process: WNL World Cup-ele.txt
+Jul 26, 2018 8:26:52 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+1C, decimal: 28)
+process: WNL Young Americans-ele.txt
+process: Zero Hours-ele.txt
+process: Amazon-int.txt
+process: Amsterdam-int.txt
+process: Anita-int.txt
+process: Arctic mapping-int.txt
+process: Banksy-int.txt
+process: Billionaires-int.txt
+process: Blackberry-int.txt
+process: Bolivia-int.txt
+process: Bonus pay-int.txt
+process: Brazil-int.txt
+process: Cigarettes-int.txt
+process: climate change -int.txt
+process: Coal to challenge oil-int.txt
+process: Copyright-int.txt
+process: Crowdfunding-int.txt
+process: Denmark-int.txt
+process: Everest-int.txt
+process: Exercise-int.txt
+process: Facebook deserted by millions of users-int.txt
+process: False memory-int.txt
+process: Ferguson-int.txt
+process: Fitness-int.txt
+process: Food shortages-int.txt
+process: Gangs-int.txt
+process: Gorillas and oil-int.txt
+process: Greeks and drugs-int.txt
+process: Hillsborough-int.txt
+process: Insects-int.txt
+process: Japan menu-int.txt
+process: Japan-int.txt
+process: Kashmir-int.txt
+process: Kate and William-int.txt
+process: Kenya-int.txt
+process: Liberia-int.txt
+process: Lie detector-int.txt
+process: Life expectancy-int.txt
+process: Life on Mars-int.txt
+process: Loterry-int.txt
+process: Malala-int.txt
+process: Meteorite-int.txt
+process: Midlife crisis-int.txt
+process: Murderers beware-int.txt
+process: Nelson Mandela-int.txt
+process: Nepal-int.txt
+process: Norwegian sun-int.txt
+process: NSA 2-int.txt
+process: NSA scandal-int.txt
+process: Obama-int.txt
+process: Old age-int.txt
+process: Organs-int.txt
+process: Pope-int.txt
+process: Prince Harry-int.txt
+process: Rats-int.txt
+process: Richard III-int.txt
+process: Royal Baby-int.txt
+process: Skydiver-int.txt
+process: Spain-int.txt
+process: Starbucks-int.txt
+process: Superbugs-int.txt
+process: Swedish prisons-int.txt
+process: Syria-int.txt
+process: Teff-int.txt
+process: Thatcher-int.txt
+process: US shutdown-int.txt
+process: Violence-int.txt
+process: WNL 101 year old bottle message-int.txt
+process: WNL A good night sleep-int.txt
+process: WNL Apple-int.txt
+process: WNL Arctic Ramadan-int.txt
+process: WNL Are MOOCs the future-int.txt
+process: WNL are you a bad boyfriend-int.txt
+process: WNL Bangladesh factory owners-int.txt
+process: WNL Bangladeshi organization-int.txt
+process: WNL Barack Obama-int.txt
+process: WNL Basic phone logs-int.txt
+process: WNL Billionaires-int.txt
+process: WNL Black Friday-int.txt
+process: WNL Bogus Allergy-int.txt
+process: WNL Bright Future-int.txt
+process: WNL Brown bears-int.txt
+process: WNL Calais Migrants-int.txt
+process: WNL Can the US-int.txt
+process: WNL Canadian Pair-int.txt
+process: WNL Castaway-int.txt
+process: WNL Changing India-int.txt
+process: WNL Coloring Books-int.txt
+process: WNL Criminal Links-int.txt
+process: WNL Cuba-int.txt
+process: WNL David Bowie-int.txt
+process: WNL David Mitchell-int.txt
+process: WNL Drowning in rubbish-int.txt
+process: WNL EU Pollution-int.txt
+process: WNL Experience-int.txt
+process: WNL Extinction-int.txt
+process: WNL Extreme heat-int.txt
+process: WNL FIFA-int.txt
+process: WNL Fifth of young adults-int.txt
+process: WNL First female coach-int.txt
+process: WNL First high resolution images-int.txt
+process: WNL Five jobs-int.txt
+process: WNL Four new elements-int.txt
+process: WNL Glastonbury-int.txt
+process: WNL Goodbye fish and chips-int.txt
+process: WNL Google boss-int.txt
+process: WNL Google car-int.txt
+process: WNL How downtown Abbey-int.txt
+process: WNL I confused my numbers-int.txt
+process: WNL Icebucket challenge-int.txt
+process: WNL Icelandic names-int.txt
+process: WNL In flight-int.txt
+process: WNL India's rich-int.txt
+process: WNL Inky the octopus-int.txt
+process: WNL Inventions-int.txt
+process: WNL Japan-int.txt
+process: WNL JMW Turner-int.txt
+process: WNL John Lewis-int.txt
+process: WNL Kate Bush-int.txt
+process: WNL Kiruna-int.txt
+process: WNL Lego movie-int.txt
+process: WNL Loneliness-int.txt
+process: WNL Love hormonw-int.txt
+process: WNL Making a killing-int.txt
+process: WNL Man falls-int.txt
+process: WNL Mars-int.txt
+process: WNL Men in black-int.txt
+process: WNL Mirrors-int.txt
+Jul 26, 2018 8:33:25 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+1C, decimal: 28)
+process: WNL Morocco-int.txt
+process: WNL Music-int.txt
+process: WNL Mystery Shopper-int.txt
+process: WNL NASA Astronaut-int.txt
+process: WNL Neuroscientists-int.txt
+process: WNL New Orleans-int.txt
+process: WNL Nigerian low tech-int.txt
+process: WNL Noise pollution -int.txt
+process: WNL Novel way-int.txt
+Jul 26, 2018 8:33:50 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+1C, decimal: 28)
+process: WNL On the trail-int.txt
+process: WNL Organic Food-int.txt
+process: WNL Pacific Islanders-int.txt
+process: WNL Pizza chain-int.txt
+process: WNL Planet-int.txt
+process: WNL Poverty-int.txt
+process: WNL Revolution-int.txt
+Jul 26, 2018 8:34:11 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL Rwanda-int.txt
+process: WNL Satnav-int.txt
+Jul 26, 2018 8:34:17 AM edu.stanford.nlp.process.PTBLexer next
+process: WNL Scarlett-int.txt
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL School Sports-int.txt
+process: WNL School-int.txt
+process: WNL Scientist-int.txt
+process: WNL Scottish referendum-int.txt
+process: WNL SeaWorld-int.txt
+process: WNL Shakespeare-int.txt
+process: WNL shark-int.txt
+process: WNL Ships noise-int.txt
+process: WNL Shocking-int.txt
+process: WNL Shops-int.txt
+process: WNL six well paid jobs-int.txt
+process: WNL Six year olds-int.txt
+process: WNL Spain Robin Hood-int.txt
+process: WNL Spain Wetlands-int.txt
+Jul 26, 2018 8:34:58 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL Star Wars-int.txt
+process: WNL Still no flying cars-int.txt
+process: WNL Swarthy caveman-int.txt
+process: WNL Switched Babies-int.txt
+process: WNL Ten ideas-int.txt
+process: WNL The age of music-int.txt
+process: WNL The Greek island-int.txt
+Jul 26, 2018 8:35:22 AM edu.stanford.nlp.process.PTBLexer next
+process: WNL The last-int.txt
+WARNING: Untokenizable: (U+8, decimal: 8)
+process: WNL The lightweight-int.txt
+process: WNL The millenials-int.txt
+process: WNL Tributes-int.txt
+process: WNL Use of e-cig-int.txt
+process: WNL Vienna-int.txt
+Jul 26, 2018 8:35:39 AM edu.stanford.nlp.process.PTBLexer next
+process: WNL Waiters-int.txt
+WARNING: Untokenizable:  (U+1, decimal: 1)
+process: WNL Ways Facebook changed-int.txt
+process: WNL We must-int.txt
+process: WNL Wealth therapy-int.txt
+process: WNL What does Apple-int.txt
+Jul 26, 2018 8:35:54 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL What is world's-int.txt
+Jul 26, 2018 8:35:57 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL What's the secret-int.txt
+process: WNL Who can stop Trump-int.txt
+process: WNL Who invented-int.txt
+process: WNL Why are people so wrong-int.txt
+process: WNL Why we should -int.txt
+process: WNL Why you should start work at 10-int.txt
+process: WNL Will drones-int.txt
+process: WNL Winter-int.txt
+process: WNL World Cup-int.txt
+Jul 26, 2018 8:36:25 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+1C, decimal: 28)
+process: WNL Young Americans-int.txt
+process: Zero Hours-int.txt
+process: Amazon-adv.txt
+process: Amsterdam-adv.txt
+process: Anita-adv.txt
+process: Arctic mapping-adv.txt
+process: Banksy-adv.txt
+process: Billionaires-adv.txt
+process: Blackberry-adv.txt
+process: Bolivia-adv.txt
+process: Bonus pay-adv.txt
+process: Brazil-adv.txt
+process: Cigarettes-adv.txt
+process: climate change -adv.txt
+process: Coal to challenge oil-adv.txt
+process: Copyright-adv.txt
+process: Crowdfunding-adv.txt
+process: Denmark-adv.txt
+process: Everest-adv.txt
+process: Exercise-adv.txt
+process: Facebook deserted by millions of users-adv.txt
+process: False memory-adv.txt
+process: Ferguson-adv.txt
+process: Fitness-adv.txt
+process: Food shortages-adv.txt
+process: Gangs-adv.txt
+process: Gorillas and oil-adv.txt
+process: Greeks and drugs-adv.txt
+process: Hillsborough-adv.txt
+process: Insects-adv.txt
+process: Japan menu-adv.txt
+process: Japan-adv.txt
+process: Kashmir-adv.txt
+process: Kate and William-adv.txt
+process: Kenya-adv.txt
+process: Liberia-adv.txt
+process: Lie detector-adv.txt
+process: Life expectancy-adv.txt
+process: Life on Mars-adv.txt
+process: Loterry-adv.txt
+process: Malala-adv.txt
+process: Meteorite-adv.txt
+process: Midlife crisis-adv.txt
+process: Murderers beware-adv.txt
+process: Nelson Mandela-adv.txt
+process: Nepal-adv.txt
+process: Norwegian sun-adv.txt
+process: NSA 2-adv.txt
+process: NSA scandal-adv.txt
+process: Obama-adv.txt
+process: Old age-adv.txt
+process: Organs-adv.txt
+process: Pope-adv.txt
+process: Prince Harry-adv.txt
+process: Rats-adv.txt
+process: Richard III-adv.txt
+process: Royal Baby-adv.txt
+process: Skydiver-adv.txt
+process: Spain-adv.txt
+process: Starbucks-adv.txt
+process: Superbugs-adv.txt
+process: Swedish prisons-adv.txt
+process: Syria-adv.txt
+process: Teff-adv.txt
+process: Thatcher-adv.txt
+process: US shutdown-adv.txt
+process: Violence-adv.txt
+process: WNL 101 year old bottle message-adv.txt
+process: WNL A good night sleep-adv.txt
+process: WNL Apple-adv.txt
+process: WNL Arctic Ramadan-adv.txt
+process: WNL Are MOOCs the future-adv.txt
+process: WNL are you a bad boyfriend-adv.txt
+process: WNL Bangladesh factory owners-adv.txt
+process: WNL Bangladeshi organization-adv.txt
+process: WNL Barack Obama-adv.txt
+process: WNL Basic phone logs-adv.txt
+process: WNL Billionaires-adv.txt
+process: WNL Black Friday-adv.txt
+process: WNL Bogus Allergy-adv.txt
+process: WNL Bright Future-adv.txt
+process: WNL Brown bears-adv.txt
+process: WNL Calais Migrants-adv.txt
+process: WNL Can the US-adv.txt
+process: WNL Canadian Pair-adv.txt
+process: WNL Castaway-adv.txt
+process: WNL Changing India-adv.txt
+process: WNL Coloring Books-adv.txt
+process: WNL Criminal Links-adv.txt
+process: WNL Cuba-adv.txt
+process: WNL David Bowie-adv.txt
+process: WNL David Mitchell-adv.txt
+process: WNL Drowning in rubbish-adv.txt
+process: WNL EU Pollution-adv.txt
+process: WNL Experience-adv.txt
+process: WNL Extinction-adv.txt
+process: WNL Extreme heat-adv.txt
+process: WNL FIFA-adv.txt
+process: WNL Fifth of young adults-adv.txt
+process: WNL First female coach-adv.txt
+process: WNL First high resolution images-adv.txt
+process: WNL Five jobs-adv.txt
+process: WNL Four new elements-adv.txt
+process: WNL Glastonbury-adv.txt
+process: WNL Goodbye fish and chips-adv.txt
+process: WNL Google boss-adv.txt
+process: WNL Google car-adv.txt
+process: WNL How downtown Abbey-adv.txt
+process: WNL I confused my numbers-adv.txt
+process: WNL Icebucket challenge-adv.txt
+process: WNL Icelandic names-adv.txt
+process: WNL In flight-adv.txt
+process: WNL India's rich-adv.txt
+process: WNL Inky the octopus-adv.txt
+process: WNL Inventions-adv.txt
+process: WNL Japan-adv.txt
+process: WNL JMW Turner-adv.txt
+process: WNL John Lewis-adv.txt
+process: WNL Kate Bush-adv.txt
+process: WNL Kiruna-adv.txt
+process: WNL Lego movie-adv.txt
+process: WNL Loneliness-adv.txt
+process: WNL Love hormonw-adv.txt
+process: WNL Making a killing-adv.txt
+process: WNL Man falls-adv.txt
+process: WNL Mars-adv.txt
+process: WNL Men in black-adv.txt
+process: WNL Mirrors-adv.txt
+Jul 26, 2018 8:46:18 AM edu.stanford.nlp.process.PTBLexer next
+process: WNL Morocco-adv.txt
+WARNING: Untokenizable:  (U+1C, decimal: 28)
+process: WNL Music-adv.txt
+process: WNL Mystery Shopper-adv.txt
+process: WNL NASA Astronaut-adv.txt
+process: WNL Neuroscientists-adv.txt
+process: WNL New Orleans-adv.txt
+process: WNL Nigerian low tech-adv.txt
+process: WNL Noise pollution -adv.txt
+Jul 26, 2018 8:46:53 AM edu.stanford.nlp.process.PTBLexer next
+process: WNL Novel way-adv.txt
+WARNING: Untokenizable:  (U+1C, decimal: 28)
+process: WNL On the trail-adv.txt
+process: WNL Organic Food-adv.txt
+process: WNL Pacific Islanders-adv.txt
+process: WNL Pizza chain-adv.txt
+process: WNL Planet-adv.txt
+process: WNL Poverty-adv.txt
+process: WNL Revolution-adv.txt
+Jul 26, 2018 8:47:41 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+1C, decimal: 28)
+process: WNL Rwanda-adv.txt
+process: WNL Satnav-adv.txt
+Jul 26, 2018 8:47:51 AM edu.stanford.nlp.process.PTBLexer next
+process: WNL Scarlett-adv.txt
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL School Sports-adv.txt
+process: WNL School-adv.txt
+process: WNL Scientist-adv.txt
+process: WNL Scottish referendum-adv.txt
+process: WNL SeaWorld-adv.txt
+process: WNL Shakespeare-adv.txt
+process: WNL shark-adv.txt
+process: WNL Ships noise-adv.txt
+process: WNL Shocking-adv.txt
+process: WNL Shops-adv.txt
+process: WNL six well paid jobs-adv.txt
+process: WNL Six year olds-adv.txt
+process: WNL Spain Robin Hood-adv.txt
+Jul 26, 2018 8:48:52 AM edu.stanford.nlp.process.PTBLexer next
+process: WNL Spain Wetlands-adv.txt
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL Star Wars-adv.txt
+process: WNL Still no flying cars-adv.txt
+process: WNL Swarthy caveman-adv.txt
+process: WNL Switched Babies-adv.txt
+process: WNL Ten ideas-adv.txt
+process: WNL The age of music-adv.txt
+process: WNL The Greek island-adv.txt
+process: WNL The last-adv.txt
+Jul 26, 2018 8:49:31 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable: (U+8, decimal: 8)
+process: WNL The lightweight-adv.txt
+process: WNL The millenials-adv.txt
+process: WNL Tributes-adv.txt
+process: WNL Use of e-cig-adv.txt
+process: WNL Vienna-adv.txt
+process: WNL Waiters-adv.txt
+Jul 26, 2018 8:50:04 AM edu.stanford.nlp.process.PTBLexer next
+process: WNL Ways Facebook changed-adv.txt
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL We must-adv.txt
+process: WNL Wealth therapy-adv.txt
+Jul 26, 2018 8:50:24 AM edu.stanford.nlp.process.PTBLexer next
+process: WNL What does Apple-adv.txt
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL What is world's-adv.txt
+Jul 26, 2018 8:50:29 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+19, decimal: 25)
+process: WNL What's the secret-adv.txt
+process: WNL Who can stop Trump-adv.txt
+process: WNL Who invented-adv.txt
+process: WNL Why are people so wrong-adv.txt
+process: WNL Why we should -adv.txt
+process: WNL Why you should start work at 10-adv.txt
+process: WNL Will drones-adv.txt
+process: WNL Winter-adv.txt
+Jul 26, 2018 8:51:13 AM edu.stanford.nlp.process.PTBLexer next
+WARNING: Untokenizable:  (U+1C, decimal: 28)
+process: WNL World Cup-adv.txt
+process: WNL Young Americans-adv.txt
+process: Zero Hours-adv.txt
+
+Process finished with exit code 0

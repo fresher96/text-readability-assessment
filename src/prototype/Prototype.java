@@ -25,12 +25,33 @@ public class Prototype
 		//prototype.featureExtractorTest();
 		//prototype.featureExtractorTest2();
 		
+		prototype.process();
+	}
+	
+	private void process() throws IOException {
+		
+		maxNumberOfFilesToProcess = 10;
+		
+		System.out.printf("\n\n");
+		
+		long nanoPerSec = 1L * 1000 * 1000 * 1000;
+		long startTime = System.nanoTime();
 		String[] dirArray = {"Ele-Txt", "Int-Txt", "Adv-Txt"};
 		for (String dir : dirArray)
 		{
-			path = String.format("../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/%s/", dir);
-			prototype.processDir(path);
+			String path = String.format("../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/%s/", dir);
+			
+			long startTime2 = System.nanoTime();
+			processDir(path);
+			long elapsedTime = System.nanoTime() - startTime2;
+			
+			System.out.println("\n..........................................................................................................");
+			System.out.printf("finished directory %s, time elapsed: %02d:%02d\n", dir, elapsedTime / nanoPerSec / 60, elapsedTime / nanoPerSec % 60);
+			System.out.println("..........................................................................................................\n\n\n\n\n");
 		}
+		
+		long elapsedTime = System.nanoTime() - startTime;
+		System.out.printf("total time elapsed: %02d:%02d\n", elapsedTime / nanoPerSec / 60, elapsedTime / nanoPerSec % 60);
 	}
 	
 	private void featureExtractorTest2() {
@@ -87,6 +108,7 @@ public class Prototype
 	
 	FeatureExtractor featureExtractor = new FeatureExtractor();
 	PrintStream featuresCsvFile = new PrintStream("features.csv");
+	int maxNumberOfFilesToProcess = 3;
 	
 	public Prototype() throws FileNotFoundException {
 		
@@ -147,16 +169,15 @@ public class Prototype
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
 		
-		int maxNumberOfFilesToProcess = 30;
 		int index = 0;
 		
 		for (File file : listOfFiles)
 		{
-			if (index == maxNumberOfFilesToProcess) break;
-			index++;
-			
 			if (file.isFile() && file.getName().endsWith(".txt"))
 			{
+				if (index == maxNumberOfFilesToProcess) break;
+				index++;
+				
 				//System.out.println(file.getName());
 				//System.out.println(file.getPath());
 				
@@ -183,8 +204,7 @@ public class Prototype
 				//Debugger.debug(label);
 				//Debugger.debug(document);
 				
-				
-				System.out.println("process: " + file.getName());
+				System.out.printf("processing file %d: %s\n", index, file.getName());
 				
 				// writing features to features.csv
 				featuresCsvFile.print(file.getName() + ",");
