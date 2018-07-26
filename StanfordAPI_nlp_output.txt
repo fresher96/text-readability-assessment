@@ -1,0 +1,32 @@
+Adding annotator tokenize
+TokenizerAnnotator: No tokenizer type provided. Defaulting to PTBTokenizer.
+Adding annotator ssplit
+Adding annotator pos
+Reading POS tagger model from edu/stanford/nlp/models/pos-tagger/english-bidirectional/english-bidirectional-distsim.tagger ... done [2.0 sec].
+Adding annotator lemma
+Adding annotator depparse
+Loading depparse model file: edu/stanford/nlp/models/parser/nndep/english_SD.gz ... 
+PreComputed 100000, Elapsed Time: 2.271 (s)
+Initializing dependency parser done [5.1 sec].
+Adding annotator ner
+Loading classifier from edu/stanford/nlp/models/ner/english.all.3class.distsim.crf.ser.gz ... done [3.6 sec].
+Loading classifier from edu/stanford/nlp/models/ner/english.conll.4class.distsim.crf.ser.gz ... done [4.3 sec].
+Loading classifier from edu/stanford/nlp/models/ner/english.muc.7class.distsim.crf.ser.gz ... done [2.0 sec].
+Jim,NNP,Jim , PERSON
+bought,VBD,buy , O
+300,CD,300 , NUMBER
+shares,NNS,share , O
+of,IN,of , O
+Acme,NNP,Acme , ORGANIZATION
+Corp.,NNP,Corp. , ORGANIZATION
+in,IN,in , O
+2006,CD,2006 , DATE
+.,.,. , O
+[bought/VBD
+  nsubj:Jim/NNP
+  dobj:[shares/NNS num:300/CD prep_of:[Corp./NNP nn:Acme/NNP]]
+  prep_in:2006/CD
+  punct:./.]
+Jim --- buy
+
+Process finished with exit code 0

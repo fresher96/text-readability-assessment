@@ -1,5 +1,7 @@
 package prototype;
 
+import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import shared.Debugger;
 import shared.StringHelper;
 
@@ -8,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class Prototype
 {
@@ -95,8 +98,7 @@ public class Prototype
 		//featureExtractor.featureSetList.add(testFeatureSet);
 		
 		
-		
-		
+		addNlpFeatures();
 		
 		
 		// writing CSV file headers
@@ -123,6 +125,16 @@ public class Prototype
 			}
 		}
 		featuresCsvFile.println("label");
+	}
+	
+	private void addNlpFeatures() {
+		
+		Properties props = new Properties();
+		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse");
+		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+		
+		NlpFeatureSet nlpFeatureSet = new NlpFeatureSet(pipeline);
+		featureExtractor.featureSetList.add(nlpFeatureSet);
 	}
 	
 	public void processDir(String path) throws IOException {

@@ -64,3 +64,5 @@ fabric.properties
 
 # custom overrides
 /features.csv
+/libs/
+/models/
