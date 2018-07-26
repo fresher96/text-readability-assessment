@@ -67,4 +67,4 @@ fabric.properties
 /libs/
 /models/
 
-/features.csv
+#/features.csv

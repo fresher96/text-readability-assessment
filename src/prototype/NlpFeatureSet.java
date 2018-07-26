@@ -1,6 +1,7 @@
 package prototype;
 
 import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.trees.Tree;
@@ -11,9 +12,7 @@ import edu.stanford.nlp.trees.tregex.TregexPatternCompiler;
 import edu.stanford.nlp.util.CoreMap;
 import shared.Debugger;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
+import java.util.*;
 
 public class NlpFeatureSet extends FeatureSet
 {
@@ -58,12 +57,30 @@ public class NlpFeatureSet extends FeatureSet
 		CN_C,
 		CN_T,
 		VP_T,
+		
+		/* others */
+		
+		SentenceCount,
+		AvgSentenceLengthInWords,
+		AvgSentenceLengthInChars,
+		
+		NounVariation,
+		VerbVariation,
+		AdjectiveVariation,
+		AdverbVariation,
+		
+		VerbVariation1,
+		SquaredVerbVariation1,
+		CorrectedVerbVariation1,
+		
+		LexicalDensity,
 	}
 	
 	@Override
 	public List<Feature> extract(String document) {
 		
 		double nWord = 0;
+		double nChar = 0;
 		
 		double depth = 0;
 		double score = 0;
@@ -80,8 +97,18 @@ public class NlpFeatureSet extends FeatureSet
 		double nComplexNominal = 0;
 		double nVerbPhrase = 0;
 		
+		/* others */
+		
+		double nNoun = 0;
+		double nVerb = 0;
+		double nAdjective = 0;
+		double nAdverb = 0;
+		
+		
+		/* computation */
 		
 		TregexPatternCompiler tpc = new TregexPatternCompiler();
+		Set<String> uniqueStemmedVerbs = new HashSet<>();
 		
 		Annotation doc = new Annotation(document);
 		nlpParser.annotate(doc);
@@ -91,7 +118,7 @@ public class NlpFeatureSet extends FeatureSet
 		{
 			Tree tree = sentence.get(TreeCoreAnnotations.TreeAnnotation.class);
 			
-			nWord += tree.getLeaves().size();
+			//nWord += tree.getLeaves().size();
 			
 			depth += tree.depth();
 			score += tree.score();
@@ -111,8 +138,45 @@ public class NlpFeatureSet extends FeatureSet
 			nComplexNominal += count("SBAR [$+ VP | > VP] & [<# WHNP |<# (IN < That|that|For|for) |<, S]", tree, tpc);
 			nComplexNominal += count("S < (VP <# VBG|TO) $+ VP", tree, tpc);
 			nVerbPhrase += count("ADJP|ADVP|NP|VP < CC", tree, tpc);
+			
+			/* others */
+			
+			List<CoreLabel> tokenList = sentence.get(CoreAnnotations.TokensAnnotation.class);
+			for (CoreLabel token : tokenList)
+			{
+				String rawToken = token.get(CoreAnnotations.TextAnnotation.class);
+				String pos = token.get(CoreAnnotations.PartOfSpeechAnnotation.class);
+				
+				nWord++;
+				nChar += rawToken.length();
+				
+				if (pos.equals("NN") || pos.equals("NNS") || pos.equals("NNP") ||
+						pos.equals("NNPS"))
+				{
+					nNoun++;
+				}
+				else if (pos.equals("VB") || pos.equals("VBD") || pos.equals("VBG") ||
+						pos.equals("VBN") || pos.equals("VBP") || pos.equals("VBZ"))
+				{
+					nVerb++;
+					String lemma = token.get(CoreAnnotations.LemmaAnnotation.class);
+					uniqueStemmedVerbs.add(lemma);
+				}
+				else if (pos.equals("JJ") || pos.equals("JJR") || pos.equals("JJS"))
+				{
+					nAdjective++;
+				}
+				else if (pos.equals("RB") || pos.equals("RBR") || pos.equals("RBS"))
+				{
+					nAdverb++;
+				}
+			}
 		}
 		
+		double nLexicalToken = nNoun + nVerb + nAdjective + nAdverb;
+		double nUniqueStemmedVerb = uniqueStemmedVerbs.size();
+		
+		/* returning results */
 		
 		List<Feature> ret = new ArrayList<>();
 		
@@ -137,6 +201,25 @@ public class NlpFeatureSet extends FeatureSet
 		ret.add(new Feature(-1, "", div(nComplexNominal, nClause)));
 		ret.add(new Feature(-1, "", div(nComplexNominal, nTunit)));
 		ret.add(new Feature(-1, "", div(nVerbPhrase, nTunit)));
+		
+		/* others */
+		
+		ret.add(new Feature(-1, "", nSentence));
+		ret.add(new Feature(-1, "", div(nWord, nSentence)));
+		ret.add(new Feature(-1, "", div(nChar, nSentence)));
+		
+		ret.add(new Feature(-1, "", div(nNoun, nLexicalToken)));
+		ret.add(new Feature(-1, "", div(nVerb, nLexicalToken)));
+		ret.add(new Feature(-1, "", div(nAdjective, nLexicalToken)));
+		ret.add(new Feature(-1, "", div(nAdverb, nLexicalToken)));
+		
+		ret.add(new Feature(-1, "", div(nUniqueStemmedVerb, nVerb)));
+		ret.add(new Feature(-1, "", div(nUniqueStemmedVerb * nUniqueStemmedVerb, nVerb)));
+		ret.add(new Feature(-1, "", div(nUniqueStemmedVerb, Math.sqrt(2 * nVerb))));
+		
+		ret.add(new Feature(-1, "", div(nLexicalToken, nWord)));
+		
+		
 		
 		return ret;
 	}
