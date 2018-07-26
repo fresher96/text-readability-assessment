@@ -19,15 +19,18 @@ public class Prototype
 		Prototype prototype = new Prototype();
 		String path;
 
-		path = "../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/test-dir/";
-		prototype.processDir(path);
-		
 //		path = "../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/test-dir/";
 //		prototype.processDir(path);
-	
 		
 		//prototype.featureExtractorTest();
 		//prototype.featureExtractorTest2();
+		
+		String[] dirArray = {"Ele-Txt", "Int-Txt", "Adv-Txt"};
+		for (String dir : dirArray)
+		{
+			path = String.format("../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/%s/", dir);
+			prototype.processDir(path);
+		}
 	}
 	
 	private void featureExtractorTest2() {
@@ -44,7 +47,7 @@ public class Prototype
 		traditionalFeatureSet.addWordCountFeature();
 		traditionalFeatureSet.addCharacterCountFeature();
 		
-		for(TraditionalFeatureSet.Features feature : traditionalFeatureSet.features)
+		for (TraditionalFeatureSet.Features feature : traditionalFeatureSet.features)
 		{
 			System.out.println(feature.ordinal() + " " + feature);
 		}
@@ -114,12 +117,11 @@ public class Prototype
 //		featuresCsvFile.println("label");
 		
 		
-		
 		featuresCsvFile.print("document,");
-		for(FeatureSet featureSet : featureExtractor.featureSetList)
+		for (FeatureSet featureSet : featureExtractor.featureSetList)
 		{
 			List<String> addedFeatures = featureSet.addedFeatures();
-			for(String feature : addedFeatures)
+			for (String feature : addedFeatures)
 			{
 				featuresCsvFile.print(feature + ",");
 			}
@@ -145,8 +147,14 @@ public class Prototype
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
 		
+		int maxNumberOfFilesToProcess = 30;
+		int index = 0;
+		
 		for (File file : listOfFiles)
 		{
+			if (index == maxNumberOfFilesToProcess) break;
+			index++;
+			
 			if (file.isFile() && file.getName().endsWith(".txt"))
 			{
 				//System.out.println(file.getName());
@@ -160,7 +168,7 @@ public class Prototype
 				{
 					//System.out.println("\"" + line + "\"");
 					
-					if(label == null)
+					if (label == null)
 					{
 						label = line.trim();
 						continue;
@@ -180,10 +188,10 @@ public class Prototype
 				
 				// writing features to features.csv
 				featuresCsvFile.print(file.getName() + ",");
-				for(FeatureSet featureSet : featureExtractor.featureSetList)
+				for (FeatureSet featureSet : featureExtractor.featureSetList)
 				{
 					List<Feature> featureList = featureSet.extract(document);
-					for(Feature feature : featureList)
+					for (Feature feature : featureList)
 					{
 						featuresCsvFile.printf("%.6f,", feature.value);
 					}
