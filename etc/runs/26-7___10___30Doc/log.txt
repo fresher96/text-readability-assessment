@@ -1,0 +1,131 @@
+"C:\Program Files\Java\jdk1.8.0_144\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.1.6\lib\idea_rt.jar=53464:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.1.6\bin" -Dfile.encoding=UTF-8 -classpath "C:\Program Files\Java\jdk1.8.0_144\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\deploy.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\access-bridge-64.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\cldrdata.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\dnsns.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\jaccess.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\jfxrt.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\localedata.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\nashorn.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\sunec.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\sunjce_provider.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\sunmscapi.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\sunpkcs11.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext\zipfs.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\javaws.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jfxswt.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\management-agent.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\plugin.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\rt.jar;D:\work space\code\out\production\code;D:\work space\code\libs\stanford-corenlp-3.5.1.jar;D:\work space\code\libs\stanford-corenlp-3.5.1-models.jar" prototype.Prototype
+Adding annotator tokenize
+TokenizerAnnotator: No tokenizer type provided. Defaulting to PTBTokenizer.
+Adding annotator ssplit
+Adding annotator pos
+Reading POS tagger model from edu/stanford/nlp/models/pos-tagger/english-left3words/english-left3words-distsim.tagger ... done [1.8 sec].
+Adding annotator lemma
+Adding annotator parse
+Loading parser from serialized file edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz ...done [0.5 sec].
+
+
+processing file 1: Amazon-ele.txt
+processing file 2: Amsterdam-ele.txt
+processing file 3: Anita-ele.txt
+processing file 4: Arctic mapping-ele.txt
+processing file 5: Banksy-ele.txt
+processing file 6: Billionaires-ele.txt
+processing file 7: Blackberry-ele.txt
+processing file 8: Bolivia-ele.txt
+processing file 9: Bonus pay-ele.txt
+processing file 10: Brazil-ele.txt
+processing file 11: Cigarettes-ele.txt
+processing file 12: climate change -ele.txt
+processing file 13: Coal to challenge oil-ele.txt
+processing file 14: Copyright-ele.txt
+processing file 15: Crowdfunding-ele.txt
+processing file 16: Denmark-ele.txt
+processing file 17: Everest-ele.txt
+processing file 18: Exercise-ele.txt
+processing file 19: Facebook deserted by millions of users-ele.txt
+processing file 20: False memory-ele.txt
+processing file 21: Ferguson-ele.txt
+processing file 22: Fitness-ele.txt
+processing file 23: Food shortages-ele.txt
+processing file 24: Gangs-ele.txt
+processing file 25: Gorillas and oil-ele.txt
+processing file 26: Greeks and drugs-ele.txt
+processing file 27: Hillsborough-ele.txt
+processing file 28: Insects-ele.txt
+processing file 29: Japan menu-ele.txt
+processing file 30: Japan-ele.txt
+
+..........................................................................................................
+finished directory Ele-Txt, time elapsed: 01:04
+..........................................................................................................
+
+
+
+
+
+processing file 1: Amazon-int.txt
+processing file 2: Amsterdam-int.txt
+processing file 3: Anita-int.txt
+processing file 4: Arctic mapping-int.txt
+processing file 5: Banksy-int.txt
+processing file 6: Billionaires-int.txt
+processing file 7: Blackberry-int.txt
+processing file 8: Bolivia-int.txt
+processing file 9: Bonus pay-int.txt
+processing file 10: Brazil-int.txt
+processing file 11: Cigarettes-int.txt
+processing file 12: climate change -int.txt
+processing file 13: Coal to challenge oil-int.txt
+processing file 14: Copyright-int.txt
+processing file 15: Crowdfunding-int.txt
+processing file 16: Denmark-int.txt
+processing file 17: Everest-int.txt
+processing file 18: Exercise-int.txt
+processing file 19: Facebook deserted by millions of users-int.txt
+processing file 20: False memory-int.txt
+processing file 21: Ferguson-int.txt
+processing file 22: Fitness-int.txt
+processing file 23: Food shortages-int.txt
+processing file 24: Gangs-int.txt
+processing file 25: Gorillas and oil-int.txt
+processing file 26: Greeks and drugs-int.txt
+processing file 27: Hillsborough-int.txt
+processing file 28: Insects-int.txt
+processing file 29: Japan menu-int.txt
+processing file 30: Japan-int.txt
+
+..........................................................................................................
+finished directory Int-Txt, time elapsed: 01:40
+..........................................................................................................
+
+
+
+
+
+processing file 1: Amazon-adv.txt
+processing file 2: Amsterdam-adv.txt
+processing file 3: Anita-adv.txt
+processing file 4: Arctic mapping-adv.txt
+processing file 5: Banksy-adv.txt
+processing file 6: Billionaires-adv.txt
+processing file 7: Blackberry-adv.txt
+processing file 8: Bolivia-adv.txt
+processing file 9: Bonus pay-adv.txt
+processing file 10: Brazil-adv.txt
+processing file 11: Cigarettes-adv.txt
+processing file 12: climate change -adv.txt
+processing file 13: Coal to challenge oil-adv.txt
+processing file 14: Copyright-adv.txt
+processing file 15: Crowdfunding-adv.txt
+processing file 16: Denmark-adv.txt
+processing file 17: Everest-adv.txt
+processing file 18: Exercise-adv.txt
+processing file 19: Facebook deserted by millions of users-adv.txt
+processing file 20: False memory-adv.txt
+processing file 21: Ferguson-adv.txt
+processing file 22: Fitness-adv.txt
+processing file 23: Food shortages-adv.txt
+processing file 24: Gangs-adv.txt
+processing file 25: Gorillas and oil-adv.txt
+processing file 26: Greeks and drugs-adv.txt
+processing file 27: Hillsborough-adv.txt
+processing file 28: Insects-adv.txt
+processing file 29: Japan menu-adv.txt
+processing file 30: Japan-adv.txt
+
+..........................................................................................................
+finished directory Adv-Txt, time elapsed: 02:19
+..........................................................................................................
+
+
+
+
+
+total time elapsed: 05:04
+
+Process finished with exit code 0

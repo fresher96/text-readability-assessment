@@ -30,7 +30,7 @@ public class Prototype
 	
 	private void process() throws IOException {
 		
-		maxNumberOfFilesToProcess = 3;
+		maxNumberOfFilesToProcess = 30;
 		
 		System.out.printf("\n\n");
 		
