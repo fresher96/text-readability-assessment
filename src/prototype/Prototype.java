@@ -176,6 +176,8 @@ public class Prototype
 				//Debugger.debug(document);
 				
 				
+				System.out.println("process: " + file.getName());
+				
 				// writing features to features.csv
 				featuresCsvFile.print(file.getName() + ",");
 				for(FeatureSet featureSet : featureExtractor.featureSetList)

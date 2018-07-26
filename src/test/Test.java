@@ -112,7 +112,16 @@ public class Test
 	}
 	
 	private static void tregexTest() {
-		String text = "We use it when a girl in our dorm is acting like a spoiled child.";
+		String text;
+		text = "hi, how are you?";
+		text = "We it use whn we is fine, you";
+		text = "hi my name is Sue, how you do?\r\n" +
+				"Increased cloud cover in periods of normally clear weather is closing Lukla Airport, the gateway to the Everest region, more often. A new road for 4x4s is being built to Lukla to guarantee the flow of tourists and their money, but Byers is worried that the rapid spread of the road network in Nepal is being done too cheaply, with disastrous consequences in terms of soil erosion and landslides.\r\n" +
+				"Everest is the icon everyone knows, he says. Its the perfect laboratory for figuring out how";
+		text = "\"Everest is the mountain everyone talks about\", he says.";
+		//text = "We use it when a girl in our dorm is acting like a spoiled child.";
+		
+		
 		
 		Properties props = new Properties();
 		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse");
@@ -128,6 +137,7 @@ public class Test
 		//tree.printLocalTree();
 		tree.pennPrint();
 		//System.out.println(tree);
+		System.out.printf("score: %f | size: %d | depth: %d | leaves#: %d \n", tree.score(), tree.size(), tree.depth(), tree.getLeaves().size());
 		
 		String pattern = "S|SINV|SQ < (VP <# MD|VBD|VBP|VBZ)";
 		TregexPatternCompiler tpc = new TregexPatternCompiler();
