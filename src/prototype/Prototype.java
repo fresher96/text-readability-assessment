@@ -8,9 +8,7 @@ import shared.StringHelper;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class Prototype
 {
@@ -25,10 +23,38 @@ public class Prototype
 		//prototype.featureExtractorTest();
 		//prototype.featureExtractorTest2();
 		
-		prototype.process();
+		
+		//prototype.processOSE();
+		prototype.processWeeBit();
 	}
 	
-	private void process() throws IOException {
+	private void processWeeBit() throws IOException {
+		
+		maxNumberOfFilesToProcess = 50;
+		
+		System.out.printf("\n\n");
+		
+		long nanoPerSec = 1L * 1000 * 1000 * 1000;
+		long startTime = System.nanoTime();
+		String[] dirArray = {"WRLevel2", "WRLevel3", "WRLevel4", "BitKS3", "BitGCSE"};
+		for (String dir : dirArray)
+		{
+			String path = String.format("../datasets/WeeBit/WeeBit-TextOnly/WeeBit-TextOnly/%s/", dir);
+			
+			long startTime2 = System.nanoTime();
+			processDir(path);
+			long elapsedTime = System.nanoTime() - startTime2;
+			
+			System.out.println("\n..........................................................................................................");
+			System.out.printf("finished directory %s, time elapsed: %02d:%02d\n", dir, elapsedTime / nanoPerSec / 60, elapsedTime / nanoPerSec % 60);
+			System.out.println("..........................................................................................................\n\n\n\n\n");
+		}
+		
+		long elapsedTime = System.nanoTime() - startTime;
+		System.out.printf("total time elapsed: %02d:%02d\n", elapsedTime / nanoPerSec / 60, elapsedTime / nanoPerSec % 60);
+	}
+	
+	private void processOSE() throws IOException {
 		
 		maxNumberOfFilesToProcess = 30;
 		
@@ -167,7 +193,9 @@ public class Prototype
 		//featuresCsvFile.println("hi \r\n how are you,nigga,wigga");
 		
 		File folder = new File(path);
-		File[] listOfFiles = folder.listFiles();
+		List<File> listOfFiles = Arrays.asList(folder.listFiles());
+		
+		//Collections.shuffle(listOfFiles);
 		
 		int index = 0;
 		
@@ -181,10 +209,14 @@ public class Prototype
 				//System.out.println(file.getName());
 				//System.out.println(file.getPath());
 				
-				FileReader fileReader = new FileReader(file);
+				//FileReader fileReader = new FileReader(file);
+				System.out.printf("processing file %d: %s\n", index, file.getName());
 				List<String> lines = Files.readAllLines(Paths.get(file.getPath()));
 				StringBuilder stringBuilder = new StringBuilder();
-				String label = null;
+				
+				//String label = null;
+				String label = file.getPath().split("\\\\")[5];
+				
 				for (String line : lines)
 				{
 					//System.out.println("\"" + line + "\"");
@@ -196,7 +228,7 @@ public class Prototype
 					}
 					
 					stringBuilder.append(line);
-					stringBuilder.append(System.lineSeparator());
+					stringBuilder.append("\n");
 				}
 				
 				
@@ -204,7 +236,7 @@ public class Prototype
 				//Debugger.debug(label);
 				//Debugger.debug(document);
 				
-				System.out.printf("processing file %d: %s\n", index, file.getName());
+				//System.out.printf("processing file %d: %s\n", index, file.getName());
 				
 				// writing features to features.csv
 				featuresCsvFile.print(file.getName() + ",");
