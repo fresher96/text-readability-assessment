@@ -67,5 +67,7 @@ fabric.properties
 /libs/
 /models/
 
-/etc/StanfordAPI_nlp_output.txt
 /etc/*.csv
+!OneStopEnglishCorpus_authors_features.csv
+
+/etc/StanfordAPI_nlp_output.txt
