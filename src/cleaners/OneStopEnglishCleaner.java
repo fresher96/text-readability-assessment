@@ -1,6 +1,7 @@
 package cleaners;
 
 import shared.MyUtils;
+import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 
@@ -29,11 +30,53 @@ public class OneStopEnglishCleaner
 //		checkReadability("D:\\work space\\datasets\\OSE_cleaned\\2_csv_readable\\0test.csv", true);
 		
 		
-		
-		
-		cleanCharacters();
-		
 //		groupText();
+
+		cleanCharacters();
+	}
+	
+	private static void groupText() throws Exception {
+		String outputDir = "D:\\work space\\datasets\\OSE_cleaned\\4_texts\\";
+		
+		String[] levelDirs = new String[]{"0_Elementary\\", "1_Intermediate\\", "2_Advanced\\"};
+		String[] suffixArray = new String[]{"-ele.txt", "-int.txt", "-adv.txt"};
+		
+		String dir = "D:\\work space\\datasets\\OSE_cleaned\\2_csv_readable\\";
+		
+		int nLevel = 3;
+		
+		
+		List<File> fileList = MyUtils.getFiles(dir);
+		
+		for (File file : fileList)
+		{
+			Instances instances = ConverterUtils.DataSource.read(file.getPath());
+//			MyUtils.debug(instances.size());
+			
+			for (int level = 0; level < nLevel; level++)
+			{
+				StringBuilder stringBuilder = new StringBuilder();
+				for (int line = 0; line < instances.size(); line++)
+				{
+					Instance instance = instances.get(line);
+					if(instance.isMissing(level)) continue;
+					
+					String str = instance.stringValue(level);
+					
+					stringBuilder.append(str);
+					stringBuilder.append("\n");
+				}
+
+//				System.out.println(stringBuilder.toString());
+				
+				String filePath = outputDir + levelDirs[level] +
+						file.getName()
+								.replaceAll(" ", "-")
+								.replaceAll("\\.csv", suffixArray[level]);
+				
+				MyUtils.writeAllText(stringBuilder.toString(), new File(filePath));
+			}
+		}
 	}
 	
 	private static void cleanCharacters() {
@@ -46,7 +89,7 @@ public class OneStopEnglishCleaner
 		
 		List<File> fileList = MyUtils.getFiles(dir);
 		
-		for(File file : fileList)
+		for (File file : fileList)
 		{
 		
 		}
