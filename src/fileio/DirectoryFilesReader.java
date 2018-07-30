@@ -14,7 +14,7 @@ public class DirectoryFilesReader implements DataFileReader
 	
 	@Override
 	public void open() throws IOException {
-		String path = "../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/test-dir/";
+		String path = "../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/tests-dir/";
 		
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();

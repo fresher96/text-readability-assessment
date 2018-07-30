@@ -1,4 +1,4 @@
-package test;
+package tests;
 
 import edu.stanford.nlp.dcoref.CorefChain;
 import edu.stanford.nlp.dcoref.CorefCoreAnnotations;
@@ -13,8 +13,6 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.semgraph.SemanticGraph;
 import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations;
-import edu.stanford.nlp.semgraph.SemanticGraphEdge;
-import edu.stanford.nlp.trees.GrammaticalRelation;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations;
 import edu.stanford.nlp.trees.tregex.TregexMatcher;
@@ -22,11 +20,7 @@ import edu.stanford.nlp.trees.tregex.TregexPattern;
 import edu.stanford.nlp.trees.tregex.TregexPatternCompiler;
 import edu.stanford.nlp.util.CoreMap;
 
-import shared.Debugger;
-
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class Test
@@ -56,7 +50,10 @@ public class Test
 	
 	
 	private static void nlpTest() {
-		String text = "Jim bought 300 shares of Acme Corp. in 2006.";
+		String text;
+		
+//		text = "Jim bought 300 shares of Acme Corp. in 2006.";
+		text = "We use it when a GiRl in our dorm IS acting LIKE a SpOiled child.";
 		
 		Properties props = new Properties();
 		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, depparse, ner, parse, dcoref");
@@ -157,7 +154,7 @@ public class Test
 	
 	
 	public static void main(String[] args) throws IOException {
-		//nlpTest();
+		nlpTest();
 		//tregexTest();
 		
 	}

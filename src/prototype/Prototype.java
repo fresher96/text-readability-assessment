@@ -17,7 +17,7 @@ public class Prototype
 		Prototype prototype = new Prototype();
 		String path;
 
-//		path = "../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/test-dir/";
+//		path = "../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/tests-dir/";
 //		prototype.processDir(path);
 		
 		//prototype.featureExtractorTest();

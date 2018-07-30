@@ -1,13 +1,10 @@
-package test;
+package tests;
 
-import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.converters.CSVLoader;
 import weka.core.converters.ConverterUtils;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Remove;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

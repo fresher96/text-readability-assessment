@@ -1,4 +1,4 @@
-package test;
+package tests;
 
 import java.util.List;
 import java.util.Properties;
@@ -86,7 +86,7 @@ public class StanfordAPI
 	
 	public static void main(String[] args) {
 		StanfordAPI.instance = new StanfordAPI();
-		//StanfordAPI.instance.test("Jim bought 300 shares of Acme Corp. in 2006.");
+		//StanfordAPI.instance.tests("Jim bought 300 shares of Acme Corp. in 2006.");
 		StanfordAPI.instance.run("Jim bought 300 shares of Acme Corp. in 2006.");
 	}
 }
