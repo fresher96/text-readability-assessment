@@ -432,7 +432,7 @@ public class OneStopEnglishCleaner
 		}
 
 
-//		StanfordAPI nlp = new StanfordAPI();
+//		StanfordAPITest nlp = new StanfordAPITest();
 //		nlp.run(str);
 //
 //		str = "what's \"amazon\" doing ...";

@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 
 public abstract class TextCorpus implements Iterable<Document>
 {
-	private List<Pair<File, String>> fileList;
+	protected List<Pair<File, String>> fileList;
 	
 	public TextCorpus(){
 		fileList = null;
@@ -48,6 +48,8 @@ public abstract class TextCorpus implements Iterable<Document>
 			}
 			
 			Pair<File, String> curPair = fileList.get(index);
+			index++;
+			
 			File curFile = curPair.getFirst();
 			
 			

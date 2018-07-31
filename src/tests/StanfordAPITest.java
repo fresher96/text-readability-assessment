@@ -20,12 +20,12 @@ import edu.stanford.nlp.trees.GrammaticalRelation;
 import edu.stanford.nlp.util.CoreMap;
 
 
-public class StanfordAPI
+public class StanfordAPITest
 {
-	public static StanfordAPI instance;
+	public static StanfordAPITest instance;
 	private StanfordCoreNLP pipeline;
 	
-	public StanfordAPI() {
+	public StanfordAPITest() {
 		Properties props = new Properties();
 		
 		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, depparse, ner");
@@ -85,8 +85,8 @@ public class StanfordAPI
 	}
 	
 	public static void main(String[] args) {
-		StanfordAPI.instance = new StanfordAPI();
-		//StanfordAPI.instance.tests("Jim bought 300 shares of Acme Corp. in 2006.");
-		StanfordAPI.instance.run("Jim bought 300 shares of Acme Corp. in 2006.");
+		StanfordAPITest.instance = new StanfordAPITest();
+		//StanfordAPITest.instance.tests("Jim bought 300 shares of Acme Corp. in 2006.");
+		StanfordAPITest.instance.run("Jim bought 300 shares of Acme Corp. in 2006.");
 	}
 }
