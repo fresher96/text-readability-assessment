@@ -43,7 +43,7 @@ public class Prototype
 			String path = String.format("../datasets/WeeBit/WeeBit-TextOnly/WeeBit-TextOnly/%s/", dir);
 			
 			long startTime2 = System.nanoTime();
-			processDir(path);
+			processDir(path, 5);
 			long elapsedTime = System.nanoTime() - startTime2;
 			
 			System.out.println("\n..........................................................................................................");
@@ -66,10 +66,10 @@ public class Prototype
 		String[] dirArray = {"0_Elementary", "1_Intermediate", "2_Advanced"};
 		for (String dir : dirArray)
 		{
-			String path = String.format("../datasets/OSE_cleaned/Texts-5_texts_final/%s/", dir);
+			String path = String.format("../datasets/OSE_cleaned/5_texts_final/%s/", dir);
 			
 			long startTime2 = System.nanoTime();
-			processDir(path);
+			processDir(path, 4);
 			long elapsedTime = System.nanoTime() - startTime2;
 			
 			System.out.println("\n..........................................................................................................");
@@ -95,7 +95,7 @@ public class Prototype
 			String path = String.format("../datasets/OneStopEnglishCorpus/Texts-SeparatedByReadingLevel/%s/", dir);
 			
 			long startTime2 = System.nanoTime();
-			processDir(path);
+			processDir(path, -1);
 			long elapsedTime = System.nanoTime() - startTime2;
 			
 			System.out.println("\n..........................................................................................................");
@@ -214,7 +214,7 @@ public class Prototype
 		featureExtractor.featureSetList.add(nlpFeatureSet);
 	}
 	
-	public void processDir(String path) throws IOException {
+	public void processDir(String path, int labelIdx) throws IOException {
 		
 		
 		//featuresCsvFile.println("hi \r\n how are you,nigga,wigga");
@@ -241,8 +241,9 @@ public class Prototype
 				List<String> lines = Files.readAllLines(Paths.get(file.getPath()));
 				StringBuilder stringBuilder = new StringBuilder();
 				
-//				String label = null;
-				String label = file.getPath().split("\\\\")[4];
+				String label = null;
+				if(labelIdx >= 0)
+					label = file.getPath().split("\\\\")[labelIdx];
 				
 				for (String line : lines)
 				{
