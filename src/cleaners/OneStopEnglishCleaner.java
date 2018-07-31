@@ -5,10 +5,8 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 public class OneStopEnglishCleaner
 {
@@ -28,11 +26,205 @@ public class OneStopEnglishCleaner
 //		checkReadability();
 
 //		checkReadability("D:\\work space\\datasets\\OSE_cleaned\\2_csv_readable\\0test.csv", true);
-		
-		
+
+
 //		groupText();
 
-		cleanCharacters();
+//		buildCharsMap();
+
+//		cleanCharacters();
+		
+//		lastCheck();
+		
+		/**
+		 * @caution
+		 * after all of this cleaning, some hand cleaning contained:
+		 * 1) `WNL-World-Cup-*.txt` line 11: 've' -> 'five'
+		 *
+		 */
+	}
+	
+	private static void lastCheck() throws IOException {
+		
+		String[] levelDirs = new String[]{"0_Elementary\\", "1_Intermediate\\", "2_Advanced\\"};
+		String dir = "D:\\work space\\datasets\\OSE_cleaned\\5_texts_final\\";
+		int nLevel = 3;
+		
+		Set<Character> visited = new HashSet<>();
+		for (int level = 0; level < nLevel; level++)
+		{
+			List<File> fileList = MyUtils.getFiles(dir + levelDirs[level]);
+			
+			for (File file : fileList)
+			{
+				String text = MyUtils.readAllText(file);
+				int line = 1, col = 0;
+				
+				for (int i = 0; i < text.length(); i++)
+				{
+					char ch = text.charAt(i);
+					col++;
+					
+					if (ch == ' ') continue;
+					else if (ch == '\n')
+					{
+						col = 0;
+						line++;
+						continue;
+					}
+					else if (33 <= ch && ch <= 126) continue;
+					else if(visited.contains(ch)) continue;
+					
+					visited.add(ch);
+					System.out.printf("strange character \"%c\" (%d), \t in file %s, \t line: %d, col: %d\n", ch, (int) ch, file.getName(), line, col);
+				}
+			}
+		}
+	}
+	
+	
+	private static void cleanCharacters() throws IOException {
+		Map<Character, String> charMap = new HashMap<>();
+		loadMap(charMap);
+		
+		String outputDir = "D:\\work space\\datasets\\OSE_cleaned\\5_texts_final\\";
+		String[] levelDirs = new String[]{"0_Elementary\\", "1_Intermediate\\", "2_Advanced\\"};
+		String dir = "D:\\work space\\datasets\\OSE_cleaned\\4_texts\\";
+		
+		int nLevel = 3;
+		
+		for (int level = 0; level < nLevel; level++)
+		{
+			List<File> fileList = MyUtils.getFiles(dir + levelDirs[level]);
+			
+			for (File file : fileList)
+			{
+				String text = MyUtils.readAllText(file);
+				StringBuilder stringBuilder = new StringBuilder();
+				
+				for (int i = 0; i < text.length(); i++)
+				{
+					char ch = text.charAt(i);
+					
+					String str = ch + "";
+					if (charMap.containsKey(ch))
+						str = charMap.get(ch);
+					
+					stringBuilder.append(str);
+				}
+				
+				String newFile = outputDir + levelDirs[level] + file.getName();
+				MyUtils.writeAllText(stringBuilder.toString(), new File(newFile));
+			}
+		}
+	}
+	
+	private static void buildCharsMap() throws IOException {
+
+//		for (int i = 0; i < 256; i++)
+//		{
+//			System.out.println(i + " ");
+//			MyUtils.debug((char)i);
+//		}
+		
+		Map<Character, String> charMap = new HashMap<>();
+		
+		loadMap(charMap);
+		
+		String outputFile = "D:\\work space\\datasets\\OSE_cleaned\\5_texts\\";
+		
+		String[] levelDirs = new String[]{"0_Elementary\\", "1_Intermediate\\", "2_Advanced\\"};
+		
+		String dir = "D:\\work space\\datasets\\OSE_cleaned\\4_texts\\";
+		
+		int nLevel = 3;
+		
+		List<File> fileList = new ArrayList<>();
+		for (int i = 0; i < nLevel; i++)
+		{
+			fileList.addAll(MyUtils.getFiles(dir + levelDirs[i]));
+		}
+		Collections.reverse(fileList);
+		
+		
+		boolean halt = false;
+		for (File file : fileList)
+		{
+			String text = MyUtils.readAllText(file);
+			int line = 1, col = 0;
+			
+			for (int i = 0; i < text.length(); i++)
+			{
+				char ch = text.charAt(i);
+				col++;
+				
+				if (ch == ' ') continue;
+				else if (ch == '\n')
+				{
+					col = 0;
+					line++;
+					continue;
+				}
+				else if (33 <= ch && ch <= 126) continue;
+				else if (charMap.containsKey(ch)) continue;
+				
+				System.out.printf("strange character \"%c\" (%d), \t in file %s, \t line: %d, col: %d\n", ch, (int) ch, file.getName(), line, col);
+				System.out.printf("want to map it? ");
+				
+				char in = MyUtils.readChar();
+				if (in == 'x') // halt, and save map
+				{
+					halt = true;
+					break;
+				}
+				else if (in == 'n') continue; // don't map
+				else if (in == 'i') // map ch to itself
+				{
+					charMap.put(ch, ch + "");
+					continue;
+				}
+				else if (in == 's') break; // skip file
+				
+				System.out.printf("enter new string: ");
+				String nw = MyUtils.readString();
+				
+				charMap.put(ch, nw);
+			}
+			
+			if (halt) break;
+		}
+		
+		
+		storeMap(charMap);
+	}
+	
+	private static void loadMap(Map<Character, String> charMap) throws IOException {
+		Properties prop = new Properties();
+		InputStream input = new FileInputStream("etc/charMap_OSE.properties");
+		
+		prop.load(input);
+		
+		charMap.clear();
+		for (String key : prop.stringPropertyNames())
+		{
+			String value = prop.getProperty(key);
+//			System.out.printf("\"%c\" (%d) => \"%s\"\n", key.charAt(0), (int)key.charAt(0), value);
+			
+			charMap.put(key.charAt(0), value);
+		}
+//		System.exit(1);
+	}
+	
+	private static void storeMap(Map<Character, String> charMap) throws IOException {
+		Properties prop = new Properties();
+		OutputStream output = new FileOutputStream("etc/charMap_OSE.properties");
+		
+		for (Map.Entry<Character, String> entry : charMap.entrySet())
+		{
+			prop.setProperty(entry.getKey().toString(), entry.getValue());
+		}
+		
+		prop.store(output, "character map for OSE dataset");
 	}
 	
 	private static void groupText() throws Exception {
@@ -59,7 +251,7 @@ public class OneStopEnglishCleaner
 				for (int line = 0; line < instances.size(); line++)
 				{
 					Instance instance = instances.get(line);
-					if(instance.isMissing(level)) continue;
+					if (instance.isMissing(level)) continue;
 					
 					String str = instance.stringValue(level);
 					
@@ -76,22 +268,6 @@ public class OneStopEnglishCleaner
 				
 				MyUtils.writeAllText(stringBuilder.toString(), new File(filePath));
 			}
-		}
-	}
-	
-	private static void cleanCharacters() {
-		
-		String outputDir;
-		outputDir = "D:\\work space\\datasets\\OSE_cleaned\\3_csv_final\\";
-		
-		String dir;
-		dir = "D:\\work space\\datasets\\OSE_cleaned\\2_csv_readable\\";
-		
-		List<File> fileList = MyUtils.getFiles(dir);
-		
-		for (File file : fileList)
-		{
-		
 		}
 	}
 	

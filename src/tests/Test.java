@@ -53,7 +53,7 @@ public class Test
 		String text;
 		
 //		text = "Jim bought 300 shares of Acme Corp. in 2006.";
-		text = "We use it when a GiRl in our dorm IS acting LIKE a SpOiled child.";
+		text = "We use it when a Jørgen in our dorm IS acting LIkE a SpOiled child.";
 		
 		Properties props = new Properties();
 		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, depparse, ner, parse, dcoref");
