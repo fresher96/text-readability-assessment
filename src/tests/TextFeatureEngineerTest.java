@@ -1,12 +1,28 @@
 package tests;
 
 import datasets.*;
+import featureengineering.SimpleFeatureExtractor;
+import featureengineering.TextFeatureEngineer;
+
+import java.io.FileNotFoundException;
 
 public class TextFeatureEngineerTest
 {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 //		testTextCorpus();
-		testCSVWriter();
+//		testCSVWriter();
+		
+		testEngineer();
+	}
+	
+	private static void testEngineer() throws FileNotFoundException {
+		TextFeatureEngineer tfe = new TextFeatureEngineer();
+		
+		tfe.setTextCorpus(new OneStopEnglishCorpus());
+		tfe.setFeatureExtractor(new SimpleFeatureExtractor());
+		tfe.setFeatureFileWriter(new CSVFileWriter("etc/features.csv"));
+		
+		tfe.run();
 	}
 	
 	private static void testCSVWriter() {

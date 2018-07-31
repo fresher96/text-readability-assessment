@@ -23,6 +23,7 @@ public abstract class TextCorpus implements Iterable<Document>
 	}
 	
 	public int size(){
+		if(fileList == null) iterator();
 		return fileList.size();
 	}
 	

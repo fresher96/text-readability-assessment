@@ -34,33 +34,41 @@ public class CSVFileWriter extends FeatureFileWriter
 	
 	@Override
 	public void writeHeaders(List<String> featureList) throws FileNotFoundException {
+		
 		printStream = new PrintStream(getPath());
-		int index = -1;
+		
+		printStream.print(prepare("file_name"));
+		printStream.print(",");
+		
+		printStream.print(prepare("file_path"));
+		printStream.print(",");
+		
 		for (String feature : featureList)
 		{
-			index++;
-			if (index != 0) printStream.print(",");
-			printStream.print(prepare(feature));
+			printStream.print(prepare(feature.toString()));
+			printStream.print(",");
 		}
+		
+		printStream.print(prepare("label"));
 		printStream.print("\n");
 	}
 	
 	@Override
 	public void process(Document document, List<Object> features) {
 		
-		printStream.print(document.getName());
+		printStream.print(prepare(document.getName()));
 		printStream.print(",");
 		
-		printStream.print(document.getPath());
+		printStream.print(prepare(document.getPath()));
 		printStream.print(",");
 		
 		for (Object value : features)
 		{
-			printStream.print(prepare(features.toString()));
+			printStream.print(prepare(value.toString()));
 			printStream.print(",");
 		}
 		
-		printStream.print(document.getLabel());
+		printStream.print(prepare(document.getLabel()));
 		printStream.print("\n");
 	}
 }

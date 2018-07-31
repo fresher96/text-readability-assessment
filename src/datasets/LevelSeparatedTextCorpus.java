@@ -16,7 +16,7 @@ public class LevelSeparatedTextCorpus extends TextCorpus
 	}
 	
 	public void setPath(String path) {
-		if (!path.equals(this.path))
+		if (this.path != null && !this.path.equals(path))
 		{
 			fileList = null;
 		}
