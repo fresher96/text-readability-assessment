@@ -68,7 +68,7 @@ public class LevelSeparatedTextCorpus extends TextCorpus
 						if (!dir.isDirectory()) continue;
 						
 						List<File> files = MyUtils.getFiles(dir.getPath());
-						Collections.shuffle(files, random);
+						if(random != null) Collections.shuffle(files, random);
 						
 						int index = 0;
 						for (File file : files)
