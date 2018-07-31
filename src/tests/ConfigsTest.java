@@ -1,5 +1,8 @@
 package tests;
 
+import shared.MyUtils;
+import shared.PropertiesManager;
+
 import java.io.*;
 import java.util.Properties;
 
@@ -28,7 +31,19 @@ public class ConfigsTest
 	}
 	
 	public static void main(String[] args) throws IOException {
-		writeConfigFile();
-		readConfigFile();
+//		writeConfigFile();
+//		readConfigFile();
+		
+		PropertiesManager prop = PropertiesManager.getInstance();
+		System.out.println(prop.get("hi"));
+		MyUtils.debug(prop.get("heyHowAreYou"));
+		MyUtils.debug(prop.get("soo"));
+		
+//		prop.set("hi", "you");
+//		prop.set("soo", "too");
+		
+		System.out.println(prop.get("hi"));
+		
+		System.gc();
 	}
 }

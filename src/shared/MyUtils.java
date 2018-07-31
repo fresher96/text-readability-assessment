@@ -16,10 +16,10 @@ public class MyUtils
 	
 	}
 	
-	private static Scanner sc = new Scanner(System.in);
+	private static Scanner scanner = new Scanner(System.in);
 	
 	public static String readString() {
-		return sc.next();
+		return scanner.next();
 	}
 	
 	public static char readChar() {
@@ -27,14 +27,14 @@ public class MyUtils
 	}
 	
 	public static int readInt() {
-		return sc.nextInt();
+		return scanner.nextInt();
 	}
 	
 	public static void debug(Object obj) {
 		System.out.println("\"" + obj.toString() + "\"");
 	}
 	
-	public static List<File> getFiles(String dirPath){
+	public static List<File> getFiles(String dirPath) {
 		File dir = new File(dirPath);
 		List<File> fileList = Arrays.asList(dir.listFiles());
 		return fileList;
@@ -47,9 +47,9 @@ public class MyUtils
 	public static String readAllTextIgnoreEmptyLines(File file) throws IOException {
 		StringBuilder stringBuilder = new StringBuilder();
 		List<String> lines = getLines(file);
-		for(String line : lines)
+		for (String line : lines)
 		{
-			if(line.equals("")) continue;
+			if (line.equals("")) continue;
 			stringBuilder.append(line);
 			stringBuilder.append("\n");
 		}
@@ -59,7 +59,7 @@ public class MyUtils
 	public static String readAllText(File file) throws IOException {
 		StringBuilder stringBuilder = new StringBuilder();
 		List<String> lines = getLines(file);
-		for(String line : lines)
+		for (String line : lines)
 		{
 			stringBuilder.append(line);
 			stringBuilder.append("\n");
