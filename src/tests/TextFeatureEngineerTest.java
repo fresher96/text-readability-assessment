@@ -1,14 +1,23 @@
 package tests;
 
-import datasets.Document;
-import datasets.LevelSeparatedTextCorpus;
-import datasets.OneStopEnglishCorpus;
-import datasets.TextCorpus;
+import datasets.*;
 
 public class TextFeatureEngineerTest
 {
 	public static void main(String[] args) {
-		testTextCorpus();
+//		testTextCorpus();
+		testCSVWriter();
+	}
+	
+	private static void testCSVWriter() {
+		
+		FeatureFileWriter ffw = new CSVFileWriter("etc/test.csv");
+		
+//		String str = "do\\cu'me\"n$t\"\\";
+//		String res = ((CSVFileWriter) ffw).prepare(str);
+//		System.out.println(res);
+	
+	
 	}
 	
 	private static void testTextCorpus() {
