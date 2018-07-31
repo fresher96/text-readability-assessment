@@ -5,22 +5,23 @@ import featureengineering.SimpleFeatureExtractor;
 import featureengineering.TextFeatureEngineer;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class TextFeatureEngineerTest
 {
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 //		testTextCorpus();
 //		testCSVWriter();
 		
 		testEngineer();
 	}
 	
-	private static void testEngineer() throws FileNotFoundException {
+	private static void testEngineer() throws IOException {
 		TextFeatureEngineer tfe = new TextFeatureEngineer();
 		
 		tfe.setTextCorpus(new OneStopEnglishCorpus());
 		tfe.setFeatureExtractor(new SimpleFeatureExtractor());
-		tfe.setFeatureFileWriter(new CSVFileWriter("etc/features.csv"));
+		tfe.setFeatureFileWriter(new DefaultCSVFeatureFile());
 		
 		tfe.run();
 	}
