@@ -42,25 +42,25 @@ public class CSVFileWriter extends FeatureFileWriter
 			if (index != 0) printStream.print(",");
 			printStream.print(prepare(feature));
 		}
+		printStream.print("\n");
 	}
 	
 	@Override
-	public void process(Document document) {
+	public void process(Document document, List<Object> features) {
+		
 		printStream.print(document.getName());
 		printStream.print(",");
+		
 		printStream.print(document.getPath());
 		printStream.print(",");
 		
-	}
-	
-	@Override
-	public void process(List<Object> features) {
-		int index = -1;
 		for (Object value : features)
 		{
-			index++;
-			if (index != 0) printStream.print(",");
 			printStream.print(prepare(features.toString()));
+			printStream.print(",");
 		}
+		
+		printStream.print(document.getLabel());
+		printStream.print("\n");
 	}
 }

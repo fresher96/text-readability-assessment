@@ -25,7 +25,5 @@ public abstract class FeatureFileWriter
 	
 	public abstract void writeHeaders(List<String> featureList) throws FileNotFoundException;
 	
-	public abstract void process(Document document);
-	
-	public abstract void process(List<Object> features);
+	public abstract void process(Document document, List<Object> features);
 }
