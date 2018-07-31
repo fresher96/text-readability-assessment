@@ -1,18 +1,15 @@
 package featureengineering;
 
-import datasets.LabeledDocument;
+import datasets.Document;
 import datasets.TextCorpus;
-import fileio.DataFileReader;
 import fileio.FeatureFileWriter;
-import javafx.util.Pair;
-import prototype.NlpFeatureSet;
 
 import java.util.List;
 
 public class TextFeatureEngineer
 {
 	private TextCorpus textCorpus;
-	private FeatureExtractor featureExtractor;
+//	private FeatureExtractor featureExtractor;
 	private FeatureFileWriter featureFileWriter;
 	
 	public void run()
@@ -20,17 +17,17 @@ public class TextFeatureEngineer
 		int index = 0;
 		int total = textCorpus.size();
 		
-		featureFileWriter.writeHeaders(featureExtractor.getFeatureList());
+//		featureFileWriter.writeHeaders(featureExtractor.getFeatureList());
 		
-		for(LabeledDocument labeledDocument : textCorpus)
+		for(Document document : textCorpus)
 		{
 			index++;
 			
 			System.out.printf("processing (%d/%d): %s\n", index, total, document.getPath());
-			List <Object> features = featureExtractor.extract(document.getText());
+//			List<Object> features = featureExtractor.extract(document.getText());
 			
-			featureFileWriter.process(document);
-			featureFileWriter.process(features);
+//			featureFileWriter.process(document);
+//			featureFileWriter.process(features);
 		}
 	}
 	

@@ -3,14 +3,13 @@ package datasets;
 import shared.MyUtils;
 import shared.Pair;
 
-import javax.xml.soap.Text;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public abstract class TextCorpus implements Iterable<LabeledDocument>
+public abstract class TextCorpus implements Iterable<Document>
 {
 	private List<Pair<File, String>> fileList;
 	
@@ -19,7 +18,7 @@ public abstract class TextCorpus implements Iterable<LabeledDocument>
 	}
 	
 	@Override
-	public Iterator<LabeledDocument> iterator() {
+	public Iterator<Document> iterator() {
 		return new DocumentIterator();
 	}
 	
@@ -27,7 +26,7 @@ public abstract class TextCorpus implements Iterable<LabeledDocument>
 		return fileList.size();
 	}
 	
-	private class DocumentIterator implements Iterator<LabeledDocument>
+	private class DocumentIterator implements Iterator<Document>
 	{
 		private int index;
 		
@@ -41,21 +40,26 @@ public abstract class TextCorpus implements Iterable<LabeledDocument>
 		}
 		
 		@Override
-		public LabeledDocument next() throws NoSuchElementException {
+		public Document next() throws NoSuchElementException {
 			
 			if (!this.hasNext())
 			{
 				throw new NoSuchElementException();
 			}
 			
-			Pair<File, String> curFile = fileList.get(index);
+			Pair<File, String> curPair = fileList.get(index);
+			File curFile = curPair.getFirst();
 			
-			LabeledDocument ret = new LabeledDocument();
-			ret.setLabel(curFile.getSecond());
+			
+			Document ret = new Document();
+			
+			ret.setLabel(curPair.getSecond());
+			ret.setName(curFile.getName());
+			ret.setPath(curFile.getPath());
 			
 			try
 			{
-				ret.setDocument(MyUtils.readAllText(curFile.getFirst()));
+				ret.setText(MyUtils.readAllText(curFile));
 			}
 			catch (IOException e)
 			{
