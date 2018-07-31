@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -41,7 +43,22 @@ public class MyUtils
 	}
 	
 	public static List<String> getLines(File file) throws IOException {
-		return Files.readAllLines(Paths.get(file.getPath()));
+		try
+		{
+			return Files.readAllLines(Paths.get(file.getPath()), StandardCharsets.UTF_8);
+		}
+		catch (Exception ex)
+		{
+			System.err.println(file.getPath() + " is not UTF8!!!");
+			List <String> ret = new ArrayList<>();
+			
+			byte[] sourceBytes = Files.readAllBytes(Paths.get(file.getPath()));
+			String text = new String(sourceBytes , "Windows-1252");
+			String[] lines = text.split("\n");
+			
+			ret = Arrays.asList(lines);
+			return ret;
+		}
 	}
 	
 	public static String readAllTextIgnoreEmptyLines(File file) throws IOException {

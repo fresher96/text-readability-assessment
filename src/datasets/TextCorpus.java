@@ -67,7 +67,7 @@ public abstract class TextCorpus implements Iterable<Document>
 			catch (IOException e)
 			{
 				e.printStackTrace();
-				throw new NoSuchElementException();
+				throw new NoSuchElementException("document: \"" + ret.getPath() + "\"");
 			}
 			
 			return ret;

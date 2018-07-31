@@ -1,6 +1,7 @@
 package tests;
 
 import datasets.*;
+import featureengineering.FeatureExtractor;
 import featureengineering.SimpleFeatureExtractor;
 import featureengineering.TextFeatureEngineer;
 
@@ -14,17 +15,19 @@ public class TextFeatureEngineerTest
 //		testTextCorpus();
 //		testCSVWriter();
 		
-		testEngineer();
+//		testEngineer();
 		
 		
+		LevelSeparatedTextCorpus corpus = new WeeBitOriginalCorpus();
+//		corpus.setClassLimit(500);
+		corpus.setRandom(new Random(0));
 		
-//		TextFeatureEngineer tfe = new TextFeatureEngineer();
-//
-//		tfe.setTextCorpus(new OneStopEnglishCorpus());
-//		tfe.setFeatureExtractor(new SimpleFeatureExtractor());
-//		tfe.setFeatureFileWriter(new DefaultCSVFeatureFile());
-//
-//		tfe.run();
+		
+		FeatureExtractor extractor = new SimpleFeatureExtractor();
+		
+		
+		TextFeatureEngineer tfe = new TextFeatureEngineer(corpus, extractor, new DefaultCSVFeatureFile());
+		tfe.run();
 	}
 	
 	private static void testEngineer() throws IOException {

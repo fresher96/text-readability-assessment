@@ -30,8 +30,4 @@ public class UTF8Converter
 			}
 		}
 	}
-	
-	public static void main(String[] args) throws Exception {
-	
-	}
 }
