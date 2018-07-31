@@ -41,7 +41,7 @@ public abstract class TextCorpus implements Iterable<LabeledDocument>
 		}
 		
 		@Override
-		public LabeledDocument next() throws Exception {
+		public LabeledDocument next() throws NoSuchElementException {
 			
 			if (!this.hasNext())
 			{

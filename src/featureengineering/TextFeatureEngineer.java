@@ -20,15 +20,17 @@ public class TextFeatureEngineer
 		int index = 0;
 		int total = textCorpus.size();
 		
-		featureFileWriter.writeHeaders(featureExtractor);
+		featureFileWriter.writeHeaders(featureExtractor.getFeatureList());
 		
 		for(LabeledDocument labeledDocument : textCorpus)
 		{
 			index++;
 			
-			System.out.printf("processing (%d/%d): %s\n", index, total, document.getName());
+			System.out.printf("processing (%d/%d): %s\n", index, total, document.getPath());
+			List <Object> features = featureExtractor.extract(document.getText());
 			
-			
+			featureFileWriter.process(document);
+			featureFileWriter.process(features);
 		}
 	}
 	
