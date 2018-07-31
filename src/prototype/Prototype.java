@@ -57,7 +57,7 @@ public class Prototype
 	
 	private void processOSE_cleaned() throws IOException {
 		
-		maxNumberOfFilesToProcess = 10;
+		maxNumberOfFilesToProcess = 500;
 		
 		System.out.printf("\n\n");
 		
