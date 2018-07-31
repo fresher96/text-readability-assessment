@@ -157,8 +157,6 @@ public class Test
 	public static void main(String[] args) throws IOException {
 //		nlpTest();
 		//tregexTest();
-		
-		Pair <String, Integer> pr = new Pair<>("hi", 3);
 	}
 	
 	

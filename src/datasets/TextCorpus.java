@@ -73,7 +73,3 @@ public abstract class TextCorpus implements Iterable<Document>
 }
 
 
-class LevelSeparatedTextCorpus extends TextCorpus
-{
-
-}
