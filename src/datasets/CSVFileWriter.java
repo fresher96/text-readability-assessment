@@ -9,7 +9,7 @@ public class CSVFileWriter extends FeatureFileWriter
 	private PrintStream printStream;
 	
 	public CSVFileWriter() {
-	
+		this(null);
 	}
 	
 	public CSVFileWriter(String path) {

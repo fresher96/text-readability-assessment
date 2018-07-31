@@ -25,13 +25,12 @@ public class LevelSeparatedTextCorpus extends TextCorpus
 	}
 	
 	public LevelSeparatedTextCorpus() {
-		setPath(null);
-		lock = new Object();
+		this(null);
 	}
 	
 	public LevelSeparatedTextCorpus(String path) {
-		this();
 		setPath(path);
+		lock = new Object();
 	}
 	
 	@Override

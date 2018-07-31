@@ -8,7 +8,7 @@ public abstract class FeatureFileWriter
 	private String path;
 	
 	public FeatureFileWriter() {
-		setPath(null);
+		this(null);
 	}
 	
 	public FeatureFileWriter(String path) {

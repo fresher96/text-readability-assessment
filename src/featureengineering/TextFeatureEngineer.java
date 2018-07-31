@@ -13,6 +13,16 @@ public class TextFeatureEngineer
 	private FeatureExtractor featureExtractor;
 	private FeatureFileWriter featureFileWriter;
 	
+	public TextFeatureEngineer(){
+		this(null, null, null);
+	}
+	
+	public TextFeatureEngineer(TextCorpus textCorpus, FeatureExtractor featureExtractor, FeatureFileWriter featureFileWriter) {
+		setTextCorpus(textCorpus);
+		setFeatureExtractor(featureExtractor);
+		setFeatureFileWriter(featureFileWriter);
+	}
+	
 	public TextCorpus getTextCorpus() {
 		return textCorpus;
 	}

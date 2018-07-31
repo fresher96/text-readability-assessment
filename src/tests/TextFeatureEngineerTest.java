@@ -29,11 +29,9 @@ public class TextFeatureEngineerTest
 		
 		FeatureFileWriter ffw = new CSVFileWriter("etc/test.csv");
 		
-//		String str = "do\\cu'me\"n$t\"\\";
-//		String res = ((CSVFileWriter) ffw).prepare(str);
-//		System.out.println(res);
-	
-	
+		String str = "do\\cu'me\"n$t\"\\";
+		String res = ((CSVFileWriter) ffw).prepare(str);
+		System.out.println(res);
 	}
 	
 	private static void testTextCorpus() {
