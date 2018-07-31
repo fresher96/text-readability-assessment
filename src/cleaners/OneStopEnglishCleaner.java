@@ -57,7 +57,7 @@ public class OneStopEnglishCleaner
 			
 			for (File file : fileList)
 			{
-				String text = MyUtils.readAllText(file);
+				String text = MyUtils.readAllTextIgnoreEmptyLines(file);
 				int line = 1, col = 0;
 				
 				for (int i = 0; i < text.length(); i++)
@@ -99,7 +99,7 @@ public class OneStopEnglishCleaner
 			
 			for (File file : fileList)
 			{
-				String text = MyUtils.readAllText(file);
+				String text = MyUtils.readAllTextIgnoreEmptyLines(file);
 				StringBuilder stringBuilder = new StringBuilder();
 				
 				for (int i = 0; i < text.length(); i++)
@@ -150,7 +150,7 @@ public class OneStopEnglishCleaner
 		boolean halt = false;
 		for (File file : fileList)
 		{
-			String text = MyUtils.readAllText(file);
+			String text = MyUtils.readAllTextIgnoreEmptyLines(file);
 			int line = 1, col = 0;
 			
 			for (int i = 0; i < text.length(); i++)
@@ -283,7 +283,7 @@ public class OneStopEnglishCleaner
 		
 		for (File file : fileList)
 		{
-			String text = MyUtils.readAllText(file);
+			String text = MyUtils.readAllTextIgnoreEmptyLines(file);
 			StringBuilder stringBuilder = new StringBuilder();
 			
 			stringBuilder.append("Elementary,Intermediate,Advanced\n");

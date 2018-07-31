@@ -44,12 +44,23 @@ public class MyUtils
 		return Files.readAllLines(Paths.get(file.getPath()));
 	}
 	
-	public static String readAllText(File file) throws IOException {
+	public static String readAllTextIgnoreEmptyLines(File file) throws IOException {
 		StringBuilder stringBuilder = new StringBuilder();
 		List<String> lines = getLines(file);
 		for(String line : lines)
 		{
 			if(line.equals("")) continue;
+			stringBuilder.append(line);
+			stringBuilder.append("\n");
+		}
+		return stringBuilder.toString();
+	}
+	
+	public static String readAllText(File file) throws IOException {
+		StringBuilder stringBuilder = new StringBuilder();
+		List<String> lines = getLines(file);
+		for(String line : lines)
+		{
 			stringBuilder.append(line);
 			stringBuilder.append("\n");
 		}

@@ -19,6 +19,7 @@ import edu.stanford.nlp.trees.tregex.TregexMatcher;
 import edu.stanford.nlp.trees.tregex.TregexPattern;
 import edu.stanford.nlp.trees.tregex.TregexPatternCompiler;
 import edu.stanford.nlp.util.CoreMap;
+import shared.Pair;
 
 import java.io.*;
 import java.util.*;
@@ -154,9 +155,10 @@ public class Test
 	
 	
 	public static void main(String[] args) throws IOException {
-		nlpTest();
+//		nlpTest();
 		//tregexTest();
 		
+		Pair <String, Integer> pr = new Pair<>("hi", 3);
 	}
 	
 	
