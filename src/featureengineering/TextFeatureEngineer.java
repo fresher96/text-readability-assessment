@@ -60,6 +60,9 @@ public class TextFeatureEngineer
 			String spaces = "    ";
 			System.out.printf("processing (%d/%d): %-30.30s %s [%s]\n", index, total, document.getName(), spaces, document.getPath());
 			
+			
+//			System.out.println(document.getText());
+			
 			List<Object> features = featureExtractor.extract(document.getText());
 			featureFileWriter.process(document, features);
 		}

@@ -6,6 +6,7 @@ import featureengineering.TextFeatureEngineer;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Random;
 
 public class TextFeatureEngineerTest
 {
@@ -14,12 +15,26 @@ public class TextFeatureEngineerTest
 //		testCSVWriter();
 		
 		testEngineer();
+		
+		
+		
+//		TextFeatureEngineer tfe = new TextFeatureEngineer();
+//
+//		tfe.setTextCorpus(new OneStopEnglishCorpus());
+//		tfe.setFeatureExtractor(new SimpleFeatureExtractor());
+//		tfe.setFeatureFileWriter(new DefaultCSVFeatureFile());
+//
+//		tfe.run();
 	}
 	
 	private static void testEngineer() throws IOException {
 		TextFeatureEngineer tfe = new TextFeatureEngineer();
 		
-		tfe.setTextCorpus(new OneStopEnglishCorpus());
+		OneStopEnglishCorpus corpus = new OneStopEnglishCorpus();
+		corpus.setRandom(new Random(123));
+		corpus.setClassLimit(10);
+		
+		tfe.setTextCorpus(corpus);
 		tfe.setFeatureExtractor(new SimpleFeatureExtractor());
 		tfe.setFeatureFileWriter(new DefaultCSVFeatureFile());
 		
