@@ -82,7 +82,7 @@ public class TextFeatureEngineer
 			System.out.printf("processing (%d/%d): %-30.30s %s [%s]\n", index, total, document.getName(), spaces, document.getPath());
 			
 			if(textCleaner != null) textCleaner.clean(document);
-			System.out.println(document.getText());
+//			System.out.println(document.getText());
 			
 			List<Object> features = featureExtractor.extract(document.getText());
 			featureFileWriter.process(document, features);

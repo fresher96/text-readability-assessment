@@ -1,12 +1,14 @@
 package tests;
 
 import datasets.*;
+import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import featureengineering.FeatureExtractor;
+import featureengineering.PrototypeFeatureExtractorAdapter;
 import featureengineering.SimpleFeatureExtractor;
 import featureengineering.TextFeatureEngineer;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Properties;
 import java.util.Random;
 
 public class TextFeatureEngineerTest
@@ -14,20 +16,53 @@ public class TextFeatureEngineerTest
 	public static void main(String[] args) throws IOException {
 //		testTextCorpus();
 //		testCSVWriter();
-		
+
 //		testEngineer();
 		
 		
+		runWeeBitPrototypeFeatures();
+
+//		LevelSeparatedTextCorpus corpus = new WeeBitOriginalCorpus();
+//		corpus.setClassLimit(600);
+////		corpus.setRandom(null);
+//
+//
+//		FeatureExtractor extractor = new SimpleFeatureExtractor();
+//
+//
+//		TextFeatureEngineer tfe = new TextFeatureEngineer(corpus, new DefaultCSVFeatureFile(), extractor);
+//		tfe.run();
+	}
+	
+	private static void runWeeBitPrototypeFeatures() throws IOException {
+		
+		prototype.FeatureExtractor prototypeFeatures = new prototype.FeatureExtractor();
+		
+		prototype.TraditionalFeatureSet traditionalFeatureSet = new prototype.TraditionalFeatureSet();
+		traditionalFeatureSet.addAllFeatures();
+		prototypeFeatures.featureSetList.add(traditionalFeatureSet);
+		
+		Properties props = new Properties();
+		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse");
+		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+		prototype.NlpFeatureSet nlpFeatureSet = new prototype.NlpFeatureSet(pipeline);
+		prototypeFeatures.featureSetList.add(nlpFeatureSet);
+		
+		FeatureExtractor extractor = new PrototypeFeatureExtractorAdapter(prototypeFeatures);
+		
+		
+		
+		
 		LevelSeparatedTextCorpus corpus = new WeeBitOriginalCorpus();
-		corpus.setClassLimit(600);
-//		corpus.setRandom(null);
-
-
-		FeatureExtractor extractor = new SimpleFeatureExtractor();
-
-
-		TextFeatureEngineer tfe = new TextFeatureEngineer(corpus, new DefaultCSVFeatureFile(), extractor);
-		tfe.run();
+		corpus.setClassLimit(10);
+		
+		FeatureFileWriter writer = new DefaultCSVFeatureFile();
+		
+		TextCleaner cleaner = new MakeLowerCaseCleaner();
+		
+		
+		TextFeatureEngineer engineer = new TextFeatureEngineer(corpus, writer, extractor, cleaner);
+		engineer.run();
 	}
 	
 	private static void testEngineer() throws IOException {

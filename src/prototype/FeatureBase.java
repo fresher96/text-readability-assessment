@@ -6,15 +6,15 @@ import java.util.List;
 class FeatureExtractorOld
 {
 	public List<FeatureBase> featureList = new ArrayList<>();
-
+	
 	public List<Integer> extract(String document) {
-
+	
 		List<Integer> ret = new ArrayList<>();
 		for (FeatureBase feature : featureList)
 		{
 			ret.add(feature.extract(document));
 		}
-
+		
 		return ret;
 	}
 }
