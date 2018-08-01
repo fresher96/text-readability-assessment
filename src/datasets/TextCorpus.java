@@ -13,7 +13,7 @@ public abstract class TextCorpus implements Iterable<Document>
 {
 	protected List<Pair<File, String>> fileList;
 	
-	public TextCorpus(){
+	public TextCorpus() {
 		fileList = null;
 	}
 	
@@ -22,8 +22,8 @@ public abstract class TextCorpus implements Iterable<Document>
 		return new DocumentIterator();
 	}
 	
-	public int size(){
-		if(fileList == null) iterator();
+	public int size() {
+		if (fileList == null) iterator();
 		return fileList.size();
 	}
 	

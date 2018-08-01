@@ -49,14 +49,14 @@ public class MyUtils
 		}
 		catch (Exception ex)
 		{
+//			if(true) throw ex;
 			System.err.println(file.getPath() + " is not UTF8!!!");
-			List <String> ret = new ArrayList<>();
 			
 			byte[] sourceBytes = Files.readAllBytes(Paths.get(file.getPath()));
 			String text = new String(sourceBytes , "Windows-1252");
 			String[] lines = text.split("\n");
 			
-			ret = Arrays.asList(lines);
+			List <String> ret = Arrays.asList(lines);
 			return ret;
 		}
 	}

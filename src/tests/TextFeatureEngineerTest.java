@@ -54,7 +54,7 @@ public class TextFeatureEngineerTest
 		
 		
 		LevelSeparatedTextCorpus corpus = new WeeBitOriginalCorpus();
-		corpus.setClassLimit(10);
+		corpus.setClassLimit(225);
 		
 		FeatureFileWriter writer = new DefaultCSVFeatureFile();
 		

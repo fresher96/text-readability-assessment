@@ -6,6 +6,7 @@ import datasets.TextCleaner;
 import datasets.TextCorpus;
 
 import java.io.FileNotFoundException;
+import java.util.Iterator;
 import java.util.List;
 
 public class TextFeatureEngineer
@@ -17,7 +18,7 @@ public class TextFeatureEngineer
 	
 	/* constructors */
 	
-	public TextFeatureEngineer(){
+	public TextFeatureEngineer() {
 		this(null, null, null, null);
 	}
 	
@@ -75,13 +76,53 @@ public class TextFeatureEngineer
 		
 		featureFileWriter.writeHeaders(featureExtractor.getFeatureList());
 		
-		for(Document document : textCorpus)
+		Iterator<Document> iterator = textCorpus.iterator();
+		
+		long startTime = System.nanoTime();
+		while (iterator.hasNext())
+		{
+			try
+			{
+				Document document = iterator.next();
+				
+				index++;
+				String spaces = "    ";
+				System.out.printf("processing (%d/%d): %-30.30s %s [%s]\n", index, total, document.getName(), spaces, document.getPath());
+				
+				if (textCleaner != null) textCleaner.clean(document);
+//				System.out.println(document.getText());
+				
+				List<Object> features = featureExtractor.extract(document.getText());
+				featureFileWriter.process(document, features);
+			}
+			catch (Exception ex)
+			{
+				ex.printStackTrace();
+			}
+		}
+		
+		long elapsedTime = System.nanoTime() - startTime;
+		long nanoPerSec = 1000 * 1000 * 1000;
+		
+		System.out.println("\n..........................................................................................................");
+		System.out.printf("time elapsed: %02d:%02d\n", elapsedTime / nanoPerSec / 60, elapsedTime / nanoPerSec % 60);
+		System.out.println("..........................................................................................................\n\n\n\n\n");
+	}
+	
+	public void run1() throws FileNotFoundException {
+		
+		int index = 0;
+		int total = textCorpus.size();
+		
+		featureFileWriter.writeHeaders(featureExtractor.getFeatureList());
+		
+		for (Document document : textCorpus)
 		{
 			index++;
 			String spaces = "    ";
 			System.out.printf("processing (%d/%d): %-30.30s %s [%s]\n", index, total, document.getName(), spaces, document.getPath());
 			
-			if(textCleaner != null) textCleaner.clean(document);
+			if (textCleaner != null) textCleaner.clean(document);
 //			System.out.println(document.getText());
 			
 			List<Object> features = featureExtractor.extract(document.getText());
