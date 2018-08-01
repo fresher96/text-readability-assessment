@@ -2,6 +2,7 @@ package featureengineering;
 
 import datasets.Document;
 import datasets.FeatureFileWriter;
+import datasets.TextCleaner;
 import datasets.TextCorpus;
 
 import java.io.FileNotFoundException;
@@ -10,17 +11,35 @@ import java.util.List;
 public class TextFeatureEngineer
 {
 	private TextCorpus textCorpus;
-	private FeatureExtractor featureExtractor;
 	private FeatureFileWriter featureFileWriter;
+	private FeatureExtractor featureExtractor;
+	private TextCleaner textCleaner;
+	
+	/* constructors */
 	
 	public TextFeatureEngineer(){
-		this(null, null, null);
+		this(null, null, null, null);
 	}
 	
-	public TextFeatureEngineer(TextCorpus textCorpus, FeatureExtractor featureExtractor, FeatureFileWriter featureFileWriter) {
+	public TextFeatureEngineer(TextCorpus textCorpus, FeatureFileWriter featureFileWriter, FeatureExtractor featureExtractor) {
+		this(textCorpus, featureFileWriter, featureExtractor, null);
+	}
+	
+	public TextFeatureEngineer(TextCorpus textCorpus, FeatureFileWriter featureFileWriter, FeatureExtractor featureExtractor, TextCleaner textCleaner) {
 		setTextCorpus(textCorpus);
-		setFeatureExtractor(featureExtractor);
 		setFeatureFileWriter(featureFileWriter);
+		setFeatureExtractor(featureExtractor);
+		setTextCleaner(textCleaner);
+	}
+	
+	/* setters & getters */
+	
+	public TextCleaner getTextCleaner() {
+		return textCleaner;
+	}
+	
+	public void setTextCleaner(TextCleaner textCleaner) {
+		this.textCleaner = textCleaner;
 	}
 	
 	public TextCorpus getTextCorpus() {
@@ -47,6 +66,8 @@ public class TextFeatureEngineer
 		this.featureFileWriter = featureFileWriter;
 	}
 	
+	/* methods */
+	
 	public void run() throws FileNotFoundException {
 		
 		int index = 0;
@@ -60,8 +81,8 @@ public class TextFeatureEngineer
 			String spaces = "    ";
 			System.out.printf("processing (%d/%d): %-30.30s %s [%s]\n", index, total, document.getName(), spaces, document.getPath());
 			
-			
-//			System.out.println(document.getText());
+			if(textCleaner != null) textCleaner.clean(document);
+			System.out.println(document.getText());
 			
 			List<Object> features = featureExtractor.extract(document.getText());
 			featureFileWriter.process(document, features);

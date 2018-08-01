@@ -19,27 +19,35 @@ public class TextFeatureEngineerTest
 		
 		
 		LevelSeparatedTextCorpus corpus = new WeeBitOriginalCorpus();
-//		corpus.setClassLimit(500);
-		corpus.setRandom(new Random(0));
-		
-		
+		corpus.setClassLimit(600);
+//		corpus.setRandom(null);
+
+
 		FeatureExtractor extractor = new SimpleFeatureExtractor();
-		
-		
-		TextFeatureEngineer tfe = new TextFeatureEngineer(corpus, extractor, new DefaultCSVFeatureFile());
+
+
+		TextFeatureEngineer tfe = new TextFeatureEngineer(corpus, new DefaultCSVFeatureFile(), extractor);
 		tfe.run();
 	}
 	
 	private static void testEngineer() throws IOException {
+		
+		TextCleanerDecorator cleaner = null;
+		cleaner = new TextCleanerDecorator(new MakeLowerCaseCleaner());
+//		cleaner = new TextCleanerDecorator(cleaner);
+		
+		
 		TextFeatureEngineer tfe = new TextFeatureEngineer();
 		
 		OneStopEnglishCorpus corpus = new OneStopEnglishCorpus();
 		corpus.setRandom(new Random(123));
 		corpus.setClassLimit(10);
 		
+		
 		tfe.setTextCorpus(corpus);
-		tfe.setFeatureExtractor(new SimpleFeatureExtractor());
 		tfe.setFeatureFileWriter(new DefaultCSVFeatureFile());
+		tfe.setFeatureExtractor(new SimpleFeatureExtractor());
+		tfe.setTextCleaner(cleaner);
 		
 		tfe.run();
 	}
