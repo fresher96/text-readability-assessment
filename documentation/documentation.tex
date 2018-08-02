@@ -33,34 +33,15 @@
 	
 	\printbibheading[title = {المراجع}]
 	\addcontentsline{toc}{chapter}{المراجع}
-		
-		{
-			\setmainfont[Script = Latin]{Traditional Arabic}
-			\setsansfont[Script = Latin]{Traditional Arabic}
-			\selectlanguage{english}
-%			\print‌​bibliography[notkeyword‌​={arabic}, title={test}, heading=subbibliography]
-\begin{LTR}
+	\pagestyle{plain}
+	
+	\begin{english}
 		\printbibliography[heading = subbibliography, notkeyword = arabic, title = {English References}]
-		\end{LTR}
-		}
+	\end{english}
 	
-%	\begin{english}
-%		
-%		\printbibliography[heading = subbibliography, notkeyword = arabic, title = {English References}]
-%	\end{english}
-	
-%	\printbibliography[heading = subbibliography, keyword = arabic, title = {المراجع العربية}]
-	
-			{
-		\setmainfont[Script = Arabic]{Traditional Arabic}
-		\setsansfont[Script = Arabic]{Traditional Arabic}
-		\selectlanguage{arabic}
-		%			\print‌​bibliography[notkeyword‌​={arabic}, title={test}, heading=subbibliography]
-
-\begin{RTL}
 	\printbibliography[heading = subbibliography, keyword = arabic, title = {المراجع العربية}]
-	\end{RTL}
-	}
+	
+	
 \end{document}
 
 
