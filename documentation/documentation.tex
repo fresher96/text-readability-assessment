@@ -1,0 +1,220 @@
+
+\documentclass{report}
+
+% included packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage[autostyle]{csquotes}
+\usepackage{amsfonts}
+\usepackage[end]{algpseudocode}
+\usepackage{caption}
+\usepackage{setspace}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage[a4paper, total={6.25in, 8.5in}]{geometry}
+\usepackage{algorithm}
+\usepackage[all]{hypcap}
+\usepackage{fontspec}
+\usepackage{lipsum}
+
+
+
+% header/footer settings
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\rightmark}
+\fancyhead[L]{\leftmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\subsectionmark}[1]{}
+\renewcommand{\subsubsectionmark}[1]{}
+
+
+
+% polyglossia package settings {
+\usepackage{polyglossia}
+
+% setting languages
+\setmainlanguage[numerals = maghrib]{arabic}
+\setotherlanguage{english}
+
+% setting fonts
+\setmainfont[Ligatures = TeX]{Traditional Arabic}
+\setsansfont[Ligatures = TeX, Script = Arabic, Scale = 0.5]{Traditional Arabic}
+\setmonofont[Ligatures = TeX]{Courier New}
+%\newfontfamily\arabicfont[Script = Arabic, Ligatures = TeX,  SizeFeatures = {Size = 15}]{Traditional Arabic}
+\newfontfamily\arabicfont[Script = Arabic, Ligatures = TeX, Scale = 1.5]{Traditional Arabic}
+
+% fixing parentheses in equations numbering
+\renewcommand{\theequation}{\arabic{equation}}
+\makeatletter
+\def\maketag@@@#1{\hbox{\m@th\normalfont\LRE{#1}}}
+\def\tagform@#1{\maketag@@@{(\ignorespaces#1\unskip)}}
+\makeatother
+
+% fixing section numbering
+%\renewcommand{\thesubsection}{\arabic{subsection}.\arabic{section}}
+%\renewcommand{\thesubsubsection}{\arabic{subsubsection}.\arabic{subsection}.\arabic{section}}
+
+% polyglossia package settings }
+
+
+
+%footnoterule settings
+\renewcommand{\footnoterule}{%
+	\kern-3pt
+	\nointerlineskip
+	\moveright.6\columnwidth\vbox{\hrule width.4\columnwidth}%
+	\nointerlineskip
+	\kern2.6pt
+}
+
+\usepackage[
+backend = biber,
+%sorting = ynt,
+%style = authoryear,
+%citestyle=authoryear
+style = numeric
+]{biblatex}
+\addbibresource{tex/references.bib}
+%\ExecuteBibliographyOptions{
+%	
+%}
+%\DeclareLanguageMapping{english}{english-apa}
+%\defbibenvironment{engenv}{\begin{otherlanguage}{english}
+%		\list
+%		{}
+%		{\setlength{\rightmargin}{\bibhang}%
+%			\setlength{\itemindent}{-\rightmargin}%
+%			\setlength{\itemsep}{\bibitemsep}%
+%			\setlength{\parsep}{\bibparsep}}}
+%	{\endlist\end{otherlanguage}}{\bibp\item}
+
+% preferences settings
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+\renewcommand{\baselinestretch}{1.5}
+\captionsetup[figure]{name={الشكل}}
+\addto\captionsarabic{\renewcommand{\chaptername}{الفصل}}
+%\hypersetup{colorlinks = true, allcolors = black} % change links colors
+
+
+% cover page stuff
+% title
+\title{
+	\Huge
+	تقييم جودة نصوص اللغة الانكليزية \\[2.5mm]
+	\Large
+	مشروع السنة الرابعة
+}
+\author{}
+\date{}
+
+\begin{document}
+	
+	% cover page
+	\newfontfamily\coverfont[Script = Arabic, Ligatures = TeX, SizeFeatures={Size=16}]{Traditional Arabic}
+	\newfontfamily\authorsfont[Script = Arabic, Ligatures = TeX, SizeFeatures={Size=18}]{Traditional Arabic}
+	
+	\pagenumbering{roman}
+	%\phantomsection\addcontentsline{toc}{section}{Cover Page}
+	{
+		\begin{wrapfigure}{l}{0.25\textwidth}
+			\hfill
+			\includegraphics[width=0.9\linewidth]{images/HIAST_logo.JPG}
+		\end{wrapfigure}
+		
+		\coverfont
+		\begin{spacing}{1.8}
+			\ \\
+			الجمهورية العربية السورية \\
+			المعهد العالي للعلوم التطبيقية والتكنولوجيا \\
+			قسم المعلوميات \\
+			العام الدراسي 2017/2018  \\
+		\end{spacing}
+	}
+	
+	%\vspace{25mm}
+	{\let\newpage\relax\maketitle}
+	
+	%\vspace{0mm}
+	\begin{center}
+		\begin{doublespace}
+			
+			\centering
+			إعداد \\
+			{\authorsfont
+				فاروق حجابو \\[6mm]
+			}
+			إشراف \\
+			{\authorsfont
+%				م. رياض سنبل \\
+%				د. غيداء ربداوي
+							\begin{tabular}{l r}
+								م. & رياض سنبل \\
+								د. & غيداء ربداوي
+							\end{tabular}
+%				أحمد \hfill راضي
+			}
+			
+%			\coverfont
+%			\begin{tabular}{l r}
+%				تقديم:		&		فاروق حجابو			\\
+%				إشراف:	&		د. راضي خازم
+%			\end{tabular}
+			
+		\end{doublespace}
+	\end{center}
+	
+	\vfill
+	\centerline{\date{2 آب 2018}}
+	\thispagestyle{empty}
+	\pagebreak
+	
+	% end of cover page
+	
+	%\phantomsection\addcontentsline{toc}{section}{Contents}
+	\tableofcontents
+	\pagebreak
+	
+	
+	\pagenumbering{arabic}
+	
+	\input{tex/intro}
+	
+	\input{tex/chapter1}
+	
+	\chapter{تعلم الآلة \LR{machine learning}}
+	اختبار \cite{5:mvcp} جميل \\
+	اختبار \cite{kouba} جميل \\
+	اختبار \cite{1:misp} جميل \\
+	اختبار \cite{shamoon} جميل \\
+%	\pagebreak
+	
+	\nocite{*}
+	
+	\printbibheading[title={المراجع}]
+	\begin{english}
+	\printbibliography[heading=subbibliography,keyword=english,title={english ref}]
+	\end{english}
+	\printbibliography[heading=subbibliography,keyword=arabic,title={المراجع العربية}]
+	
+	
+	%\phantomsection\addcontentsline{toc}{section}{المصادر}
+%	\LR{\printbibliography}
+%	\printbibliography
+%	\printbibliography[category=english]{المصادر الأجنبية}
+%	
+%	\printbibliography[category = arabic]{المصادر العربية}
+	
+%	\begin{spacing}{2}
+%		\selectlanguage{english}
+%		\printbibliography
+%	\end{spacing}
+	
+
+\end{document}
+
