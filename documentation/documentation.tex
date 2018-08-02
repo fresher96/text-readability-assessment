@@ -115,64 +115,9 @@ style = numeric
 
 \begin{document}
 	
-	% cover page
-	\newfontfamily\coverfont[Script = Arabic, Ligatures = TeX, SizeFeatures={Size=16}]{Traditional Arabic}
-	\newfontfamily\authorsfont[Script = Arabic, Ligatures = TeX, SizeFeatures={Size=18}]{Traditional Arabic}
-	
 	\pagenumbering{roman}
-	%\phantomsection\addcontentsline{toc}{section}{Cover Page}
-	{
-		\begin{wrapfigure}{l}{0.25\textwidth}
-			\hfill
-			\includegraphics[width=0.9\linewidth]{images/HIAST_logo.JPG}
-		\end{wrapfigure}
-		
-		\coverfont
-		\begin{spacing}{1.8}
-			\ \\
-			الجمهورية العربية السورية \\
-			المعهد العالي للعلوم التطبيقية والتكنولوجيا \\
-			قسم المعلوميات \\
-			العام الدراسي 2017/2018  \\
-		\end{spacing}
-	}
 	
-	%\vspace{25mm}
-	{\let\newpage\relax\maketitle}
-	
-	%\vspace{0mm}
-	\begin{center}
-		\begin{doublespace}
-			
-			\centering
-			إعداد \\
-			{\authorsfont
-				فاروق حجابو \\[6mm]
-			}
-			إشراف \\
-			{\authorsfont
-%				م. رياض سنبل \\
-%				د. غيداء ربداوي
-							\begin{tabular}{l r}
-								م. & رياض سنبل \\
-								د. & غيداء ربداوي
-							\end{tabular}
-%				أحمد \hfill راضي
-			}
-			
-%			\coverfont
-%			\begin{tabular}{l r}
-%				تقديم:		&		فاروق حجابو			\\
-%				إشراف:	&		د. راضي خازم
-%			\end{tabular}
-			
-		\end{doublespace}
-	\end{center}
-	
-	\vfill
-	\centerline{\date{2 آب 2018}}
-	\thispagestyle{empty}
-	\pagebreak
+	\input{tex/cover.tex}
 	
 	% end of cover page
 	
