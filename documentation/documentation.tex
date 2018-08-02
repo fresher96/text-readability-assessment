@@ -107,47 +107,34 @@ style = numeric
 	\pagenumbering{roman}
 	
 	\input{tex/cover.tex}
-	\input{tex/abstract.tex}
+	
+	\pagenumbering{roman}
+%	\input{tex/abstract.tex}
 	
 	\addcontentsline{toc}{chapter}{المحتويات}
 	\tableofcontents
-	\pagebreak
 	
+	\listoffigures
+	
+	\listoftables
 	
 	\pagenumbering{arabic}
 	
-	\input{tex/intro}
+	\input{tex/intro.tex}
 	
 	\input{tex/chapter1}
 	
-	\chapter{تعلم الآلة \LR{machine learning}}
-	اختبار \cite{5:mvcp} جميل \\
-	اختبار \cite{kouba} جميل \\
-	اختبار \cite{1:misp} جميل \\
-	اختبار \cite{shamoon} جميل \\
-%	\pagebreak
+	
 	
 	\nocite{*}
-	
 	\printbibheading[title={المراجع}]
+	
 	\begin{english}
-	\printbibliography[heading=subbibliography,keyword=english,title={english ref}]
+		\printbibliography[heading=subbibliography,keyword=english,title={English References}]
 	\end{english}
+
 	\printbibliography[heading=subbibliography,keyword=arabic,title={المراجع العربية}]
 	
 	
-	%\phantomsection\addcontentsline{toc}{section}{المصادر}
-%	\LR{\printbibliography}
-%	\printbibliography
-%	\printbibliography[category=english]{المصادر الأجنبية}
-%	
-%	\printbibliography[category = arabic]{المصادر العربية}
-	
-%	\begin{spacing}{2}
-%		\selectlanguage{english}
-%		\printbibliography
-%	\end{spacing}
-	
-
 \end{document}
 
