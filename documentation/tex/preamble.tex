@@ -20,7 +20,6 @@
 \usepackage{lipsum}
 
 
-
 % header/footer settings
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -29,8 +28,7 @@
 \fancyhead[L]{\leftmark}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.5pt}
-%\renewcommand{\chaptermark}[1]{\markleft{#1}}
-\renewcommand{\sectionmark}[1]{\markright{#1}}
+%\renewcommand{\sectionmark}[1]{\markright{#1}}
 \renewcommand{\subsectionmark}[1]{}
 \renewcommand{\subsubsectionmark}[1]{}
 
@@ -40,7 +38,7 @@
 \usepackage{polyglossia}
 \setmainlanguage[numerals = maghrib]{arabic}
 \setotherlanguage{english}
-\setmainfont[Ligatures = TeX]{Traditional Arabic}
+\setmainfont[Ligatures = TeX, Scale = 1.5]{Traditional Arabic}
 \setsansfont[Ligatures = TeX, Script = Arabic, Scale = 0.5]{Traditional Arabic}
 \setmonofont[Ligatures = TeX]{Courier New}
 \newfontfamily\arabicfont[Script = Arabic, Ligatures = TeX, Scale = 1.5]{Traditional Arabic}
@@ -87,7 +85,7 @@
 	التاسع عشر\or 
 	العشرون\or 
 	\else
-	أحتاج إلى المزيد من الأرقام!!! الأبواب بالحروف في ملف
+	أحتاج إلى المزيد من الأرقام!!!
 	 \fi
 }
 \makeatletter
@@ -125,6 +123,9 @@ style = numeric
 %\hypersetup{colorlinks = true, allcolors = black} % change links colors
 \captionsetup[figure]{name={الشكل}}
 \addto\captionsarabic{\renewcommand{\chaptername}{الفصل}}
+
+
+
 
 
 

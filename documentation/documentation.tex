@@ -3,32 +3,44 @@
 
 \begin{document}
 	
-	\input{tex/cover.tex}
+	% cover page
+%	\input{tex/cover.tex}
 	
+	
+	% front matter
 	\pagenumbering{roman}
 	\input{tex/abstract.tex}
 	
-	\addcontentsline{toc}{chapter}{المحتويات}
+	
+	% indexes/contents
 	\tableofcontents
+	\addcontentsline{toc}{chapter}{المحتويات}
 	
 	\listoffigures
+	\addcontentsline{toc}{chapter}{قائمة الأشكال}
 	
 	\listoftables
+	\addcontentsline{toc}{chapter}{قائمة الجداول}
 	
+	
+	% main matter
 	\pagenumbering{arabic}
-	
 	\input{tex/introduction.tex}
 	
 	
-%	\nocite{*}
+	% bibliography/references
+	\nocite{*}
 	\printbibheading[title={المراجع}]
+	\addcontentsline{toc}{chapter}{المراجع}
 	
+	\printbibliography[heading=subbibliography,keyword=arabic,title={المراجع العربية}]
+		
 	\begin{english}
 		\printbibliography[heading=subbibliography,keyword=english,title={English References}]
 	\end{english}
-
-	\printbibliography[heading=subbibliography,keyword=arabic,title={المراجع العربية}]
 	
 	
 \end{document}
+
+
 
