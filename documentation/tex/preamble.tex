@@ -29,6 +29,7 @@
 \fancyhead[L]{\leftmark}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.5pt}
+%\renewcommand{\chaptermark}[1]{\markleft{#1}}
 \renewcommand{\sectionmark}[1]{\markright{#1}}
 \renewcommand{\subsectionmark}[1]{}
 \renewcommand{\subsubsectionmark}[1]{}
@@ -57,11 +58,42 @@
 \makeatother
 
 % fixing section numbering
-%\renewcommand{\thesubsection}{\arabic{subsection}.\arabic{section}}
-%\renewcommand{\thesubsubsection}{\arabic{subsubsection}.\arabic{subsection}.\arabic{section}}
+\renewcommand{\thesection}{\arabic{section}.\arabic{chapter}}
+\renewcommand{\thesubsection}{\arabic{subsection}.\arabic{section}.\arabic{chapter}}
+\renewcommand{\thesubsubsection}{\arabic{subsubsection}.\arabic{subsection}.\arabic{section}.\arabic{chapter}}
 
 % polyglossia package settings }
 
+% to write الفصل الأول
+\newcommand\words[1]{\expandafter\xwords\csname c@#1\endcsname}
+\def\xwords#1{\ifcase#1\or
+	الأول\or          
+	الثاني\or          
+	الثالث\or 
+	الرابع\or 
+	الخامس\or 
+	السادس\or 
+	السابع\or 
+	الثامن\or 
+	التاسع\or 
+	العاشر\or 
+	الحادي عشر\or 
+	الثاني عشر\or 
+	الثالث عشر\or 
+	الرابع عشر\or 
+	الخامس عشر\or 
+	السادس عشر\or  
+	السابع عشر\or
+	الثامن عشر\or 
+	التاسع عشر\or 
+	العشرون\or 
+	\else
+	أحتاج إلى المزيد من الأرقام!!! الأبواب بالحروف في ملف
+	 \fi
+}
+\makeatletter
+\patchcmd{\@makechapterhead}{\thechapter}{\words{chapter}}{}{}
+\makeatother
 
 
 %footnoterule settings
