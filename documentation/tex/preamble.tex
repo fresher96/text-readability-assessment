@@ -36,35 +36,34 @@
 
 
 
-% polyglossia package settings {
+% polyglossia settings
 \usepackage{polyglossia}
-
-% setting languages
 \setmainlanguage[numerals = maghrib]{arabic}
 \setotherlanguage{english}
-
-% setting fonts
 \setmainfont[Ligatures = TeX]{Traditional Arabic}
 \setsansfont[Ligatures = TeX, Script = Arabic, Scale = 0.5]{Traditional Arabic}
 \setmonofont[Ligatures = TeX]{Courier New}
-%\newfontfamily\arabicfont[Script = Arabic, Ligatures = TeX,  SizeFeatures = {Size = 15}]{Traditional Arabic}
 \newfontfamily\arabicfont[Script = Arabic, Ligatures = TeX, Scale = 1.5]{Traditional Arabic}
 
-% fixing parentheses in equations numbering
+
+
+% fixing parentheses in equations' numbering
 \renewcommand{\theequation}{\arabic{equation}}
 \makeatletter
 \def\maketag@@@#1{\hbox{\m@th\normalfont\LRE{#1}}}
 \def\tagform@#1{\maketag@@@{(\ignorespaces#1\unskip)}}
 \makeatother
 
+
+
 % fixing section numbering
 \renewcommand{\thesection}{\arabic{section}.\arabic{chapter}}
 \renewcommand{\thesubsection}{\arabic{subsection}.\arabic{section}.\arabic{chapter}}
 \renewcommand{\thesubsubsection}{\arabic{subsubsection}.\arabic{subsection}.\arabic{section}.\arabic{chapter}}
 
-% polyglossia package settings }
 
-% to write الفصل الأول
+
+% setting chapter numbering to words
 \newcommand\words[1]{\expandafter\xwords\csname c@#1\endcsname}
 \def\xwords#1{\ifcase#1\or
 	الأول\or          
@@ -96,7 +95,7 @@
 \makeatother
 
 
-%footnoterule settings
+% fixing footnoterule orientation
 \renewcommand{\footnoterule}{%
 	\kern-3pt
 	\nointerlineskip
@@ -105,6 +104,9 @@
 	\kern2.6pt
 }
 
+
+
+% references settings
 \usepackage[
 backend = biber,
 %sorting = ynt,
@@ -113,24 +115,16 @@ backend = biber,
 style = numeric
 ]{biblatex}
 \addbibresource{tex/references.bib}
-%\ExecuteBibliographyOptions{
-%	
-%}
-%\DeclareLanguageMapping{english}{english-apa}
-%\defbibenvironment{engenv}{\begin{otherlanguage}{english}
-%		\list
-%		{}
-%		{\setlength{\rightmargin}{\bibhang}%
-%			\setlength{\itemindent}{-\rightmargin}%
-%			\setlength{\itemsep}{\bibitemsep}%
-%			\setlength{\parsep}{\bibparsep}}}
-%	{\endlist\end{otherlanguage}}{\bibp\item}
+
+
 
 % preferences settings
 \setlength{\parskip}{1em}
 \setlength{\parindent}{0em}
 \renewcommand{\baselinestretch}{1.5}
+%\hypersetup{colorlinks = true, allcolors = black} % change links colors
 \captionsetup[figure]{name={الشكل}}
 \addto\captionsarabic{\renewcommand{\chaptername}{الفصل}}
-%\hypersetup{colorlinks = true, allcolors = black} % change links colors
+
+
 
