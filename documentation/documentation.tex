@@ -5,6 +5,8 @@
 	
 	% front matter
 	\pagenumbering{roman}
+	\pagestyle{plain}
+	
 	\input{tex/cover.tex}
 	\input{tex/abstract.tex}
 	
@@ -13,30 +15,32 @@
 	
 	% indexes/contents
 	\tableofcontents
-	\pagestyle{plain}
 	\addcontentsline{toc}{chapter}{المحتويات}
 	
 	\listoffigures
-	\addcontentsline{toc}{chapter}{قائمة الأشكال}
+	\addcontentsline{toc}{section}{قائمة الأشكال}
 	
 	\listoftables
-	\addcontentsline{toc}{chapter}{قائمة الجداول}
+	\addcontentsline{toc}{section}{قائمة الجداول}
 	
 	\input{tex/abbreviations.tex}
 	
 	% main matter
 	\clearpage
 	\pagenumbering{arabic}
+	\pagestyle{fancy}
+	
 	\input{tex/introduction.tex}
 	\input{tex/literature.tex}
 	
 	
 	% bibliography/references
+	\clearpage
+	\pagestyle{plain}
 	\nocite{*}
 	
 	\printbibheading[title = {المراجع}]
 	\addcontentsline{toc}{chapter}{المراجع}
-	\pagestyle{plain}
 	
 	\begin{english}
 		\printbibliography[heading = subbibliography, notkeyword = arabic, title = {English References}]
