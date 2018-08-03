@@ -3,18 +3,17 @@
 
 \begin{document}
 	
-	% cover page
-	\input{tex/cover.tex}
-	
-	
 	% front matter
-	\clearpage
 	\pagenumbering{roman}
+	\input{tex/cover.tex}
 	\input{tex/abstract.tex}
+	
+	\addtocounter{page}{1}
 	
 	
 	% indexes/contents
 	\tableofcontents
+	\pagestyle{plain}
 	\addcontentsline{toc}{chapter}{المحتويات}
 	
 	\listoffigures
