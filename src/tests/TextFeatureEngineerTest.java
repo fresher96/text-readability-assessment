@@ -20,7 +20,7 @@ public class TextFeatureEngineerTest
 //		testEngineer();
 		
 		
-		runWeeBitPrototypeFeatures();
+//		runWeeBitPrototypeFeatures();
 
 //		LevelSeparatedTextCorpus corpus = new WeeBitOriginalCorpus();
 //		corpus.setClassLimit(600);

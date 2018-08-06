@@ -15,6 +15,11 @@ import java.util.Observer;
 
 public class NlpFeatureSet
 {
+	
+}
+
+class NlpFeatureSet1
+{
 	Observable sentences;
 	Observable parseTrees;
 	TokenObservable tokens;
@@ -91,7 +96,7 @@ class WordCountFeatureSub extends WordCountFeature
 class Main
 {
 	public void main() {
-		NlpFeatureSet nlp = new NlpFeatureSet();
+		NlpFeatureSet1 nlp = new NlpFeatureSet1();
 		nlp.addTokenObserver(new WordCountFeature());
 	}
 }

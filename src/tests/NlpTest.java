@@ -30,12 +30,15 @@ public class NlpTest
 		String text;
 		
 //		text = "Jim bought 300 shares of Acme Corp. in 2006.";
-		text = "We use it when a Jørgen in our dorm IS acting LIkE a SpOiled child.";
+		text = "hi my name is Sue, how you do?\r\n" +
+				"Increased cloud cover in periods of normally clear weather is closing Lukla Airport, the gateway to the Everest region, more often. A new road for 4x4s is being built to Lukla to guarantee the flow of tourists and their money, but Byers is worried that the rapid spread of the road network in Nepal is being done too cheaply, with disastrous consequences in terms of soil erosion and landslides.\r\n" +
+				"Everest is the icon everyone knows, he says. Its the perfect laboratory for figuring out how";
+//		text = "We use it when a Jørgen in our dorm IS acting LIkE a SpOiled child.";
 		
 		Properties props = new Properties();
 		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, depparse, ner, parse, dcoref");
-		props.setProperty("pos.model", "edu/stanford/nlp/models/pos-tagger/english-bidirectional/english-bidirectional-distsim.tagger");
-		props.setProperty("ner.model", "edu/stanford/nlp/models/ner/english.all.3class.distsim.crf.ser.gz,edu/stanford/nlp/models/ner/english.conll.4class.distsim.crf.ser.gz,edu/stanford/nlp/models/ner/english.muc.7class.distsim.crf.ser.gz");
+//		props.setProperty("pos.model", "edu/stanford/nlp/models/pos-tagger/english-bidirectional/english-bidirectional-distsim.tagger");
+//		props.setProperty("ner.model", "edu/stanford/nlp/models/ner/english.all.3class.distsim.crf.ser.gz,edu/stanford/nlp/models/ner/english.conll.4class.distsim.crf.ser.gz,edu/stanford/nlp/models/ner/english.muc.7class.distsim.crf.ser.gz");
 		
 		Annotation document = new Annotation(text);
 		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
@@ -131,8 +134,8 @@ public class NlpTest
 	
 	
 	public static void main(String[] args) throws IOException {
-//		nlpTest();
-		//tregexTest();
+		nlpTest();
+//		tregexTest();
 	}
 	
 	
