@@ -1,22 +1,17 @@
 package featureengineering;
 
-import edu.stanford.nlp.dcoref.CorefChain;
-import edu.stanford.nlp.dcoref.CorefCoreAnnotations;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import edu.stanford.nlp.semgraph.SemanticGraph;
-import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations;
 import edu.stanford.nlp.util.CoreMap;
-import javafx.beans.value.ObservableDoubleValue;
-import javafx.collections.ObservableList;
 
-import javax.xml.bind.Marshaller;
-import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import java.util.Vector;
 
 class Test
 {
@@ -129,6 +124,26 @@ public class TraFeatureExtractor implements FeatureExtractor
 		}
 	}
 }
+
+
+class ClauseCountFeature implements Observer<NlpParseTree>{
+	
+	@Override
+	public void update(Observable o, NlpParseTree arg) {
+//		nClause += count("S|SINV|SQ < (VP <# MD|VBD|VBP|VBZ)", tree, tpc) + count("FRAG > ROOT !<< VP", tree, tpc);
+	}
+}
+
+class LangFeatureSet{
+
+}
+
+
+
+
+
+
+
 
 interface Observer<T> {
 	void update(Observable o, T arg);
