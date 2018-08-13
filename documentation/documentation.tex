@@ -14,14 +14,14 @@
 	
 	
 	% indexes/contents
+	\clearpage\phantomsection\addcontentsline{toc}{chapter}{المحتويات}
 	\tableofcontents
-	\addcontentsline{toc}{chapter}{المحتويات}
-	
+
+	\clearpage\phantomsection\addcontentsline{toc}{section}{قائمة الأشكال}
 	\listoffigures
-	\addcontentsline{toc}{section}{قائمة الأشكال}
 	
+	\clearpage\phantomsection\addcontentsline{toc}{section}{قائمة الجداول}
 	\listoftables
-	\addcontentsline{toc}{section}{قائمة الجداول}
 	
 	\input{tex/abbreviations.tex}
 	
@@ -39,14 +39,17 @@
 	\pagestyle{plain}
 	\nocite{*}
 	
-	\printbibheading[title = {المراجع}]
-	\addcontentsline{toc}{chapter}{المراجع}
+	\printbibliography[heading = bibintoc]
 	
-	\begin{english}
-		\printbibliography[heading = subbibliography, notkeyword = arabic, title = {English References}]
-	\end{english}
 	
-	\printbibliography[heading = subbibliography, keyword = arabic, title = {المراجع العربية}]
+%	\printbibheading[title = {المراجع}]
+%	\addcontentsline{toc}{chapter}{المراجع}
+	
+%	\begin{english}
+%		\printbibliography[heading = subbibliography, notkeyword = arabic, title = {English References}]
+%	\end{english}
+%	
+%	\printbibliography[heading = subbibliography, keyword = arabic, title = {المراجع العربية}]
 	
 	
 \end{document}
