@@ -40,10 +40,11 @@
 \usepackage{polyglossia}
 \setmainlanguage[numerals = maghrib]{arabic}
 \setotherlanguage{english}
-\setmainfont[Ligatures = TeX, Scale = 1.5]{Traditional Arabic}
-\setsansfont[Ligatures = TeX, Script = Arabic, Scale = 1.5]{Traditional Arabic}
-\setmonofont[Ligatures = TeX, Script=Arabic, Scale = 1.5]{Courier New}
+\setmainfont[Ligatures = TeX, Scale = 1]{Latin Modern Math}
+%\setsansfont[Ligatures = TeX, Script = Arabic, Scale = 1.5]{Traditional Arabic}
+%\setmonofont[Ligatures = TeX, Script=Arabic, Scale = 1.5]{Courier New}
 \newfontfamily\arabicfont[Script = Arabic, Ligatures = TeX, Scale = 1.5]{Traditional Arabic}
+\newfontfamily\englishfont[Ligatures = TeX, Scale = 1.25]{Latin Modern Math}
 
 
 
@@ -129,6 +130,11 @@ style = numeric
 %\hypersetup{colorlinks = true, allcolors = black} % change links colors
 \captionsetup[figure]{name={الشكل}}
 \addto\captionsarabic{\renewcommand{\chaptername}{الفصل}}
+
+
+
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+
 
 
 
