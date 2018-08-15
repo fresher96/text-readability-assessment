@@ -37,27 +37,38 @@ class Test
 
 public class TraFeatureExtractor implements FeatureExtractor
 {
+	//region fields
+	
 	private NlpParser nlpParser;
 	
 	private Observable<NlpAnnotation> annotationObservable = new Observable<>();
+	private Observable<NlpSentence> sentenceObservable = new Observable<>();
 	private Observable<NlpToken> tokenObservable = new Observable<>();
 	private Observable<NlpParseTree> parseTreeObservable = new Observable<>();
 	
-	private <T> void addObserver(Observable<T> observable, Observer<T> observer) {
-		observable.addObserver(observer);
+	//endregion
+	
+	//region addObserver methods
+	
+	public void addAnnotationObserver(Observer<NlpAnnotation> observer) {
+		annotationObservable.addObserver(observer);
+	}
+	
+	public void addSentenceObservaber(Observer<NlpSentence> observer) {
+		sentenceObservable.addObserver(observer);
 	}
 	
 	public void addTokenObserver(Observer<NlpToken> observer) {
 		tokenObservable.addObserver(observer);
 	}
 	
-	public void addAnnotationObserver(Observer<NlpAnnotation> observer) {
-		annotationObservable.addObserver(observer);
+	public void addParseTreeObserver(Observer<NlpParseTree> observer) {
+		parseTreeObservable.addObserver(observer);
 	}
 	
-	public void addParseTreeObserver(Observer<NlpParseTree> observer) {
-		addObserver(parseTreeObservable, observer);
-	}
+	//endregion
+	
+	//region constructors
 	
 	public TraFeatureExtractor() {
 		setParser(null);
@@ -66,6 +77,8 @@ public class TraFeatureExtractor implements FeatureExtractor
 	public void setParser(NlpParser nlpParser) {
 		this.nlpParser = nlpParser;
 	}
+	
+	//endregion
 	
 	@Override
 	public List<String> getFeatureList() {
@@ -76,12 +89,12 @@ public class TraFeatureExtractor implements FeatureExtractor
 	public List<Object> extract(String text) {
 		
 		NlpAnnotation document = nlpParser.annotate(text);
-		notify(annotationObservable, document);
+		annotationObservable.notifyObservers(document);
 		
 		List<NlpSentence> sentenceList = document.getSentenceList();
 		for (NlpSentence sentence : sentenceList)
 		{
-			// not sen
+			sentenceObservable.notifyObservers(sentence);
 			
 			List<NlpToken> tokenList = sentence.getTokenList();
 			for (NlpToken token : tokenList)
@@ -90,7 +103,8 @@ public class TraFeatureExtractor implements FeatureExtractor
 			}
 			
 			NlpParseTree tree = sentence.getParseTree();
-			notify(parseTreeObservable, tree);
+			parseTreeObservable.notifyObservers(tree);
+
 
 //			SemanticGraph dependencies = sentence.get(SemanticGraphCoreAnnotations.CollapsedCCProcessedDependenciesAnnotation.class);
 			// not depend
@@ -101,13 +115,4 @@ public class TraFeatureExtractor implements FeatureExtractor
 		
 		return null;
 	}
-	
-	private <T> void notify(Observable<T> observable, T arg) {
-		if (observable.countObservers() > 0)
-		{
-			observable.notifyObservers(arg);
-		}
-	}
 }
-
-
