@@ -113,14 +113,13 @@
 \textenglish{Linear Regression}
 لحل مسائل الانحدار \cite{hands-on}.
 أو استخدام خوارزمية \textenglish{K-Means Clustering}  لحل مسائل التجميع \cite{hands-on}.
- 
+
 سنمهد في هذه الفقرة لأهم الخوارزميات المستخدمة في هذا المشروع.
-وهي: \textenglish{J48}و\textenglish{SVM}.
+وهي: \eng{SVM} و \eng{J48}.
 وجب التنويه إلى أنه تم النظر إلى المسألة المطروحة في هذا المشروع على أنها مسألة تصنيف، انظر إلى الفقرة
 %todo
 
 
-\subsubsection{J48}
 
 \subsubsection{SVM}
 إن كلمة \textenglish{SVM} هي اختصار لـ \textenglish{Support Vector Machine}.
@@ -138,13 +137,13 @@ $(x^{(i)}, y^{(i)})_{1 \leq i \leq m}$
 مع كون $ y^{(i)} = +1 $ في حال الصف الأول، و $ y^{(i)} = -1 $ في حال الصف الثاني.
 وإن $ x^{(i)} $ هو شعاع عددي بـ $ n+1 $ بُعد أي
 $ x^{(i)} \in \mathbb{R}^{n+1} $%
-. وهو ما سميناه شعاع الميزات، انظر الفقرة \ref{sec:ml:steps}.
-أي هنا لدينا $n$ ميزة، حيث للسهولة نضيف $ x^{(i)}_0 = 1 $.
+. وهو ما سميناه شعاع الميزات في الفقرة \ref{sec:ml:steps}.
+أي هنا لدينا $n$ ميزة، حيث لتبسيط العلاقات الرياضية نضيف $ x^{(i)}_0 = 1 $.
 
 النموذج المطروح في خوارزمية الـ \textenglish{SVM}، هو تعريف تابع 
 $ f: \mathbb{R}^{n+1} \rightarrow \{-1, +1 \} $%
-. حيث أننا نقول أنه لأجل عيّنة ما $ (x, y) $ فإنها ينتمي إلى الصف الأول في حال كان $ f(x) \geq 0 $،
-وينتمي إلى الصف الثاني في حال $ f(x) < 0 $.
+. حيث أننا نقول أنه لأجل عيّنة ما $ (x, y) $، فإنها تنتمي إلى الصف الأول في حال كان $ f(x) \geq 0 $،
+وتنتمي إلى الصف الثاني في حال $ f(x) < 0 $.
 سنأخذ مبدئياً للتبسيط التابع $f$ بالشكل
 $ f(x) = \theta_0 x_0 + \theta_1 x_1 + \dots + \theta_n x_n $
 حيث
@@ -170,45 +169,95 @@ $\pospart{\cdot}$
 هو تابع الجزء الموجب؛ أي
 $ \pospart{z} = \max(z, 0) $%
 . و
- $ \norm{\cdot} $
- هو النظيم الإقليدي؛ أي
- $ \norm{\theta}^2 = \sum_{j=0}^{n} \theta_j^2 $%
- . والباراميتر $C$ هو معامل وزن، يحدد مدى التفضيل والمساومة بين الحديّن الأول والثاني في المعادلة.
- 
- إن الحد الأول $ \norm{\theta}^2 $ في المعادلة \ref{eq:svm:primal} هو للتنظيم \textenglish{Regularization}.
- هذا يضبط قيم البارميتر $ \theta $ ويمنعها من أن تأخذ قيم كبيرة.
- الحد الثاني يمثل مجموعة قيمة الخطأ الحاصل في كل مثال تدريبي من معطيات التدريب.
- حيث أن الخطأ الحاصل في عيّنة ما $ (x, y) $ هو
- $ \pospart{1 - y \cdot f(x)} $
-يمكن تأمل صفات هذا الخطأ من خلال الشكل \ref{fig:svm:error}.
+$ \norm{\cdot} $
+هو النظيم الإقليدي؛ أي
+$ \norm{\theta}^2 = \sum_{j=0}^{n} \theta_j^2 $%
+. والباراميتر $C$ هو معامل وزن، يحدد مدى التفضيل والمساومة بين الحديّن الأول والثاني في المعادلة.
+وهو باراميتر فوقي \eng{Hyperparameter} أي يجب تحديده قبل البدء بحل مسألة الأمثلة، وإن تغييره يغيير حل المسألة.
+
+إن الحد الأول $ \norm{\theta}^2 $ في المعادلة \ref{eq:svm:primal} هو للتنظيم \textenglish{Regularization}.
+هذا الحد يضبط قيم البارميتر $ \theta $ ويمنعها من أن تأخذ قيم كبيرة.
+الحد الثاني يمثل مجموع قيمة الخطأ الحاصل في كل مثال تدريبي من معطيات التدريب.
+حيث أن الخطأ الحاصل في عيّنة ما $ (x, y) $ هو
+ $ \pospart{1 - y \cdot f(x)} $%
+. يمكن تأمل صفات هذا الخطأ من خلال الشكل \ref{fig:svm:error}.
 حيث نلاحظ مثلاً في حالة $ y = 1 $ أن الخطأ يساوي الصفر عندما $ f(x) \geq 1 $ 
 وأنه يتزايد بشكل خطي كلما أبتعدت قيمة $ f(x) $ عن $1$ بالاتجاه الخاطئ.
- \begin{figure}[htb]
+ \begin{figure}[htb] 
  	\centering
- 	\includegraphics[width=0.2\linewidth]{images/HIAST_logo.JPG}
- 	\caption[short]{long}
+ 	\includegraphics[width=0.7\linewidth]{images/svm-error.png}
+ 	\caption{%
+ 		الخطأ في العينة الواحدة في نموذج الـ \eng{SVM}.
+ 	}
  	\label{fig:svm:error}
  \end{figure}
+
+يمكن البرهان على أنه في حالة كون المعطيات قابلة للفصل بخط مستقيم، فإن حل مسألة الأمثلة سيعطي المستقيم $f$ الذي يحقق أكبر هامش ممكن؛
+أي اذا قمنا بحساب البعد بين كل نقطة وهذا المستقيم، فإن أصغر بعد سيكون أكبر ما يمكن، وهذا ما يوضحة الشكل~\ref{fig:svm:margin}.
+ \begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/svm-margin.jpg}
+	\caption{
+		مستقيم يفصل صفين بهامش أعظمي.
+	}
+	\label{fig:svm:margin}
+\end{figure}
+
+ولكن أيضاً يمكننا اختيار تابع غير خطي. هذا مفيد مثلاً في حال كان شكل معطيات التدريب مثلما في الشكل~\ref{fig:svm:non-linear}.
+ \begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/svm-non-linear.PNG}
+	\caption{
+		معطيات التدريب غير قابلة للفصل باستخدام مستقيم.
+	}
+	\label{fig:svm:non-linear}
+\end{figure}
+إذ يوجد أسلوب يسمى بالـ \eng{Kernel Trick}، يسمح لنا بفعل هذا.
+ينص هذا الأسلوب على تعريف $f$ بالشكل
+$ f(x) = \sum_{i=1}^{m} \theta_i K(x, x^{(i)}) + \theta_0 $%
+، ثمّ حل مسألة الأمثلة السابقة ذاتها.
+نلاحظ هنا أنه لدينا $ m+1 $ باراميتر عوض الـ $ n+1 $ باراميتر في الحالة السابقة.
+و يسمى التابع $K$ بالنواة \eng{Kernel}.
+فمثلاً اختيار
+ $ K(u, v) = \sum_{j=1}^{n} u_j v_j $
+يؤدي إلى حل مكافئ لحل المسألة الموضحة في المعادلة~\ref{eq:svm:primal}. تسمى هذه النواة بالنواة الخطية \eng{Linear Kernel}.
  
-يوجد شكل آخر لمسألة الأمثلة التي تحلها خوارزمية الـ \eng{SVM} وهو:
-\begin{align}
-\argmax_{\theta} \left(
-\sum_{i=1}^{m} \theta_i -
-\frac{1}{2} \sum_{i=1}^{m} \sum_{k=1}^{m}
-\theta_i \theta_k y^{(i)} y^{(k)} K(x^{(i)}, x^{(k)})
-\right)
-\\
-\operatorname{subject \ to} \left(
-\sum_{i=1}^{m} \theta_i y^{(i)} = 0
-\bigwedge
-0 \leq \theta_i \leq C : i = 1, \dots, m
-\right)
-\nonumber
-\end{align}
-حيث يسمى التابع $K$ بالنواة \eng{Kernel}.
-لكن نلاحظ أنه في هذه المعادلة لدينا $ m+1 $ متحول عوض $ n+1 $ متحول.
-وفي هذه الحالة يكون
-$ f(x) = \sum_{i=1}^{m} \theta_i K(x, x^{(i)}) + \theta_0 $
+إنّ أشهر النوى المستخدمة عادةً هي:
+\begin{doublespacing}
+	\begin{center}
+		\begin{tabular}{r l l}
+			النواة الخطية & \eng{Linear Kernel} &
+			 $ K(u, v) = u^T v $
+			 \\
+			 النواة الحدودية & \eng{Polynomial Kernel} &
+			 $ K(u, v) = (u^T v + r)^d $
+			 \\
+			 النواة الغاوسية & \eng{Gaussian Kernel} &
+			 $ K(u, v) = \exp{\left( -\gamma \norm{u - v}^2 \right)} $
+		\end{tabular}
+	\end{center}
+\end{doublespacing}
+إذ أن الرمز $u^T$ يرمز إلى المنقول وتحديداً فإن
+$ u^T =
+\left(\begin{smallmatrix}
+u_1 \\ \vdots \\ u_n
+\end{smallmatrix}\right)^T
+= \left( u_1, \dots, u_n \right) $%
+. تسمى النواة الغاوسية أيضاً بـ \eng{Radial Basis Function (RBF) Kernel}.
+وننوه أن البارمترات المذكورة $ r, d, \gamma $ هي بارامترات فوقية.
+
+لحل مسألة الأمثلة المطروحة، توجد العديد من الخوارزميات. هذا النوع من المسائل، ومسائل الأمثلة بشكل عام هو فرع
+مدروس بشكل جيد في الرياضيات تحت اسم \eng{Mathematical Optimization}.
+فتوجد العديد من الخوارزميات المستخدمة لحل مسألة الأمثلة المطروحة.
+من أشهرها هي خوارزمية
+\eng{Sequential Minimal Optimization (SMO)}%
+. يتطلب شرحها الخوض في كثير من التفاصيل الرياضية وهو خارج نطاق هذا المشروع.
+
+
+
+\subsubsection{J48}
+
+
 
 
  
