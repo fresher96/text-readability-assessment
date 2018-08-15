@@ -1,22 +1,19 @@
 package featureengineering;
 
-import edu.stanford.nlp.ling.CoreAnnotations;
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.trees.Tree;
-import edu.stanford.nlp.trees.TreeCoreAnnotations;
-import edu.stanford.nlp.util.CoreMap;
 import nlp.*;
-import nlp.stanford.*;
+import nlp.stanford.StanfordNlpParseTreeAdapter;
+import nlp.stanford.StanfordNlpParserAdapter;
 import shared.Debugger;
 import shared.Pair;
+import shared.observer.Observable;
+import shared.observer.Observer;
 import shared.utils.TregexUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.Vector;
 
 class Test
 {
@@ -191,11 +188,6 @@ class LinguisticFeatureSet implements Observer<NlpParseTree>
 
 
 
-interface Observer<T>
-{
-	void update(Observable<T> o, T arg);
-}
-
 class WordCount implements Observer<NlpToken>
 {
 	@Override
@@ -204,60 +196,3 @@ class WordCount implements Observer<NlpToken>
 	}
 }
 
-class Observable<T>
-{
-	private Vector<Observer<T>> obs;
-	
-	public Observable() {
-		obs = new Vector<>();
-	}
-	
-	public synchronized void addObserver(Observer<T> o) {
-		if (o == null)
-			throw new NullPointerException();
-		if (!obs.contains(o))
-		{
-			obs.addElement(o);
-		}
-	}
-	
-	public synchronized void deleteObserver(Observer<T> o) {
-		obs.removeElement(o);
-	}
-	
-	public void notifyObservers(T arg) {
-		/*
-		 * a temporary array buffer, used as a snapshot of the state of
-		 * current Observers.
-		 */
-		Object[] arrLocal;
-		
-		synchronized (this)
-		{
-			/* We don't want the Observer doing callbacks into
-			 * arbitrary code while holding its own Monitor.
-			 * The code where we extract each Observable from
-			 * the Vector and store the state of the Observer
-			 * needs synchronization, but notifying observers
-			 * does not (should not).  The worst result of any
-			 * potential race-condition here is that:
-			 * 1) a newly-added Observer will miss a
-			 *   notification in progress
-			 * 2) a recently unregistered Observer will be
-			 *   wrongly notified when it doesn't care
-			 */
-			arrLocal = obs.toArray();
-		}
-		
-		for (int i = arrLocal.length - 1; i >= 0; i--)
-			((Observer) arrLocal[i]).update(this, arg);
-	}
-	
-	public synchronized void deleteObservers() {
-		obs.removeAllElements();
-	}
-	
-	public synchronized int countObservers() {
-		return obs.size();
-	}
-}
