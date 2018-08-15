@@ -1,4 +1,4 @@
-package datasets;
+package datasets.corpora;
 
 public class OneStopEnglishCorpus extends LevelSeparatedTextCorpus
 {

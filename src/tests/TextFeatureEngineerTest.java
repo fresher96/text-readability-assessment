@@ -1,6 +1,16 @@
 package tests;
 
+import cleaners.automatic.ExampleTextCleaner;
+import cleaners.automatic.MakeLowerCaseCleaner;
+import cleaners.automatic.TextCleaner;
 import datasets.*;
+import datasets.corpora.LevelSeparatedTextCorpus;
+import datasets.corpora.ListBasedTextCorpus;
+import datasets.corpora.OneStopEnglishCorpus;
+import datasets.corpora.WeeBitOriginalCorpus;
+import datasets.writers.CSVFileWriter;
+import datasets.writers.DefaultCSVFeatureFile;
+import datasets.writers.FeatureFileWriter;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import featureengineering.FeatureExtractor;
 import featureengineering.PrototypeFeatureExtractorAdapter;

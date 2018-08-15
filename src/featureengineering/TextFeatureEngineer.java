@@ -1,9 +1,11 @@
 package featureengineering;
 
+import cleaners.automatic.TextCleaner;
 import datasets.*;
+import datasets.corpora.TextCorpus;
+import datasets.writers.FeatureWriter;
 import shared.Timer;
 
-import javax.xml.soap.Text;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.List;
@@ -85,7 +87,7 @@ public class TextFeatureEngineer
 				System.out.printf("processing (%d/%d): %-30.30s %s [%s]\n", index+1, total, document.getName(), spaces, document.getPath());
 				
 				if (textCleaner != null) textCleaner.clean(document);
-				System.out.println(document.getText() + "\n\n\n");
+//				System.out.println(document.getText() + "\n\n\n");
 				
 				List<Object> features = featureExtractor.extract(document.getText());
 				featureWriter.process(document, features);

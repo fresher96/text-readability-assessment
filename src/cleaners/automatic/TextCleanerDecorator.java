@@ -1,4 +1,6 @@
-package datasets;
+package cleaners.automatic;
+
+import datasets.Document;
 
 public abstract class TextCleanerDecorator implements TextCleaner
 {

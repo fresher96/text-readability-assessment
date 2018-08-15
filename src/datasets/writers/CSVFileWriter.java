@@ -1,4 +1,6 @@
-package datasets;
+package datasets.writers;
+
+import datasets.Document;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;

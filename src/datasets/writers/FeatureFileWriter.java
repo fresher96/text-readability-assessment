@@ -1,7 +1,4 @@
-package datasets;
-
-import java.io.FileNotFoundException;
-import java.util.List;
+package datasets.writers;
 
 public abstract class FeatureFileWriter implements FeatureWriter
 {

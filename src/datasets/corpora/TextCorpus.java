@@ -1,4 +1,6 @@
-package datasets;
+package datasets.corpora;
+
+import datasets.Document;
 
 import java.util.Iterator;
 

@@ -1,4 +1,4 @@
-package datasets;
+package datasets.writers;
 
 import shared.PropertiesManager;
 

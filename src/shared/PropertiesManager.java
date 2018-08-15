@@ -1,6 +1,6 @@
 package shared;
 
-import datasets.DefaultCSVFeatureFile;
+import datasets.writers.DefaultCSVFeatureFile;
 
 import java.io.*;
 import java.util.Properties;

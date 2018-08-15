@@ -1,4 +1,6 @@
-package datasets;
+package cleaners.automatic;
+
+import datasets.Document;
 
 public class MakeLowerCaseCleaner extends TextCleanerDecorator
 {

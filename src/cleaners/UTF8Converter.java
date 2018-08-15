@@ -18,13 +18,13 @@ public class UTF8Converter
 		File dir = new File(path);
 		List<File> fileList = Arrays.asList(dir.listFiles());
 		
-		for(File file : fileList)
+		for (File file : fileList)
 		{
 			if (file.isFile() && file.getName().endsWith(".csv"))
 			{
 				byte[] sourceBytes = Files.readAllBytes(Paths.get(file.getPath()));
 				
-				String data = new String(sourceBytes , "Windows-1252");
+				String data = new String(sourceBytes, "Windows-1252");
 				
 				Files.write(Paths.get(outputDirPath + file.getName()), data.getBytes(StandardCharsets.UTF_8));
 			}

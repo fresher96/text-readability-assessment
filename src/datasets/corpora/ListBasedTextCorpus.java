@@ -1,5 +1,6 @@
-package datasets;
+package datasets.corpora;
 
+import datasets.Document;
 import shared.utils.FileUtils;
 import shared.Pair;
 

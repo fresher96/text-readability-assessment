@@ -1,5 +1,6 @@
-package cleaners;
+package cleaners.manual;
 
+import cleaners.UTF8Converter;
 import shared.utils.FileUtils;
 import shared.utils.StdIOUtils;
 import weka.core.Instance;
