@@ -58,13 +58,19 @@ public class TextFeatureEngineer
 	
 	public void run() throws FileNotFoundException {
 		
+		System.out.print("\n\n\n");
+		
 		int index = -1;
 		int total = textCorpus.size();
 		int errors = 0;
+		
+		Timer chunkTimer = new Timer();
 		Timer timer = new Timer();
 		
 		featureWriter.writeHeaders(featureExtractor.getFeatureList());
 		Iterator<Document> iterator = textCorpus.iterator();
+		
+		chunkTimer.start();
 		timer.start();
 		
 		while (iterator.hasNext())
@@ -79,7 +85,7 @@ public class TextFeatureEngineer
 				System.out.printf("processing (%d/%d): %-30.30s %s [%s]\n", index+1, total, document.getName(), spaces, document.getPath());
 				
 				if (textCleaner != null) textCleaner.clean(document);
-//				System.out.println(document.getText());
+				System.out.println(document.getText() + "\n\n\n");
 				
 				List<Object> features = featureExtractor.extract(document.getText());
 				featureWriter.process(document, features);
@@ -89,13 +95,24 @@ public class TextFeatureEngineer
 				ex.printStackTrace();
 				errors++;
 			}
+			
+			if(textCorpus.chunk() != -1 && (index + 1)%textCorpus.chunk() == 0)
+			{
+				chunkTimer.stop();
+				
+				System.out.println("\n..........................................................................................................");
+				System.out.printf("time elapsed: %s\n", chunkTimer.toString());
+				System.out.println("..........................................................................................................\n\n\n\n\n");
+				
+				chunkTimer.start();
+			}
 		}
 		
-		timer.end();
+		timer.stop();
 		
-		System.out.println("\n\n\n..........................................................................................................");
+		System.out.println("\n\n\n.........................................");
 		System.out.printf("time elapsed: %s\n", timer.toString());
-		System.out.printf("there were %d/%d errors", errors, total);
+		System.out.printf("there were %d/%d errors\n", errors, total);
 	}
 	
 	//endregion

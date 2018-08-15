@@ -4,5 +4,9 @@ import java.util.Iterator;
 
 public interface TextCorpus extends Iterable<Document>
 {
-	public int size();
+	int size();
+	
+	default int chunk(){
+		return -1;
+	}
 }

@@ -13,10 +13,6 @@ public class LevelSeparatedTextCorpus extends ListBasedTextCorpus
 	private int classLimit;
 	Random random;
 	
-	public Random getRandom() {
-		return random;
-	}
-	
 	public void setRandom(Random random) {
 		this.random = random;
 	}
@@ -51,6 +47,11 @@ public class LevelSeparatedTextCorpus extends ListBasedTextCorpus
 		lock = new Object();
 		classLimit = Integer.MAX_VALUE;
 		random = new Random(0);
+	}
+	
+	@Override
+	public int chunk() {
+		return getClassLimit();
 	}
 	
 	@Override
