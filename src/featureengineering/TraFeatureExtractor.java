@@ -1,17 +1,12 @@
 package featureengineering;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import edu.stanford.nlp.trees.Tree;
+import featureengineering.featuresets.LinguisticFeatureSet;
 import nlp.*;
-import nlp.stanford.StanfordNlpParseTreeAdapter;
 import nlp.stanford.StanfordNlpParserAdapter;
-import shared.Debugger;
-import shared.Pair;
 import shared.observer.Observable;
 import shared.observer.Observer;
-import shared.utils.TregexUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -115,84 +110,4 @@ public class TraFeatureExtractor implements FeatureExtractor
 	}
 }
 
-
-interface Feature
-{
-	
-	default String getName() {
-		return this.getClass().getSimpleName();
-	}
-	
-}
-
-class ClauseCountFeature implements Feature, Observer<NlpParseTree>
-{
-	
-	private int clauseCount;
-	private int wordCount;
-	
-	public int getClauseCount() {
-		return clauseCount;
-	}
-	
-	public int getWordCount() {
-		return wordCount;
-	}
-	
-	public ClauseCountFeature() {
-		clauseCount = 0;
-		wordCount = 0;
-	}
-	
-	
-	@Override
-	public void update(Observable<NlpParseTree> o, NlpParseTree arg) {
-//		nClause += count("S|SINV|SQ < (VP <# MD|VBD|VBP|VBZ)", tree, tpc) + count("FRAG > ROOT !<< VP", tree, tpc);
-		
-		Tree tree = ((StanfordNlpParseTreeAdapter)arg).getTree();
-		Pair<Integer, Integer> res = TregexUtils.count("S|SINV|SQ < (VP <# MD|VBD|VBP|VBZ)", tree);
-		clauseCount += res.getFirst();
-		wordCount += res.getSecond();
-	}
-}
-
-
-class LinguisticFeatureSet implements Observer<NlpParseTree>
-{
-	
-	ClauseCountFeature clauses = new ClauseCountFeature();
-	
-	@Override
-	public void update(Observable<NlpParseTree> o, NlpParseTree arg) {
-		clauses.update(o, arg);
-	}
-	
-	public List<String> getFeatureNames() {
-//		List<String> ret =
-		return null;
-	}
-	
-	public List<Object> getFeatures() {
-		List<Object> ret = new ArrayList<>();
-		ret.add(clauses.getClauseCount());
-		ret.add(clauses.getWordCount() / (double) clauses.getClauseCount());
-		
-		Debugger.debug(ret);
-		
-		return ret;
-	}
-}
-
-
-
-
-
-
-class WordCount implements Observer<NlpToken>
-{
-	@Override
-	public void update(Observable<NlpToken> o, NlpToken arg) {
-		System.out.println(arg.getRaw());
-	}
-}
 

@@ -1,4 +1,4 @@
-package featureengineering;
+package featureengineering.featuresets;
 
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.ling.CoreLabel;
