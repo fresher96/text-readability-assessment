@@ -1,6 +1,6 @@
 package datasets;
 
-import shared.MyUtils;
+import shared.utils.FileUtils;
 import shared.Pair;
 
 import java.io.File;
@@ -61,13 +61,13 @@ public class LevelSeparatedTextCorpus extends TextCorpus
 			{
 				if (fileList == null)
 				{
-					List<File> dirList = MyUtils.getFiles(path);
+					List<File> dirList = FileUtils.getFiles(path);
 					fileList = new ArrayList<>();
 					for (File dir : dirList)
 					{
 						if (!dir.isDirectory()) continue;
 						
-						List<File> files = MyUtils.getFiles(dir.getPath());
+						List<File> files = FileUtils.getFiles(dir.getPath());
 						if(random != null) Collections.shuffle(files, random);
 						
 						int index = 0;

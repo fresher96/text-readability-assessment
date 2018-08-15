@@ -1,4 +1,4 @@
-package shared;
+package shared.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,35 +7,11 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
-public class MyUtils
+public class FileUtils
 {
-	private MyUtils() {
-	
-	}
-	
-	private static Scanner scanner = new Scanner(System.in);
-	
-	public static String readString() {
-		return scanner.next();
-	}
-	
-	public static char readChar() {
-		return readString().charAt(0);
-	}
-	
-	public static int readInt() {
-		return scanner.nextInt();
-	}
-	
-	public static void debug(Object obj) {
-		System.out.println("\"" + obj.toString() + "\"");
-	}
-	
 	public static List<File> getFiles(String dirPath) {
 		File dir = new File(dirPath);
 		List<File> fileList = Arrays.asList(dir.listFiles());

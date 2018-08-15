@@ -1,6 +1,6 @@
 package datasets;
 
-import shared.MyUtils;
+import shared.utils.FileUtils;
 import shared.Pair;
 
 import java.io.File;
@@ -62,7 +62,7 @@ public abstract class TextCorpus implements Iterable<Document>
 			
 			try
 			{
-				ret.setText(MyUtils.readAllText(curFile));
+				ret.setText(FileUtils.readAllText(curFile));
 			}
 			catch (IOException e)
 			{

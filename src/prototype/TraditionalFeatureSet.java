@@ -1,6 +1,6 @@
 package prototype;
 
-import shared.StringHelper;
+import shared.utils.StringUtils;
 
 import java.util.*;
 
@@ -71,7 +71,7 @@ public class TraditionalFeatureSet extends FeatureSet
 		
 		for (String token : tokenArray)
 		{
-			if (StringHelper.isNullOrEmpty(token)) continue;
+			if (StringUtils.isNullOrEmpty(token)) continue;
 			
 			if (!uniqueWords.contains(token))
 			{

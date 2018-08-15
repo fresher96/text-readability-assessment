@@ -1,9 +1,6 @@
 package prototype;
 
-import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import shared.Debugger;
-import shared.StringHelper;
 
 import java.io.*;
 import java.nio.file.Files;

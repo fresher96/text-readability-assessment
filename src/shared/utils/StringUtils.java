@@ -1,8 +1,8 @@
-package shared;
+package shared.utils;
 
-public class StringHelper
+public class StringUtils
 {
-	private StringHelper(){
+	private StringUtils(){
 	
 	}
 	

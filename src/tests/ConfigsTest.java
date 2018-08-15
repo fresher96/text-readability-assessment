@@ -1,6 +1,6 @@
 package tests;
 
-import shared.MyUtils;
+import shared.Debugger;
 import shared.PropertiesManager;
 
 import java.io.*;
@@ -36,8 +36,8 @@ public class ConfigsTest
 		
 		PropertiesManager prop = PropertiesManager.getInstance();
 		System.out.println(prop.get("hi"));
-		MyUtils.debug(prop.get("heyHowAreYou"));
-		MyUtils.debug(prop.get("soo"));
+		Debugger.debug(prop.get("heyHowAreYou"));
+		Debugger.debug(prop.get("soo"));
 		
 //		prop.set("hi", "you");
 //		prop.set("soo", "too");

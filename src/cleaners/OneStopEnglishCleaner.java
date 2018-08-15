@@ -1,6 +1,7 @@
 package cleaners;
 
-import shared.MyUtils;
+import shared.utils.FileUtils;
+import shared.utils.StdIOUtils;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
@@ -53,11 +54,11 @@ public class OneStopEnglishCleaner
 		Set<Character> visited = new HashSet<>();
 		for (int level = 0; level < nLevel; level++)
 		{
-			List<File> fileList = MyUtils.getFiles(dir + levelDirs[level]);
+			List<File> fileList = FileUtils.getFiles(dir + levelDirs[level]);
 			
 			for (File file : fileList)
 			{
-				String text = MyUtils.readAllTextIgnoreEmptyLines(file);
+				String text = FileUtils.readAllTextIgnoreEmptyLines(file);
 				int line = 1, col = 0;
 				
 				for (int i = 0; i < text.length(); i++)
@@ -95,11 +96,11 @@ public class OneStopEnglishCleaner
 		
 		for (int level = 0; level < nLevel; level++)
 		{
-			List<File> fileList = MyUtils.getFiles(dir + levelDirs[level]);
+			List<File> fileList = FileUtils.getFiles(dir + levelDirs[level]);
 			
 			for (File file : fileList)
 			{
-				String text = MyUtils.readAllTextIgnoreEmptyLines(file);
+				String text = FileUtils.readAllTextIgnoreEmptyLines(file);
 				StringBuilder stringBuilder = new StringBuilder();
 				
 				for (int i = 0; i < text.length(); i++)
@@ -114,7 +115,7 @@ public class OneStopEnglishCleaner
 				}
 				
 				String newFile = outputDir + levelDirs[level] + file.getName();
-				MyUtils.writeAllText(stringBuilder.toString(), new File(newFile));
+				FileUtils.writeAllText(stringBuilder.toString(), new File(newFile));
 			}
 		}
 	}
@@ -124,7 +125,7 @@ public class OneStopEnglishCleaner
 //		for (int i = 0; i < 256; i++)
 //		{
 //			System.out.println(i + " ");
-//			MyUtils.debug((char)i);
+//			Debugger.debug((char)i);
 //		}
 		
 		Map<Character, String> charMap = new HashMap<>();
@@ -142,7 +143,7 @@ public class OneStopEnglishCleaner
 		List<File> fileList = new ArrayList<>();
 		for (int i = 0; i < nLevel; i++)
 		{
-			fileList.addAll(MyUtils.getFiles(dir + levelDirs[i]));
+			fileList.addAll(FileUtils.getFiles(dir + levelDirs[i]));
 		}
 		Collections.reverse(fileList);
 		
@@ -150,7 +151,7 @@ public class OneStopEnglishCleaner
 		boolean halt = false;
 		for (File file : fileList)
 		{
-			String text = MyUtils.readAllTextIgnoreEmptyLines(file);
+			String text = FileUtils.readAllTextIgnoreEmptyLines(file);
 			int line = 1, col = 0;
 			
 			for (int i = 0; i < text.length(); i++)
@@ -171,7 +172,7 @@ public class OneStopEnglishCleaner
 				System.out.printf("strange character \"%c\" (%d), \t in file %s, \t line: %d, col: %d\n", ch, (int) ch, file.getName(), line, col);
 				System.out.printf("want to map it? ");
 				
-				char in = MyUtils.readChar();
+				char in = StdIOUtils.readChar();
 				if (in == 'x') // halt, and save map
 				{
 					halt = true;
@@ -186,7 +187,7 @@ public class OneStopEnglishCleaner
 				else if (in == 's') break; // skip file
 				
 				System.out.printf("enter new string: ");
-				String nw = MyUtils.readString();
+				String nw = StdIOUtils.readString();
 				
 				charMap.put(ch, nw);
 			}
@@ -238,12 +239,12 @@ public class OneStopEnglishCleaner
 		int nLevel = 3;
 		
 		
-		List<File> fileList = MyUtils.getFiles(dir);
+		List<File> fileList = FileUtils.getFiles(dir);
 		
 		for (File file : fileList)
 		{
 			Instances instances = ConverterUtils.DataSource.read(file.getPath());
-//			MyUtils.debug(instances.size());
+//			Debugger.debug(instances.size());
 			
 			for (int level = 0; level < nLevel; level++)
 			{
@@ -266,7 +267,7 @@ public class OneStopEnglishCleaner
 								.replaceAll(" ", "-")
 								.replaceAll("\\.csv", suffixArray[level]);
 				
-				MyUtils.writeAllText(stringBuilder.toString(), new File(filePath));
+				FileUtils.writeAllText(stringBuilder.toString(), new File(filePath));
 			}
 		}
 	}
@@ -279,11 +280,11 @@ public class OneStopEnglishCleaner
 		String dir;
 		dir = "D:\\work space\\datasets\\OSE_cleaned\\1_csv_utf8\\";
 		
-		List<File> fileList = MyUtils.getFiles(dir);
+		List<File> fileList = FileUtils.getFiles(dir);
 		
 		for (File file : fileList)
 		{
-			String text = MyUtils.readAllTextIgnoreEmptyLines(file);
+			String text = FileUtils.readAllTextIgnoreEmptyLines(file);
 			StringBuilder stringBuilder = new StringBuilder();
 			
 			stringBuilder.append("Elementary,Intermediate,Advanced\n");
@@ -342,7 +343,7 @@ public class OneStopEnglishCleaner
 			
 			String newText = stringBuilder.toString();
 //			System.out.println(newText);
-			MyUtils.writeAllText(newText, new File(outputDir + file.getName()));
+			FileUtils.writeAllText(newText, new File(outputDir + file.getName()));
 		}
 	}
 	
@@ -366,7 +367,7 @@ public class OneStopEnglishCleaner
 				System.out.println(ex.getMessage());
 				
 				System.out.println("continue?");
-				char ch = MyUtils.readChar();
+				char ch = StdIOUtils.readChar();
 				if (ch != 'y') break;
 			}
 		}
