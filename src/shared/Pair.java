@@ -6,7 +6,7 @@ public class Pair<T1, T2>
 	private T2 second;
 	
 	public Pair() {
-	
+		
 	}
 	
 	public Pair(T1 first, T2 second) {

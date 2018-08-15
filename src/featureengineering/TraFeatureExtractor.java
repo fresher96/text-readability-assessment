@@ -7,6 +7,9 @@ import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations;
 import edu.stanford.nlp.util.CoreMap;
+import shared.Debugger;
+import shared.Pair;
+import shared.utils.TregexUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +21,9 @@ class Test
 	public static void main(String[] args) {
 		
 		
-		
-		
-		
 		Properties props = new Properties();
 //		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, depparse, ner, parse, dcoref");
-		props.setProperty("annotators", "tokenize, ssplit, pos, lemma");
+		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse");
 		
 		StanfordCoreNLP stanfordCoreNLP = new StanfordCoreNLP(props);
 		NlpParser nlpParser = new StanfordNlpParserAdapter(stanfordCoreNLP);
@@ -32,30 +32,12 @@ class Test
 		TraFeatureExtractor extractor = new TraFeatureExtractor();
 		extractor.setParser(nlpParser);
 		
-		extractor.addTokenObserver(new Observer<NlpToken>()
-		{
-			@Override
-			public void update(Observable o, NlpToken arg) {
-//				System.out.println("hi");
-			}
-		});
-		extractor.addTokenObserver(new WordCount());
-		extractor.addAnnotationObserver(new Observer<NlpAnnotation>()
-		{
-			@Override
-			public void update(Observable o, NlpAnnotation arg) {
-				System.out.println("helloo");
-			}
-		});
-		extractor.addAnnotationObserver(new Observer<NlpAnnotation>()
-		{
-			@Override
-			public void update(Observable o, NlpAnnotation arg) {
-				System.out.println("woooorrrld");
-			}
-		});
+		LinguisticFeatureSet linguistic = new LinguisticFeatureSet();
+		extractor.addParseTreeObserver(linguistic);
 		
-		extractor.extract("hello my name is Sue.");
+		extractor.extract("We use it when a girl in our dorm is acting like a spoiled child.");
+		
+		linguistic.getFeatures();
 	}
 }
 
@@ -65,6 +47,11 @@ public class TraFeatureExtractor implements FeatureExtractor
 	
 	private Observable<NlpAnnotation> annotationObservable = new Observable<>();
 	private Observable<NlpToken> tokenObservable = new Observable<>();
+	private Observable<NlpParseTree> parseTreeObservable = new Observable<>();
+	
+	private <T> void addObserver(Observable<T> observable, Observer<T> observer) {
+		observable.addObserver(observer);
+	}
 	
 	public void addTokenObserver(Observer<NlpToken> observer) {
 		tokenObservable.addObserver(observer);
@@ -72,6 +59,10 @@ public class TraFeatureExtractor implements FeatureExtractor
 	
 	public void addAnnotationObserver(Observer<NlpAnnotation> observer) {
 		annotationObservable.addObserver(observer);
+	}
+	
+	public void addParseTreeObserver(Observer<NlpParseTree> observer) {
+		addObserver(parseTreeObservable, observer);
 	}
 	
 	public TraFeatureExtractor() {
@@ -105,7 +96,7 @@ public class TraFeatureExtractor implements FeatureExtractor
 			}
 			
 			NlpParseTree tree = sentence.getParseTree();
-			// not tree
+			notify(parseTreeObservable, tree);
 
 //			SemanticGraph dependencies = sentence.get(SemanticGraphCoreAnnotations.CollapsedCCProcessedDependenciesAnnotation.class);
 			// not depend
@@ -118,7 +109,7 @@ public class TraFeatureExtractor implements FeatureExtractor
 	}
 	
 	private <T> void notify(Observable<T> observable, T arg) {
-		if(observable.countObservers() > 0)
+		if (observable.countObservers() > 0)
 		{
 			observable.notifyObservers(arg);
 		}
@@ -126,16 +117,71 @@ public class TraFeatureExtractor implements FeatureExtractor
 }
 
 
-class ClauseCountFeature implements Observer<NlpParseTree>{
+interface Feature
+{
+	
+	default String getName() {
+		return this.getClass().getSimpleName();
+	}
+	
+}
+
+class ClauseCountFeature implements Feature, Observer<NlpParseTree>
+{
+	
+	private int clauseCount;
+	private int wordCount;
+	
+	public int getClauseCount() {
+		return clauseCount;
+	}
+	
+	public int getWordCount() {
+		return wordCount;
+	}
+	
+	public ClauseCountFeature() {
+		clauseCount = 0;
+		wordCount = 0;
+	}
+	
 	
 	@Override
-	public void update(Observable o, NlpParseTree arg) {
+	public void update(Observable<NlpParseTree> o, NlpParseTree arg) {
 //		nClause += count("S|SINV|SQ < (VP <# MD|VBD|VBP|VBZ)", tree, tpc) + count("FRAG > ROOT !<< VP", tree, tpc);
+		
+		Tree tree = ((StanfordNlpParseTreeAdapter)arg).getTree();
+		Pair<Integer, Integer> res = TregexUtils.count("S|SINV|SQ < (VP <# MD|VBD|VBP|VBZ)", tree);
+		clauseCount += res.getFirst();
+		wordCount += res.getSecond();
 	}
 }
 
-class LangFeatureSet{
 
+class LinguisticFeatureSet implements Observer<NlpParseTree>
+{
+	
+	ClauseCountFeature clauses = new ClauseCountFeature();
+	
+	@Override
+	public void update(Observable<NlpParseTree> o, NlpParseTree arg) {
+		clauses.update(o, arg);
+	}
+	
+	public List<String> getFeatureNames() {
+//		List<String> ret =
+		return null;
+	}
+	
+	public List<Object> getFeatures() {
+		List<Object> ret = new ArrayList<>();
+		ret.add(clauses.getClauseCount());
+		ret.add(clauses.getWordCount() / (double) clauses.getClauseCount());
+		
+		Debugger.debug(ret);
+		
+		return ret;
+	}
 }
 
 
@@ -143,16 +189,15 @@ class LangFeatureSet{
 
 
 
-
-
-interface Observer<T> {
-	void update(Observable o, T arg);
+interface Observer<T>
+{
+	void update(Observable<T> o, T arg);
 }
 
 class WordCount implements Observer<NlpToken>
 {
 	@Override
-	public void update(Observable o, NlpToken arg) {
+	public void update(Observable<NlpToken> o, NlpToken arg) {
 		System.out.println(arg.getRaw());
 	}
 }
@@ -164,15 +209,16 @@ class Observable<T>
 	public Observable() {
 		obs = new Vector<>();
 	}
-
+	
 	public synchronized void addObserver(Observer<T> o) {
 		if (o == null)
 			throw new NullPointerException();
-		if (!obs.contains(o)) {
+		if (!obs.contains(o))
+		{
 			obs.addElement(o);
 		}
 	}
-
+	
 	public synchronized void deleteObserver(Observer<T> o) {
 		obs.removeElement(o);
 	}
@@ -184,7 +230,8 @@ class Observable<T>
 		 */
 		Object[] arrLocal;
 		
-		synchronized (this) {
+		synchronized (this)
+		{
 			/* We don't want the Observer doing callbacks into
 			 * arbitrary code while holding its own Monitor.
 			 * The code where we extract each Observable from
@@ -200,8 +247,8 @@ class Observable<T>
 			arrLocal = obs.toArray();
 		}
 		
-		for (int i = arrLocal.length-1; i>=0; i--)
-			((Observer)arrLocal[i]).update(this, arg);
+		for (int i = arrLocal.length - 1; i >= 0; i--)
+			((Observer) arrLocal[i]).update(this, arg);
 	}
 	
 	public synchronized void deleteObservers() {
@@ -212,18 +259,6 @@ class Observable<T>
 		return obs.size();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 class StanfordNlpParserAdapter implements NlpParser
@@ -283,7 +318,7 @@ class StanfordNlpSentenceAdapter implements NlpSentence
 		
 		List<CoreLabel> tokenList = stanfordSentence.get(CoreAnnotations.TokensAnnotation.class);
 		List<NlpToken> ret = new ArrayList<>(tokenList.size());
-
+		
 		for (CoreLabel token : tokenList)
 		{
 			NlpToken stanfordToken = new StanfordNlpTokenAdapter(token);
@@ -312,7 +347,7 @@ class StanfordNlpTokenAdapter implements NlpToken
 	
 	
 	@Override
-	public String getRaw(){
+	public String getRaw() {
 		return stanfordToken.get(CoreAnnotations.TextAnnotation.class);
 	}
 }
@@ -323,6 +358,10 @@ class StanfordNlpParseTreeAdapter implements NlpParseTree
 	
 	public StanfordNlpParseTreeAdapter(Tree stanfordTree) {
 		this.stanfordTree = stanfordTree;
+	}
+	
+	public Tree getTree(){
+		return stanfordTree;
 	}
 }
 
@@ -352,6 +391,6 @@ interface NlpToken
 
 interface NlpParseTree
 {
-
+	
 }
 
