@@ -6,7 +6,7 @@ import shared.Pair;
 import java.io.File;
 import java.util.*;
 
-public class LevelSeparatedTextCorpus extends TextCorpus
+public class LevelSeparatedTextCorpus extends ListBasedTextCorpus
 {
 	private String path;
 	private Object lock;

@@ -3,7 +3,7 @@ package datasets;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-public abstract class FeatureFileWriter
+public abstract class FeatureFileWriter implements FeatureWriter
 {
 	private String path;
 	
@@ -22,8 +22,4 @@ public abstract class FeatureFileWriter
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
-	public abstract void writeHeaders(List<String> featureList) throws FileNotFoundException;
-	
-	public abstract void process(Document document, List<Object> features);
 }

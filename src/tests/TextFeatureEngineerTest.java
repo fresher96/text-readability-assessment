@@ -98,7 +98,7 @@ public class TextFeatureEngineerTest
 	}
 	
 	private static void testTextCorpus() {
-		TextCorpus textCorpus = new OneStopEnglishCorpus();
+		ListBasedTextCorpus textCorpus = new OneStopEnglishCorpus();
 		for (Document doc : textCorpus)
 		{
 			System.out.println(doc.getName() + " " + doc.getLabel() + " " + doc.getPath());

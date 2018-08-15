@@ -1,10 +1,8 @@
 package featureengineering;
 
-import datasets.Document;
-import datasets.FeatureFileWriter;
-import datasets.TextCleaner;
-import datasets.TextCorpus;
+import datasets.*;
 
+import javax.xml.soap.Text;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.List;
@@ -12,69 +10,57 @@ import java.util.List;
 public class TextFeatureEngineer
 {
 	private TextCorpus textCorpus;
-	private FeatureFileWriter featureFileWriter;
+	private FeatureWriter featureWriter;
 	private FeatureExtractor featureExtractor;
 	private TextCleaner textCleaner;
 	
-	/* constructors */
+	//region constructors
 	
 	public TextFeatureEngineer() {
 		this(null, null, null, null);
 	}
 	
-	public TextFeatureEngineer(TextCorpus textCorpus, FeatureFileWriter featureFileWriter, FeatureExtractor featureExtractor) {
-		this(textCorpus, featureFileWriter, featureExtractor, null);
+	public TextFeatureEngineer(TextCorpus textCorpus, FeatureWriter featureWriter, FeatureExtractor featureExtractor) {
+		this(textCorpus, featureWriter, featureExtractor, null);
 	}
 	
-	public TextFeatureEngineer(TextCorpus textCorpus, FeatureFileWriter featureFileWriter, FeatureExtractor featureExtractor, TextCleaner textCleaner) {
+	public TextFeatureEngineer(TextCorpus textCorpus, FeatureWriter featureWriter, FeatureExtractor featureExtractor, TextCleaner textCleaner) {
 		setTextCorpus(textCorpus);
-		setFeatureFileWriter(featureFileWriter);
+		setFeatureFileWriter(featureWriter);
 		setFeatureExtractor(featureExtractor);
 		setTextCleaner(textCleaner);
 	}
 	
-	/* setters & getters */
+	//endregion
 	
-	public TextCleaner getTextCleaner() {
-		return textCleaner;
-	}
+	//region setters
 	
 	public void setTextCleaner(TextCleaner textCleaner) {
 		this.textCleaner = textCleaner;
-	}
-	
-	public TextCorpus getTextCorpus() {
-		return textCorpus;
 	}
 	
 	public void setTextCorpus(TextCorpus textCorpus) {
 		this.textCorpus = textCorpus;
 	}
 	
-	public FeatureExtractor getFeatureExtractor() {
-		return featureExtractor;
-	}
-	
 	public void setFeatureExtractor(FeatureExtractor featureExtractor) {
 		this.featureExtractor = featureExtractor;
 	}
 	
-	public FeatureFileWriter getFeatureFileWriter() {
-		return featureFileWriter;
+	public void setFeatureFileWriter(FeatureWriter featureWriter) {
+		this.featureWriter = featureWriter;
 	}
 	
-	public void setFeatureFileWriter(FeatureFileWriter featureFileWriter) {
-		this.featureFileWriter = featureFileWriter;
-	}
+	//endregion
 	
-	/* methods */
+	//region methods
 	
 	public void run() throws FileNotFoundException {
 		
 		int index = 0;
 		int total = textCorpus.size();
 		
-		featureFileWriter.writeHeaders(featureExtractor.getFeatureList());
+		featureWriter.writeHeaders(featureExtractor.getFeatureList());
 		
 		Iterator<Document> iterator = textCorpus.iterator();
 		
@@ -93,7 +79,7 @@ public class TextFeatureEngineer
 //				System.out.println(document.getText());
 				
 				List<Object> features = featureExtractor.extract(document.getText());
-				featureFileWriter.process(document, features);
+				featureWriter.process(document, features);
 			}
 			catch (Exception ex)
 			{
@@ -114,7 +100,7 @@ public class TextFeatureEngineer
 		int index = 0;
 		int total = textCorpus.size();
 		
-		featureFileWriter.writeHeaders(featureExtractor.getFeatureList());
+		featureWriter.writeHeaders(featureExtractor.getFeatureList());
 		
 		for (Document document : textCorpus)
 		{
@@ -126,7 +112,9 @@ public class TextFeatureEngineer
 //			System.out.println(document.getText());
 			
 			List<Object> features = featureExtractor.extract(document.getText());
-			featureFileWriter.process(document, features);
+			featureWriter.process(document, features);
 		}
 	}
+	
+	//endregion
 }
