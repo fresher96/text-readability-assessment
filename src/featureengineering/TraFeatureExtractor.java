@@ -46,6 +46,8 @@ public class TraFeatureExtractor implements FeatureExtractor
 	private Observable<NlpToken> tokenObservable = new Observable<>();
 	private Observable<NlpParseTree> parseTreeObservable = new Observable<>();
 	
+	private Observable[] obs = new Observable[]{annotationObservable, sentenceObservable, tokenObservable, parseTreeObservable};
+	
 	//endregion
 	
 	//region addObserver methods
@@ -80,8 +82,17 @@ public class TraFeatureExtractor implements FeatureExtractor
 	
 	//endregion
 	
+	//region methods
+	
 	@Override
 	public List<String> getFeatureList() {
+//		for(Observable ob : obs)
+//		{
+//			for(Observer o : ob)
+//			{
+//
+//			}
+//		}
 		return null;
 	}
 	
@@ -113,6 +124,10 @@ public class TraFeatureExtractor implements FeatureExtractor
 //		Map<Integer, CorefChain> graph = document.get(CorefCoreAnnotations.CorefChainAnnotation.class);
 		// not graph
 		
+		
+		
 		return null;
 	}
+	
+	//endregion
 }
