@@ -59,8 +59,8 @@ public class TextFeatureEngineerTest
 		
 		FeatureFileWriter writer = new DefaultCSVFeatureFile();
 		
-		TextCleaner cleaner = new MakeLowerCaseCleaner();
 		
+		TextCleaner cleaner = new MakeLowerCaseCleaner();
 		
 		TextFeatureEngineer engineer = new TextFeatureEngineer(corpus, writer, extractor, cleaner);
 		engineer.run();
@@ -68,10 +68,10 @@ public class TextFeatureEngineerTest
 	
 	private static void testEngineer() throws IOException {
 		
-		TextCleanerDecorator cleaner = null;
-		cleaner = new TextCleanerDecorator(new MakeLowerCaseCleaner());
-//		cleaner = new TextCleanerDecorator(cleaner);
-		
+		TextCleaner cleaner;
+		cleaner = new ExampleTextCleaner();
+		cleaner = new MakeLowerCaseCleaner(cleaner);
+//		cleaner = new SomeOtherCleaner(cleaner);
 		
 		TextFeatureEngineer tfe = new TextFeatureEngineer();
 		

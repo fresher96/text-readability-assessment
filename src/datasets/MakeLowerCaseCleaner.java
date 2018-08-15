@@ -1,11 +1,19 @@
 package datasets;
 
-public class MakeLowerCaseCleaner implements TextCleaner
+public class MakeLowerCaseCleaner extends TextCleanerDecorator
 {
+	public MakeLowerCaseCleaner(TextCleaner textCleaner){
+		super(textCleaner);
+	}
+	
+	public MakeLowerCaseCleaner(){
+	
+	}
+	
 	@Override
 	public void clean(Document document) {
-		String text = document.getText();
-		text = text.toLowerCase();
-		document.setText(text);
+		super.clean(document);
+		
+		document.setText(document.getText().toLowerCase());
 	}
 }

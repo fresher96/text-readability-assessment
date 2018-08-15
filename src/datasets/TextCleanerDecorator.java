@@ -1,6 +1,6 @@
 package datasets;
 
-public class TextCleanerDecorator implements TextCleaner
+public abstract class TextCleanerDecorator implements TextCleaner
 {
 	private TextCleaner textCleaner;
 	
@@ -8,8 +8,13 @@ public class TextCleanerDecorator implements TextCleaner
 		this.textCleaner = textCleaner;
 	}
 	
+	public TextCleanerDecorator(){
+		this(null);
+	}
+	
 	@Override
 	public void clean(Document document) {
-		textCleaner.clean(document);
+		if(textCleaner != null)
+			textCleaner.clean(document);
 	}
 }
