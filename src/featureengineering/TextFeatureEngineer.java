@@ -1,6 +1,7 @@
 package featureengineering;
 
 import datasets.*;
+import shared.Timer;
 
 import javax.xml.soap.Text;
 import java.io.FileNotFoundException;
@@ -57,23 +58,25 @@ public class TextFeatureEngineer
 	
 	public void run() throws FileNotFoundException {
 		
-		int index = 0;
+		int index = -1;
 		int total = textCorpus.size();
+		int errors = 0;
+		Timer timer = new Timer();
 		
 		featureWriter.writeHeaders(featureExtractor.getFeatureList());
-		
 		Iterator<Document> iterator = textCorpus.iterator();
+		timer.start();
 		
-		long startTime = System.nanoTime();
 		while (iterator.hasNext())
 		{
+			index++;
+			
 			try
 			{
 				Document document = iterator.next();
 				
-				index++;
 				String spaces = "    ";
-				System.out.printf("processing (%d/%d): %-30.30s %s [%s]\n", index, total, document.getName(), spaces, document.getPath());
+				System.out.printf("processing (%d/%d): %-30.30s %s [%s]\n", index+1, total, document.getName(), spaces, document.getPath());
 				
 				if (textCleaner != null) textCleaner.clean(document);
 //				System.out.println(document.getText());
@@ -84,36 +87,15 @@ public class TextFeatureEngineer
 			catch (Exception ex)
 			{
 				ex.printStackTrace();
+				errors++;
 			}
 		}
 		
-		long elapsedTime = System.nanoTime() - startTime;
-		long nanoPerSec = 1000 * 1000 * 1000;
+		timer.end();
 		
-		System.out.println("\n..........................................................................................................");
-		System.out.printf("time elapsed: %02d:%02d\n", elapsedTime / nanoPerSec / 60, elapsedTime / nanoPerSec % 60);
-		System.out.println("..........................................................................................................\n\n\n\n\n");
-	}
-	
-	public void run1() throws FileNotFoundException {
-		
-		int index = 0;
-		int total = textCorpus.size();
-		
-		featureWriter.writeHeaders(featureExtractor.getFeatureList());
-		
-		for (Document document : textCorpus)
-		{
-			index++;
-			String spaces = "    ";
-			System.out.printf("processing (%d/%d): %-30.30s %s [%s]\n", index, total, document.getName(), spaces, document.getPath());
-			
-			if (textCleaner != null) textCleaner.clean(document);
-//			System.out.println(document.getText());
-			
-			List<Object> features = featureExtractor.extract(document.getText());
-			featureWriter.process(document, features);
-		}
+		System.out.println("\n\n\n..........................................................................................................");
+		System.out.printf("time elapsed: %s\n", timer.toString());
+		System.out.printf("there were %d/%d errors", errors, total);
 	}
 	
 	//endregion
