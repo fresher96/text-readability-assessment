@@ -40,8 +40,15 @@
 	\pagestyle{plain}
 	\nocite{*}
 	
-	\selectlanguage{english}
-	\printbibliography[heading = bibintoc, title = {المراجع}]
+	
+	\clearpage\phantomsection\addcontentsline{toc}{chapter}{المراجع}
+	\printbibheading[title = {المراجع}]
+	
+	{
+		\newfontfamily\arabicfont[Script = Arabic, Ligatures = TeX, Scale = 1.15]{Latin Modern Roman}
+		\selectlanguage{english}
+		\printbibliography[heading = none]
+	}
 	
 \end{document}
 
