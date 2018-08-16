@@ -1,5 +1,5 @@
 
-\documentclass{report}
+\documentclass[11pt]{report}
 
 
 % included packages
@@ -40,11 +40,19 @@
 \usepackage{polyglossia}
 \setmainlanguage[numerals = maghrib]{arabic}
 \setotherlanguage{english}
-\setmainfont[Ligatures = TeX, Scale = 1]{Latin Modern Math}
-\setsansfont[Ligatures = TeX, Script = Arabic, Scale = 1.5]{Latin Modern Math}
-\setmonofont[Ligatures = TeX, Script=Arabic, Scale = 1.5]{Latin Modern Math}
+
+\setmainfont[Ligatures = TeX, Script = Arabic, Scale = 1]{Latin Modern Roman}
+\setsansfont[Ligatures = TeX, Script = Arabic, Scale = 3]{Traditional Arabic}
+\setmonofont[Ligatures = TeX, Script=Arabic, Scale = 3]{Traditional Arabic}
 \newfontfamily\arabicfont[Script = Arabic, Ligatures = TeX, Scale = 1.5]{Traditional Arabic}
-\newfontfamily\englishfont[Ligatures = TeX, Scale = 1.25]{Latin Modern Math}
+\newfontfamily\englishfont[Ligatures = TeX, Script = Latin, Scale = 1.15]{Latin Modern Roman}
+
+%\setmainfont[Ligatures = TeX, Script = Arabic, Scale = 1]{Latin Modern Roman}
+%\setsansfont[Ligatures = TeX, Script = Arabic, Scale = 3]{Traditional Arabic}
+%\setmonofont[Ligatures = TeX, Script=Arabic, Scale = 3]{Traditional Arabic}
+%\newfontfamily\arabicfont[Script = Arabic, Ligatures = TeX, Scale = 1.6]{Scheherazade}
+%\newfontfamily\englishfont[Ligatures = TeX, Script = Latin, Scale = 1.15]{Latin Modern Roman}
+%\DeclareMathSizes{18.7}{200}{16.59}{13.82}
 
 
 
@@ -113,9 +121,9 @@
 backend = biber,
 sorting = ynt,
 %style = authoryear,
-%citestyle=authoryear
-language = english,
-autolang = langname,
+%citestyle=authoryear,
+%language = english,
+%autolang = langname, % never use this with polyglossia, there seem to be a bug
 %bibstyle=numeric,
 style = numeric
 ]{biblatex}
@@ -128,7 +136,7 @@ style = numeric
 \setlength{\parskip}{1em}
 \setlength{\parindent}{0em}
 \renewcommand{\baselinestretch}{1.5}
-%\hypersetup{colorlinks = true, allcolors = black} % change links colors
+\hypersetup{colorlinks = true, allcolors = black} % change links colors
 \captionsetup[figure]{name={الشكل}}
 \addto\captionsarabic{\renewcommand{\chaptername}{الفصل}}
 \newcommand{\eng}[1]{\textenglish{#1}}
@@ -140,9 +148,7 @@ style = numeric
 \newcommand{\argmin}{\operatornamewithlimits{argmin}}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert_{2}}
 \newcommand{\pospart}[1]{\left\lfloor#1\right\rfloor_{+}}
-
-
-
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
 
 
 
