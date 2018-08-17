@@ -1,12 +1,15 @@
 package featureengineering;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import featureengineering.featuresets.FeatureSet;
 import featureengineering.featuresets.LinguisticFeatureSet;
 import nlp.*;
+import nlp.stanford.NlpTemp;
 import nlp.stanford.StanfordNlpParserAdapter;
 import shared.observer.Observable;
 import shared.observer.Observer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.function.ToLongBiFunction;
@@ -50,9 +53,13 @@ public class TraFeatureExtractor implements FeatureExtractor
 	private Observable<NlpToken> tokenObservable = new Observable<>();
 	private Observable<NlpParseTree> parseTreeObservable = new Observable<>();
 	
-	
-	
 	private Observable[] observables = new Observable[]{annotationObservable, sentenceObservable, tokenObservable, parseTreeObservable};
+	
+	
+	private List<FeatureSet<NlpTemp>> annotationFeatureSets;
+	
+//	private List<FeatureSet> featureSets = new ArrayList<List<FeatureSet>>(annotationFeatureSets);
+	
 	
 	//endregion
 	
@@ -112,6 +119,12 @@ public class TraFeatureExtractor implements FeatureExtractor
 			doit(observable);
 		}
 		
+		
+		for(FeatureSet fs : annotationFeatureSets)
+		{
+			fs.getFeatureList();
+		}
+		
 		return null;
 	}
 	
@@ -120,6 +133,10 @@ public class TraFeatureExtractor implements FeatureExtractor
 		
 		NlpAnnotation document = nlpParser.annotate(text);
 		annotationObservable.notifyObservers(document);
+		for(FeatureSet fs : annotationFeatureSets)
+		{
+		
+		}
 		
 		List<NlpSentence> sentenceList = document.getSentenceList();
 		for (NlpSentence sentence : sentenceList)
