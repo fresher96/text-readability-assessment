@@ -1,34 +1,17 @@
 package featureengineering.featuresets;
 
-import nlp.stanford.NlpTemp;
+import featureengineering.FeatureExtractor;
+import nlp.NlpItem;
 import shared.observer.Observable;
 import shared.observer.Observer;
 
 import java.util.List;
 
-public interface FeatureSet <T extends NlpTemp> extends Observer<T>
+public interface FeatureSet <T extends NlpItem>
 {
 	List<String> getFeatureList();
 	
 	List<Object> getFeatures();
-}
-
-
-class LingFeatureSet implements FeatureSet<NlpTemp>
-{
 	
-	@Override
-	public List<String> getFeatureList() {
-		return null;
-	}
-	
-	@Override
-	public List<Object> getFeatures() {
-		return null;
-	}
-	
-	@Override
-	public void update(Observable<NlpTemp> o, NlpTemp arg) {
-	
-	}
+	void update(T arg);
 }

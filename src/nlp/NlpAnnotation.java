@@ -2,7 +2,7 @@ package nlp;
 
 import java.util.List;
 
-public interface NlpAnnotation
+public interface NlpAnnotation extends NlpItem
 {
 	List<NlpSentence> getSentenceList();
 }

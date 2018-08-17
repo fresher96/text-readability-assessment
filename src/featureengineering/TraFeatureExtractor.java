@@ -3,16 +3,18 @@ package featureengineering;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import featureengineering.featuresets.FeatureSet;
 import featureengineering.featuresets.LinguisticFeatureSet;
+import featureengineering.featuresets.LinguisticFeatureSett;
 import nlp.*;
-import nlp.stanford.NlpTemp;
+import nlp.NlpItem;
 import nlp.stanford.StanfordNlpParserAdapter;
+import org.omg.PortableServer.POAPackage.ObjectAlreadyActiveHelper;
+import shared.Debugger;
 import shared.observer.Observable;
 import shared.observer.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.function.ToLongBiFunction;
 
 class Test
 {
@@ -30,15 +32,15 @@ class Test
 		TraFeatureExtractor extractor = new TraFeatureExtractor();
 		extractor.setParser(nlpParser);
 		
-		LinguisticFeatureSet linguistic = new LinguisticFeatureSet();
-		extractor.addParseTreeObserver(linguistic);
+		LinguisticFeatureSett linguistic = new LinguisticFeatureSett();
+		extractor.addSentenceFeatureSet(linguistic);
 		
-		extractor.extract("We use it when a girl in our dorm is acting like a spoiled child.");
-		
-		linguistic.getFeatures();
+		List<Object> features = extractor.extract("We use it when a girl in our dorm is acting like a spoiled child.");
 		
 		
-		extractor.getFeatureList();
+		Debugger.debug(extractor.getFeatureList());
+		Debugger.debug(features);
+		
 	}
 }
 
@@ -56,9 +58,9 @@ public class TraFeatureExtractor implements FeatureExtractor
 	private Observable[] observables = new Observable[]{annotationObservable, sentenceObservable, tokenObservable, parseTreeObservable};
 	
 	
-	private List<FeatureSet<NlpTemp>> annotationFeatureSets;
-	
-//	private List<FeatureSet> featureSets = new ArrayList<List<FeatureSet>>(annotationFeatureSets);
+	private List<FeatureSet<NlpAnnotation>> annotationFeatureSets = new ArrayList<>();
+	private List<FeatureSet<NlpSentence>> sentenceFeatureSets = new ArrayList<>();
+	private List<FeatureSet<NlpToken>> tokenFeatureSets = new ArrayList<>();
 	
 	
 	//endregion
@@ -80,6 +82,19 @@ public class TraFeatureExtractor implements FeatureExtractor
 	public void addParseTreeObserver(Observer<NlpParseTree> observer) {
 		parseTreeObservable.addObserver(observer);
 	}
+	
+	public void addAnnotationFeatureSet(FeatureSet<NlpAnnotation> featureSet) {
+		annotationFeatureSets.add(featureSet);
+	}
+	
+	public void addSentenceFeatureSet(FeatureSet<NlpSentence> featureSet) {
+		sentenceFeatureSets.add(featureSet);
+	}
+	
+	public void addTokenFeatureSet(FeatureSet<NlpToken> featureSet) {
+		tokenFeatureSets.add(featureSet);
+	}
+	
 	
 	//endregion
 	
@@ -104,36 +119,83 @@ public class TraFeatureExtractor implements FeatureExtractor
 		}
 	}
 	
+	private <T> void add(List<T> to, List<T> from) {
+		to.addAll(from);
+	}
+	
+	private <T extends NlpItem> void addFeatureList(List<String> to, List<FeatureSet<T>> TFeatureSets) {
+		for (FeatureSet<T> featureSet : TFeatureSets)
+		{
+			add(to, featureSet.getFeatureList());
+		}
+	}
+	
+	private <T extends NlpItem> void addFeatures(List<Object> to, List<FeatureSet<T>> TFeatureSets) {
+		for (FeatureSet<T> featureSet : TFeatureSets)
+		{
+			add(to, featureSet.getFeatures());
+		}
+	}
+	
+	
+	private <T extends NlpItem> void update(List<FeatureSet<T>> TFeatureSets, T arg) {
+		for (FeatureSet<T> featureSet : TFeatureSets)
+		{
+			featureSet.update(arg);
+		}
+	}
+	
 	@Override
 	public List<String> getFeatureList() {
-		for (Observable observable : observables)
-		{
-			for (Object observer : observable)
-			{
-			
-			}
-		}
+		List<String> ret = new ArrayList<>();
 		
-		for (Observable observable : observables)
-		{
-			doit(observable);
-		}
+		addFeatureList(ret, annotationFeatureSets);
+		addFeatureList(ret, sentenceFeatureSets);
+		addFeatureList(ret, tokenFeatureSets);
 		
-		
-		for(FeatureSet fs : annotationFeatureSets)
-		{
-			fs.getFeatureList();
-		}
-		
-		return null;
+		return ret;
 	}
 	
 	@Override
 	public List<Object> extract(String text) {
 		
 		NlpAnnotation document = nlpParser.annotate(text);
+		update(annotationFeatureSets, document);
+		
+		if(sentenceFeatureSets.size() > 0 || tokenFeatureSets.size() > 0)
+		{
+			List<NlpSentence> sentenceList = document.getSentenceList();
+			for (NlpSentence sentence : sentenceList)
+			{
+				update(sentenceFeatureSets, sentence);
+				
+				if(tokenFeatureSets.size() > 0)
+				{
+					List<NlpToken> tokenList = sentence.getTokenList();
+					for (NlpToken token : tokenList)
+					{
+						update(tokenFeatureSets, token);
+					}
+				}
+			}
+		}
+		
+		
+		
+		List<Object> ret = new ArrayList<>();
+		
+		addFeatures(ret, annotationFeatureSets);
+		addFeatures(ret, sentenceFeatureSets);
+		addFeatures(ret, tokenFeatureSets);
+		
+		return ret;
+	}
+	
+	public List<Object> extract11111(String text) {
+		
+		NlpAnnotation document = nlpParser.annotate(text);
 		annotationObservable.notifyObservers(document);
-		for(FeatureSet fs : annotationFeatureSets)
+		for (FeatureSet fs : annotationFeatureSets)
 		{
 		
 		}

@@ -1,6 +1,6 @@
 package nlp;
 
-public interface NlpToken
+public interface NlpToken extends NlpItem
 {
 	String getRaw();
 }
