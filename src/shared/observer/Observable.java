@@ -1,8 +1,10 @@
 package shared.observer;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Vector;
 
-public class Observable<T>
+public class Observable<T> implements Iterable<Observer<T>>
 {
 	private Vector<Observer<T>> obs;
 	
@@ -57,5 +59,42 @@ public class Observable<T>
 	
 	public synchronized int countObservers() {
 		return obs.size();
+	}
+	
+	
+	
+	
+	
+	@Override
+	public Iterator<Observer<T>> iterator() {
+		return new ObserverIterator();
+	}
+	
+	private class ObserverIterator implements Iterator<Observer<T>>
+	{
+		private int index;
+		
+		public ObserverIterator() {
+			index = 0;
+		}
+		
+		@Override
+		public boolean hasNext() {
+			return index < obs.size();
+		}
+		
+		@Override
+		public Observer<T> next() throws NoSuchElementException {
+			
+			if (!this.hasNext())
+			{
+				throw new NoSuchElementException();
+			}
+			
+			Observer<T> ret = obs.get(index);
+			index++;
+			
+			return ret;
+		}
 	}
 }

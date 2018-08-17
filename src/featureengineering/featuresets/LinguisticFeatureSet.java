@@ -1,7 +1,9 @@
 package featureengineering.featuresets;
 
 import featureengineering.features.ClauseCountFeature;
+import nlp.NlpAnnotation;
 import nlp.NlpParseTree;
+import nlp.NlpSentence;
 import shared.Debugger;
 import shared.observer.Observable;
 import shared.observer.Observer;

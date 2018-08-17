@@ -9,6 +9,7 @@ import shared.observer.Observer;
 
 import java.util.List;
 import java.util.Properties;
+import java.util.function.ToLongBiFunction;
 
 class Test
 {
@@ -32,6 +33,9 @@ class Test
 		extractor.extract("We use it when a girl in our dorm is acting like a spoiled child.");
 		
 		linguistic.getFeatures();
+		
+		
+		extractor.getFeatureList();
 	}
 }
 
@@ -46,7 +50,9 @@ public class TraFeatureExtractor implements FeatureExtractor
 	private Observable<NlpToken> tokenObservable = new Observable<>();
 	private Observable<NlpParseTree> parseTreeObservable = new Observable<>();
 	
-	private Observable[] obs = new Observable[]{annotationObservable, sentenceObservable, tokenObservable, parseTreeObservable};
+	
+	
+	private Observable[] observables = new Observable[]{annotationObservable, sentenceObservable, tokenObservable, parseTreeObservable};
 	
 	//endregion
 	
@@ -84,15 +90,28 @@ public class TraFeatureExtractor implements FeatureExtractor
 	
 	//region methods
 	
+	<T> void doit(Observable<T> observable) {
+		for (Observer<T> observer : observable)
+		{
+			System.out.println(observer.getClass().getSimpleName());
+		}
+	}
+	
 	@Override
 	public List<String> getFeatureList() {
-//		for(Observable ob : obs)
-//		{
-//			for(Observer o : ob)
-//			{
-//
-//			}
-//		}
+		for (Observable observable : observables)
+		{
+			for (Object observer : observable)
+			{
+			
+			}
+		}
+		
+		for (Observable observable : observables)
+		{
+			doit(observable);
+		}
+		
 		return null;
 	}
 	
@@ -123,7 +142,6 @@ public class TraFeatureExtractor implements FeatureExtractor
 
 //		Map<Integer, CorefChain> graph = document.get(CorefCoreAnnotations.CorefChainAnnotation.class);
 		// not graph
-		
 		
 		
 		return null;

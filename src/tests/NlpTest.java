@@ -34,6 +34,7 @@ public class NlpTest
 				"Increased cloud cover in periods of normally clear weather is closing Lukla Airport, the gateway to the Everest region, more often. A new road for 4x4s is being built to Lukla to guarantee the flow of tourists and their money, but Byers is worried that the rapid spread of the road network in Nepal is being done too cheaply, with disastrous consequences in terms of soil erosion and landslides.\r\n" +
 				"Everest is the icon everyone knows, he says. Its the perfect laboratory for figuring out how";
 //		text = "We use it when a Jørgen in our dorm IS acting LIkE a SpOiled child.";
+		text = "no, that's not it. he said: \"it's in a middle-aged man's hand\". nothing else.";
 		
 		Properties props = new Properties();
 		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, depparse, ner, parse, dcoref");
