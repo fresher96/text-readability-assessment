@@ -1,38 +1,36 @@
 package featureengineering.featuresets;
 
 import featureengineering.features.ClauseCountFeature;
-import nlp.NlpAnnotation;
+import nlp.NlpItem;
 import nlp.NlpParseTree;
 import nlp.NlpSentence;
-import shared.Debugger;
-import shared.observer.Observable;
-import shared.observer.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinguisticFeatureSet implements Observer<NlpParseTree>
+public class LinguisticFeatureSet implements FeatureSet<NlpSentence>
 {
 	
 	ClauseCountFeature clauses = new ClauseCountFeature();
 	
+	
 	@Override
-	public void update(Observable<NlpParseTree> o, NlpParseTree arg) {
-		clauses.update(o, arg);
+	public List<String> getFeatureList() {
+		List<String> ret = new ArrayList<>();
+		ret.add(clauses.getName());
+		return ret;
 	}
 	
-	public List<String> getFeatureNames() {
-//		List<String> ret =
-		return null;
-	}
-	
+	@Override
 	public List<Object> getFeatures() {
 		List<Object> ret = new ArrayList<>();
 		ret.add(clauses.getClauseCount());
-		ret.add(clauses.getWordCount() / (double) clauses.getClauseCount());
-		
-		Debugger.debug(ret);
-		
 		return ret;
+	}
+	
+	@Override
+	public void update(NlpSentence arg) {
+		NlpParseTree tree = arg.getParseTree();
+		clauses.update(null, tree);
 	}
 }

@@ -69,16 +69,16 @@ class WordCountFeature implements Observer
 {
 	int wordCount = 0;
 	int adjCount = 0;
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
 		wordCount++;
-		
+
 		CoreLabel token = (CoreLabel)arg;
 		if(token.get(CoreAnnotations.PartOfSpeechAnnotation.class).equals("JJ"))
 			adjCount++;
 	}
-	
+
 	public List<Object> getFeatures(){
 		// return wordCount, adjCount
 		return null;

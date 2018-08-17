@@ -1,16 +1,14 @@
 package featureengineering.features;
 
 import nlp.NlpToken;
-import shared.observer.Observable;
-import shared.observer.Observer;
 
-public class WordCountFeature implements Feature<NlpToken>
+public class CharCountFeature implements Feature<NlpToken>
 {
 	int value = 0;
 	
 	@Override
 	public void update(NlpToken arg) {
-		value++;
+		value += arg.getRaw().length();
 	}
 	
 	@Override
