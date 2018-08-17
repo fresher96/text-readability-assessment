@@ -4,6 +4,7 @@ import cleaners.automatic.TextCleaner;
 import datasets.*;
 import datasets.corpora.TextCorpus;
 import datasets.writers.FeatureWriter;
+import featureengineering.extractors.FeatureExtractor;
 import shared.Timer;
 
 import java.io.FileNotFoundException;

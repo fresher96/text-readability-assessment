@@ -12,9 +12,9 @@ import datasets.writers.CSVFileWriter;
 import datasets.writers.DefaultCSVFeatureFile;
 import datasets.writers.FeatureFileWriter;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import featureengineering.FeatureExtractor;
-import featureengineering.PrototypeFeatureExtractorAdapter;
-import featureengineering.SimpleFeatureExtractor;
+import featureengineering.extractors.FeatureExtractor;
+import featureengineering.extractors.PrototypeFeatureExtractorAdapter;
+import featureengineering.extractors.SampleFeatureExtractor;
 import featureengineering.TextFeatureEngineer;
 
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class TextFeatureEngineerTest
 ////		corpus.setRandom(null);
 //
 //
-//		FeatureExtractor extractor = new SimpleFeatureExtractor();
+//		FeatureExtractor extractor = new SampleFeatureExtractor();
 //
 //
 //		TextFeatureEngineer tfe = new TextFeatureEngineer(corpus, new DefaultCSVFeatureFile(), extractor);
@@ -92,7 +92,7 @@ public class TextFeatureEngineerTest
 		
 		tfe.setTextCorpus(corpus);
 		tfe.setFeatureFileWriter(new DefaultCSVFeatureFile());
-		tfe.setFeatureExtractor(new SimpleFeatureExtractor());
+		tfe.setFeatureExtractor(new SampleFeatureExtractor());
 		tfe.setTextCleaner(cleaner);
 		
 		tfe.run();

@@ -1,14 +1,14 @@
-package featureengineering;
+package featureengineering.extractors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SimpleFeatureExtractor implements FeatureExtractor
+public class SampleFeatureExtractor implements FeatureExtractor
 {
 	List<String> featureList;
 	
-	public SimpleFeatureExtractor(){
+	public SampleFeatureExtractor(){
 		featureList = Arrays.asList(new String[]{"char_count", "word_count", "par_count", "length_category"});
 	}
 	

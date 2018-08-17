@@ -1,4 +1,4 @@
-package featureengineering;
+package featureengineering.extractors;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import featureengineering.featuresets.FeatureSet;

@@ -1,4 +1,4 @@
-package featureengineering;
+package featureengineering.extractors;
 
 import java.util.List;
 
