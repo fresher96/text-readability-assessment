@@ -3,6 +3,7 @@ package featureengineering.extractors;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import featureengineering.featuresets.FeatureSet;
 import featureengineering.featuresets.LinguisticFeatureSet;
+import featureengineering.featuresets.SampleFeatureSet;
 import nlp.*;
 import nlp.NlpItem;
 import nlp.stanford.StanfordNlpParserAdapter;
@@ -28,14 +29,17 @@ class Test
 		TraFeatureExtractor extractor = new TraFeatureExtractor();
 		extractor.setParser(nlpParser);
 		
-		LinguisticFeatureSet linguistic = new LinguisticFeatureSet();
-		extractor.addSentenceFeatureSet(linguistic);
+//		LinguisticFeatureSet linguistic = new LinguisticFeatureSet();
+//		extractor.addSentenceFeatureSet(linguistic);
+		
+		SampleFeatureSet sampleFeatureSet = new SampleFeatureSet();
+		extractor.addTokenFeatureSet(sampleFeatureSet);
 		
 		List<Object> features = extractor.extract("We use it when a girl in our dorm is acting like a spoiled child.");
-		
-		
 		Debugger.debug(extractor.getFeatureList());
 		Debugger.debug(features);
+		
+		Debugger.debug(extractor.extract("hello world!"));
 	}
 }
 

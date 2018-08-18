@@ -13,33 +13,3 @@ public class SampleFeatureSet implements FeatureSet<NlpToken>
 	String testt;
 	String ss = null;
 }
-
-class Test
-{
-	public static void main(String[] args){
-		
-		SampleFeatureSet sfs = new SampleFeatureSet();
-		
-		Debugger.debug(sfs.getFeatureList());
-		Debugger.debug(sfs.getFeatures());
-		
-		sfs.update(new NlpToken()
-		{
-			@Override
-			public String getRaw() {
-				return "hi";
-			}
-		});
-		
-		sfs.update(new NlpToken()
-		{
-			@Override
-			public String getRaw() {
-				return "bye";
-			}
-		});
-		
-		Debugger.debug(sfs.getFeatures());
-		
-	}
-}

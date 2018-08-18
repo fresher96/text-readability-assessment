@@ -28,9 +28,9 @@ public interface FeatureSet<T extends NlpItem>
 				e.printStackTrace();
 			}
 			
-			if(value instanceof Feature)
+			if (value instanceof Feature)
 			{
-				ret.add(((Feature)value).getName());
+				ret.add(((Feature) value).getName());
 			}
 		}
 		return ret;
@@ -52,11 +52,13 @@ public interface FeatureSet<T extends NlpItem>
 				e.printStackTrace();
 			}
 			
-			if(value instanceof Feature)
+			if (value instanceof Feature)
 			{
-				ret.add(((Feature)value).getValue());
+				ret.add(((Feature) value).getValue());
 			}
 		}
+		
+		reset();
 		return ret;
 	}
 	
@@ -75,10 +77,33 @@ public interface FeatureSet<T extends NlpItem>
 				e.printStackTrace();
 			}
 			
-			if(value instanceof Feature)
+			if (value instanceof Feature)
 			{
-				((Feature)value).update(arg);
+				((Feature) value).update(arg);
 			}
 		}
 	}
+	
+	default void reset(){
+		for (Field field : this.getClass().getDeclaredFields())
+		{
+			field.setAccessible(true);
+			Object value = null;
+			
+			try
+			{
+				value = field.get(this);
+			}
+			catch (IllegalAccessException e)
+			{
+				e.printStackTrace();
+			}
+			
+			if (value instanceof Feature)
+			{
+				((Feature) value).reset();
+			}
+		}
+	}
+	
 }
