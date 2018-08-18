@@ -13,35 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-class Test
-{
-	public static void main(String[] args) {
-		
-		
-		Properties props = new Properties();
-//		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, depparse, ner, parse, dcoref");
-		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse");
-		
-		StanfordCoreNLP stanfordCoreNLP = new StanfordCoreNLP(props);
-		NlpParser nlpParser = new StanfordNlpParserAdapter(stanfordCoreNLP);
-		
-		
-		TraFeatureExtractor extractor = new TraFeatureExtractor();
-		extractor.setParser(nlpParser);
-		
-//		LinguisticFeatureSet linguistic = new LinguisticFeatureSet();
-//		extractor.addSentenceFeatureSet(linguistic);
-		
-		SampleFeatureSet sampleFeatureSet = new SampleFeatureSet();
-		extractor.addTokenFeatureSet(sampleFeatureSet);
-		
-		List<Object> features = extractor.extract("We use it when a girl in our dorm is acting like a spoiled child.");
-		Debugger.debug(extractor.getFeatureList());
-		Debugger.debug(features);
-		
-		Debugger.debug(extractor.extract("hello world!"));
-	}
-}
 
 public class TraFeatureExtractor implements FeatureExtractor
 {
@@ -73,8 +44,12 @@ public class TraFeatureExtractor implements FeatureExtractor
 	
 	//region constructors
 	
+	public TraFeatureExtractor(NlpParser nlpParser) {
+		setParser(nlpParser);
+	}
+	
 	public TraFeatureExtractor() {
-		setParser(null);
+		this(null);
 	}
 	
 	public void setParser(NlpParser nlpParser) {
@@ -156,4 +131,37 @@ public class TraFeatureExtractor implements FeatureExtractor
 	}
 	
 	//endregion
+}
+
+
+class Test
+{
+	public static void main(String[] args) {
+		
+		
+		Properties props = new Properties();
+//		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, depparse, ner, parse, dcoref");
+		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse");
+		
+		StanfordCoreNLP stanfordCoreNLP = new StanfordCoreNLP(props);
+		NlpParser nlpParser = new StanfordNlpParserAdapter(stanfordCoreNLP);
+		
+		
+		TraFeatureExtractor extractor = new TraFeatureExtractor();
+		extractor.setParser(nlpParser);
+
+//		LinguisticFeatureSet linguistic = new LinguisticFeatureSet();
+//		extractor.addSentenceFeatureSet(linguistic);
+		
+		SampleFeatureSet sampleFeatureSet = new SampleFeatureSet();
+		extractor.addTokenFeatureSet(sampleFeatureSet);
+		
+		List<Object> features = extractor.extract("We use it when a girl in our dorm is acting like a spoiled child.");
+		Debugger.debug(extractor.getFeatureList());
+		Debugger.debug(features);
+		
+		Debugger.debug(extractor.extract("hello world!"));
+		
+		Debugger.debug(extractor.extract("good bye"));
+	}
 }
