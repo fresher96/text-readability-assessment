@@ -1,9 +1,8 @@
 package featureengineering.featuresets;
 
-import featureengineering.features.CharCountFeature;
-import featureengineering.features.WordCountFeature;
+import featureengineering.features.traditional.CharCountFeature;
+import featureengineering.features.traditional.WordCountFeature;
 import nlp.NlpToken;
-import shared.Debugger;
 
 public class SampleFeatureSet implements FeatureSet<NlpToken>
 {

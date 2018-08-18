@@ -1,10 +1,7 @@
 package featureengineering.featuresets;
 
-import featureengineering.features.CharCountFeature;
 import featureengineering.features.Feature;
 import nlp.NlpItem;
-import nlp.NlpToken;
-import shared.Debugger;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

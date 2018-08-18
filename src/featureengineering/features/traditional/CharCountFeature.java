@@ -1,5 +1,6 @@
-package featureengineering.features;
+package featureengineering.features.traditional;
 
+import featureengineering.features.Feature;
 import nlp.NlpToken;
 
 public class CharCountFeature implements Feature<NlpToken>

@@ -1,5 +1,6 @@
-package featureengineering.features;
+package featureengineering.features.traditional;
 
+import featureengineering.features.Feature;
 import nlp.NlpToken;
 import shared.observer.Observable;
 import shared.observer.Observer;
