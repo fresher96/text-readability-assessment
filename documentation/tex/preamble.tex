@@ -45,7 +45,7 @@
 
 \setmainfont[Ligatures = TeX, Script = Arabic, Scale = 1]{Latin Modern Roman}
 \setsansfont[Ligatures = TeX, Script = Arabic, Scale = 3]{Traditional Arabic}
-\setmonofont[Ligatures = TeX, Script=Arabic, Scale = 3]{Traditional Arabic}
+\setmonofont[Ligatures = TeX, Script=Arabic, Scale = 1.2]{Traditional Arabic}
 \newfontfamily\arabicfont[Script = Arabic, Ligatures = TeX, Scale = 1.5]{Traditional Arabic}
 \newfontfamily\englishfont[Ligatures = TeX, Script = Latin, Scale = 1.15]{Latin Modern Roman}
 
@@ -131,6 +131,7 @@ style = numeric
 ]{biblatex}
 \addbibresource{tex/references.bib}
 %\AtEveryBibitem{\clearfield{pages}}
+\renewcommand\multicitedelim{\space\space\addcomma}
 
 
 
@@ -153,6 +154,5 @@ style = numeric
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert_{2}}
 \newcommand{\pospart}[1]{\left\lfloor#1\right\rfloor_{+}}
 \newcommand{\abs}[1]{\left\vert#1\right\vert}
-
 
 
