@@ -6,7 +6,7 @@ import nlp.NlpSentence;
 import nlp.stanford.StanfordNlpParseTreeAdapter;
 import shared.Pair;
 
-public class ClauseCountFeature implements Feature<NlpSentence>
+public class ComplexNominalCountFeature implements Feature<NlpSentence>
 {
 	private int count;
 	private int nWord;
@@ -19,7 +19,7 @@ public class ClauseCountFeature implements Feature<NlpSentence>
 		return nWord;
 	}
 	
-	public ClauseCountFeature() {
+	public ComplexNominalCountFeature() {
 		reset();
 	}
 	
@@ -39,8 +39,9 @@ public class ClauseCountFeature implements Feature<NlpSentence>
 		
 		StanfordNlpParseTreeAdapter treeAdapter = (StanfordNlpParseTreeAdapter)nlpParseTree;
 		
-		apply(treeAdapter, "S|SINV|SQ < (VP <# MD|VBD|VBP|VBZ)");
-		apply(treeAdapter, "FRAG > ROOT !<< VP");
+		apply(treeAdapter, "NP !> NP [<< JJ|POS|PP|S|VBG |<< (NP $++ NP !$+ CC)]");
+		apply(treeAdapter, "SBAR [$+ VP | > VP] & [<# WHNP |<# (IN < That|that|For|for) |<, S]");
+		apply(treeAdapter, "S < (VP <# VBG|TO) $+ VP");
 	}
 	
 	private void apply(StanfordNlpParseTreeAdapter treeAdapter, String pattern) {

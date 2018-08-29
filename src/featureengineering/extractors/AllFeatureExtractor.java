@@ -2,6 +2,7 @@ package featureengineering.extractors;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import featureengineering.featuresets.LinguisticFeatureSet;
+import featureengineering.featuresets.SampleFeatureSet;
 import nlp.NlpParser;
 import nlp.stanford.StanfordNlpParserAdapter;
 
@@ -26,6 +27,7 @@ public class AllFeatureExtractor implements FeatureExtractor
 		
 		//
 		extractor.addSentenceFeatureSet(new LinguisticFeatureSet());
+		
 	}
 	
 	

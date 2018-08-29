@@ -1,6 +1,6 @@
 package featureengineering.featuresets;
 
-import featureengineering.features.linguistic.ClauseCountFeature;
+import featureengineering.features.linguistic.*;
 import nlp.NlpSentence;
 
 import java.util.ArrayList;
@@ -8,8 +8,13 @@ import java.util.List;
 
 public class LinguisticFeatureSet implements FeatureSet<NlpSentence>
 {
-	
 	ClauseCountFeature clauses = new ClauseCountFeature();
+	ComplexNominalCountFeature nominals = new ComplexNominalCountFeature();
+	ComplexTUnitCountFeature cTUnits = new ComplexTUnitCountFeature();
+	CoordinatePhraseCountFeature coordinateClauses = new CoordinatePhraseCountFeature();
+	DependentClauseCountFeature depClauses = new DependentClauseCountFeature();
+	TUnitCountFeature TUnits = new TUnitCountFeature();
+	VerbPhraseCountFeature verbPhrases = new VerbPhraseCountFeature();
 	
 	@Override
 	public List<String> getFeatureList() {
@@ -25,8 +30,12 @@ public class LinguisticFeatureSet implements FeatureSet<NlpSentence>
 	public List<Object> getFeatures() {
 		List<Object> ret = new ArrayList<>();
 		
-		ret.add(clauses.clauseCount());
-		ret.add(clauses.wordCount() / (double)clauses.clauseCount());
+		ret.add((double) clauses.wordCount() / (double) clauses.count());
+//		ret.add((double) clauses.wordCount() / (double) clauses.count());
+		ret.add((double) TUnits.wordCount() / (double) TUnits.count());
+		
+		ret.add((double) clauses.wordCount() / (double) clauses.count());
+		
 		
 		return ret;
 	}

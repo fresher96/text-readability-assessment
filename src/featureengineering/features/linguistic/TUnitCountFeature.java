@@ -1,12 +1,16 @@
 package featureengineering.features.linguistic;
 
+import edu.stanford.nlp.trees.Tree;
 import featureengineering.features.Feature;
 import nlp.NlpParseTree;
 import nlp.NlpSentence;
 import nlp.stanford.StanfordNlpParseTreeAdapter;
 import shared.Pair;
+import shared.observer.Observable;
+import shared.observer.Observer;
+import shared.utils.TregexUtils;
 
-public class ClauseCountFeature implements Feature<NlpSentence>
+public class TUnitCountFeature implements Feature<NlpSentence>
 {
 	private int count;
 	private int nWord;
@@ -19,7 +23,7 @@ public class ClauseCountFeature implements Feature<NlpSentence>
 		return nWord;
 	}
 	
-	public ClauseCountFeature() {
+	public TUnitCountFeature() {
 		reset();
 	}
 	
@@ -33,14 +37,14 @@ public class ClauseCountFeature implements Feature<NlpSentence>
 	public void update(NlpSentence arg) {
 		NlpParseTree nlpParseTree = arg.getParseTree();
 		
-		if(!(nlpParseTree instanceof StanfordNlpParseTreeAdapter))
+		if (!(nlpParseTree instanceof StanfordNlpParseTreeAdapter))
 			throw new UnsupportedOperationException();
 		
 		
-		StanfordNlpParseTreeAdapter treeAdapter = (StanfordNlpParseTreeAdapter)nlpParseTree;
+		StanfordNlpParseTreeAdapter treeAdapter = (StanfordNlpParseTreeAdapter) nlpParseTree;
 		
-		apply(treeAdapter, "S|SINV|SQ < (VP <# MD|VBD|VBP|VBZ)");
-		apply(treeAdapter, "FRAG > ROOT !<< VP");
+		apply(treeAdapter, "S|SBARQ|SINV|SQ > ROOT | [$-- S|SBARQ|SINV|SQ !>> SBAR|VP]");
+		apply(treeAdapter, "FRAG > ROOT");
 	}
 	
 	private void apply(StanfordNlpParseTreeAdapter treeAdapter, String pattern) {
