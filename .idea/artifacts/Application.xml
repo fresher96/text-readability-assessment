@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Application">
+    <output-path>$PROJECT_DIR$/</output-path>
+    <root id="archive" name="code.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/etc/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="code" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/syllable-counter-4.0.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/stanford-corenlp-3.5.1-models.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/weka.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/stanford-corenlp-3.5.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

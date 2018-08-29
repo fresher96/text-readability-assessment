@@ -2,7 +2,6 @@ package featureengineering.extractors;
 
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import featureengineering.featuresets.FeatureSet;
-import featureengineering.featuresets.LinguisticFeatureSet;
 import featureengineering.featuresets.SampleFeatureSet;
 import nlp.*;
 import nlp.NlpItem;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 
-public class TraFeatureExtractor implements FeatureExtractor
+public class ObservableFeatureExtractor implements FeatureExtractor
 {
 	//region fields
 	
@@ -44,11 +43,11 @@ public class TraFeatureExtractor implements FeatureExtractor
 	
 	//region constructors
 	
-	public TraFeatureExtractor(NlpParser nlpParser) {
+	public ObservableFeatureExtractor(NlpParser nlpParser) {
 		setParser(nlpParser);
 	}
 	
-	public TraFeatureExtractor() {
+	public ObservableFeatureExtractor() {
 		this(null);
 	}
 	
@@ -147,7 +146,7 @@ class Test
 		NlpParser nlpParser = new StanfordNlpParserAdapter(stanfordCoreNLP);
 		
 		
-		TraFeatureExtractor extractor = new TraFeatureExtractor();
+		ObservableFeatureExtractor extractor = new ObservableFeatureExtractor();
 		extractor.setParser(nlpParser);
 
 //		LinguisticFeatureSet linguistic = new LinguisticFeatureSet();

@@ -58,6 +58,7 @@ public class NlpTest
 			{
 				// this is the text of the token
 				String word = token.get(TextAnnotation.class);
+//				String word = token.word();
 				
 				// this is the POS tag of the token
 				String pos = token.get(PartOfSpeechAnnotation.class);
@@ -68,17 +69,29 @@ public class NlpTest
 				// this is the NER label of the token
 				String ne = token.get(NamedEntityTagAnnotation.class);
 				
+				String ner = token.ner();
+				
 				
 				System.out.println("word: " + word + " | pos: " + pos + " | lemma: " + lemma + " | ne:" + ne);
+				
+//				System.out.println(token.category());
+				System.out.println(token.originalText());
+				System.out.println(token.lemma());
+				System.out.println(token.tag());
+				System.out.println(token.ner());
+//				System.out.println(token.value());
+//				System.out.println(token.word());
+				
+				System.out.println("/.....\\");
 			}
 			
-			// this is the parse tree of the current sentence
-			Tree tree = sentence.get(TreeCoreAnnotations.TreeAnnotation.class);
-			System.out.println("parse tree:\n" + tree);
-			
-			// this is the Stanford dependency graph of the current sentence
-			SemanticGraph dependencies = sentence.get(SemanticGraphCoreAnnotations.CollapsedCCProcessedDependenciesAnnotation.class);
-			System.out.println("dependency graph:\n" + dependencies);
+//			// this is the parse tree of the current sentence
+//			Tree tree = sentence.get(TreeCoreAnnotations.TreeAnnotation.class);
+//			System.out.println("parse tree:\n" + tree);
+//
+//			// this is the Stanford dependency graph of the current sentence
+//			SemanticGraph dependencies = sentence.get(SemanticGraphCoreAnnotations.CollapsedCCProcessedDependenciesAnnotation.class);
+//			System.out.println("dependency graph:\n" + dependencies);
 		}
 		
 		

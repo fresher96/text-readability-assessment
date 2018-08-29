@@ -70,3 +70,8 @@ fabric.properties
 !OneStopEnglishCorpus_authors_features.csv
 
 /etc/StanfordAPI_nlp_output.txt
+
+code.jar
+
+# temp
+/etc/models/

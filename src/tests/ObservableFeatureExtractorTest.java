@@ -4,12 +4,11 @@ import cleaners.automatic.MakeLowerCaseCleaner;
 import cleaners.automatic.TextCleaner;
 import datasets.corpora.LevelSeparatedTextCorpus;
 import datasets.corpora.OneStopEnglishCorpus;
-import datasets.corpora.TextCorpus;
 import datasets.writers.DefaultCSVFeatureFile;
 import datasets.writers.FeatureFileWriter;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import featureengineering.TextFeatureEngineer;
-import featureengineering.extractors.TraFeatureExtractor;
+import featureengineering.extractors.ObservableFeatureExtractor;
 import featureengineering.featuresets.LinguisticFeatureSet;
 import nlp.NlpParser;
 import nlp.stanford.StanfordNlpParserAdapter;
@@ -17,7 +16,7 @@ import nlp.stanford.StanfordNlpParserAdapter;
 import java.io.IOException;
 import java.util.Properties;
 
-public class TraFeatureExtractorTest
+public class ObservableFeatureExtractorTest
 {
 	public static void main(String[] args) throws IOException {
 		
@@ -34,7 +33,7 @@ public class TraFeatureExtractorTest
 		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse");
 		StanfordCoreNLP stanfordCoreNLP = new StanfordCoreNLP(props);
 		NlpParser nlpParser = new StanfordNlpParserAdapter(stanfordCoreNLP);
-		TraFeatureExtractor extractor = new TraFeatureExtractor(nlpParser);
+		ObservableFeatureExtractor extractor = new ObservableFeatureExtractor(nlpParser);
 		
 		
 		

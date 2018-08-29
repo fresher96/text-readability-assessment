@@ -2,19 +2,18 @@ package featureengineering.features.traditional;
 
 import featureengineering.features.Feature;
 import nlp.NlpToken;
-import shared.observer.Observable;
-import shared.observer.Observer;
-import shared.utils.StringUtils;
 
-public class WordCountFeature implements Feature<NlpToken>
+public class AlphaCharCountFeature implements Feature<NlpToken>
 {
 	int value = 0;
 	
 	@Override
 	public void update(NlpToken arg) {
 		String word = arg.raw();
-		if(StringUtils.isAWord(word))
-			value++;
+		for(int i=0; i<word.length(); i++)
+		{
+			if(Character.isAlphabetic(word.charAt(i)))
+				value++;
+		}
 	}
-	
 }

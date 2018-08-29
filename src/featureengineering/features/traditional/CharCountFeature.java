@@ -9,11 +9,6 @@ public class CharCountFeature implements Feature<NlpToken>
 	
 	@Override
 	public void update(NlpToken arg) {
-		value += arg.getRaw().length();
-	}
-	
-	@Override
-	public Object getValue() {
-		return value;
+		value += arg.raw().length();
 	}
 }

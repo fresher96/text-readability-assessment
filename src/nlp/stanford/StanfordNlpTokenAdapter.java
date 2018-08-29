@@ -13,10 +13,24 @@ public class StanfordNlpTokenAdapter implements NlpToken
 		this.stanfordToken = stanfordToken;
 	}
 	
+	@Override
+	public String raw() {
+		return stanfordToken.originalText();
+	}
 	
 	@Override
-	public String getRaw() {
-		return stanfordToken.get(CoreAnnotations.TextAnnotation.class);
+	public String tag() {
+		return stanfordToken.tag();
+	}
+	
+	@Override
+	public String lemma() {
+		return stanfordToken.lemma();
+	}
+	
+	@Override
+	public String ner() {
+		return stanfordToken.ner();
 	}
 }
 

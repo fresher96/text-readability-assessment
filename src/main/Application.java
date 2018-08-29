@@ -34,7 +34,7 @@ public class Application
 	
 	private JFrame frame;
 	private Cursor waitCursor = new Cursor(Cursor.WAIT_CURSOR);
-	private Cursor defaulCursor = new Cursor(Cursor.DEFAULT_CURSOR);
+	private Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
 	
 	private List<Classifier> classifierList;
 	private FeatureExtractor featureExtractor;
@@ -158,8 +158,8 @@ public class Application
 		}
 		
 		
-		txtArea.setCursor(defaulCursor);
-		frame.setCursor(defaulCursor);
+		txtArea.setCursor(defaultCursor);
+		frame.setCursor(defaultCursor);
 	}
 	
 	private void btnLoad_clicked(ActionEvent e) {
