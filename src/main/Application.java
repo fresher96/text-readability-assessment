@@ -32,9 +32,13 @@ public class Application
 	private JTextArea txtArea;
 	private JLabel lblResult;
 	
+	private JFrame frame;
+	private Cursor waitCursor = new Cursor(Cursor.WAIT_CURSOR);
+	private Cursor defaulCursor = new Cursor(Cursor.DEFAULT_CURSOR);
+	
 	private List<Classifier> classifierList;
-	FeatureExtractor featureExtractor;
-	Instances instances;
+	private FeatureExtractor featureExtractor;
+	private Instances instances;
 	
 	public Application() {
 		
@@ -127,32 +131,8 @@ public class Application
 	
 	private void btnClassify_clicked(ActionEvent e) {
 		
-//		lblResult.setText("running...");
-//		txtArea.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-		
-		txtArea.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-				frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-		
-		Thread th = new Thread(new Runnable()
-		{
-			@Override
-			public void run() {
-				lblResult.setText("running...");
-				txtArea.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//				frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-			}
-		});
-		
-//		th.start();
-//		try
-//		{
-//			th.join();
-//			System.out.println();
-//		}
-//		catch (InterruptedException e1)
-//		{
-//			e1.printStackTrace();
-//		}
+		txtArea.setCursor(waitCursor);
+		frame.setCursor(waitCursor);
 		
 		String text = txtArea.getText();
 		double[] features = castToDoubleArray(featureExtractor.extract(text));
@@ -176,6 +156,10 @@ public class Application
 			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			lblResult.setText("Result Label");
 		}
+		
+		
+		txtArea.setCursor(defaulCursor);
+		frame.setCursor(defaulCursor);
 	}
 	
 	private void btnLoad_clicked(ActionEvent e) {
@@ -201,19 +185,17 @@ public class Application
 		}
 	}
 	
-	static JFrame frame;
-	
 	
 	public static void main(String[] args) {
 		Application application = new Application();
 		
-		frame = new JFrame("Text Readability Assessment");
-		frame.setContentPane(application.pnlMain);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		application.frame = new JFrame("Text Readability Assessment");
+		application.frame.setContentPane(application.pnlMain);
+		application.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		frame.pack();
-		frame.setSize(500, 500);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
+		application.frame.setSize(500, 500);
+		application.frame.setLocationRelativeTo(null);
+		application.frame.setVisible(true);
 		
 //		frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
 //		application.pnlMain.setCursor(new Cursor(Cursor.WAIT_CURSOR));
