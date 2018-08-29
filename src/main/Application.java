@@ -187,12 +187,13 @@ public class Application
 	
 	
 	public static void main(String[] args) {
+		
 		Application application = new Application();
 		
 		application.frame = new JFrame("Text Readability Assessment");
 		application.frame.setContentPane(application.pnlMain);
 		application.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		frame.pack();
+//		application.frame.pack();
 		application.frame.setSize(500, 500);
 		application.frame.setLocationRelativeTo(null);
 		application.frame.setVisible(true);

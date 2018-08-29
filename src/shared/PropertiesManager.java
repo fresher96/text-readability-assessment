@@ -11,7 +11,7 @@ public class PropertiesManager
 	private static Object lock = new Object();
 	
 	private Properties prop;
-	private String path = "etc/config.properties";
+	private String path = System.getProperty("user.dir") + "/etc/config.properties";
 	
 	private PropertiesManager() throws IOException {
 		prop = new Properties();
