@@ -1,4 +1,4 @@
-package cleaners.automatic;
+package featureengineering.cleaners;
 
 import datasets.Document;
 

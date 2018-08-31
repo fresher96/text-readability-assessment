@@ -1,7 +1,7 @@
 package tests;
 
-import cleaners.automatic.MakeLowerCaseCleaner;
-import cleaners.automatic.TextCleaner;
+import featureengineering.cleaners.MakeLowerCaseCleaner;
+import featureengineering.cleaners.TextCleaner;
 import datasets.corpora.LevelSeparatedTextCorpus;
 import datasets.corpora.OneStopEnglishCorpus;
 import datasets.writers.DefaultCSVFeatureFile;

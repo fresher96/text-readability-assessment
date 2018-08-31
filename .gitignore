@@ -73,5 +73,21 @@ fabric.properties
 
 code.jar
 
+# plantuml files
+code.plantuml
+src/*.plantuml
+src/*/*.plantuml
+src/*/*/*.plantuml
+src/*/*/*/*.plantuml
+src/*/*/*/*/*.plantuml
+src/*/*/*/*/*/*.plantuml
+src/*/*/*/*/*/*/*.plantuml
+src/*/*/*/*/*/*/*/*.plantuml
+
 # temp
 /etc/models/
+
+
+
+
+

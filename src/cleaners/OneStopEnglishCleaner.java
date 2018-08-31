@@ -1,4 +1,4 @@
-package cleaners.manual;
+package cleaners;
 
 import cleaners.UTF8Converter;
 import shared.utils.FileUtils;

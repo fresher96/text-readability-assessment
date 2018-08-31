@@ -1,8 +1,8 @@
 package tests;
 
-import cleaners.automatic.ExampleTextCleaner;
-import cleaners.automatic.MakeLowerCaseCleaner;
-import cleaners.automatic.TextCleaner;
+import featureengineering.cleaners.ExampleTextCleaner;
+import featureengineering.cleaners.MakeLowerCaseCleaner;
+import featureengineering.cleaners.TextCleaner;
 import datasets.*;
 import datasets.corpora.LevelSeparatedTextCorpus;
 import datasets.corpora.ListBasedTextCorpus;

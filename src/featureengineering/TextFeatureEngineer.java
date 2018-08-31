@@ -1,6 +1,6 @@
 package featureengineering;
 
-import cleaners.automatic.TextCleaner;
+import featureengineering.cleaners.TextCleaner;
 import datasets.*;
 import datasets.corpora.TextCorpus;
 import datasets.writers.FeatureWriter;
