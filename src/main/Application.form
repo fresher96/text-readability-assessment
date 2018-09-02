@@ -117,6 +117,8 @@
                 <constraints/>
                 <properties>
                   <font name="Times New Roman" size="15"/>
+                  <lineWrap value="true"/>
+                  <wrapStyleWord value="true"/>
                 </properties>
               </component>
             </children>

@@ -1,6 +1,9 @@
 package main;
 
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
+import edu.stanford.nlp.util.CoreMap;
 import featureengineering.extractors.FeatureExtractor;
 import featureengineering.extractors.PrototypeFeatureExtractorAdapter;
 import shared.Debugger;
@@ -129,37 +132,65 @@ public class Application
 	}
 	
 	
+	private String classify(String text){
+		
+		double[] features = castToDoubleArray(featureExtractor.extract(text));
+		
+		Instance instance = new DenseInstance(1, features);
+		instance.setDataset(instances);
+		
+//		for(double d : features) System.out.println(d);
+		
+		Classifier cls = classifierList.get(comboClassifier.getSelectedIndex());
+		String ret;
+		try
+		{
+			double result = cls.classifyInstance(instance);
+//			String resClass = instance.
+			ret = instances.classAttribute().value((int)(result + 0.5));
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			ret = "error, retry later";
+		}
+		
+		return ret;
+	}
+	
 	private void btnClassify_clicked(ActionEvent e) {
 		
 		txtArea.setCursor(waitCursor);
 		frame.setCursor(waitCursor);
 		
 		String text = txtArea.getText();
-		double[] features = castToDoubleArray(featureExtractor.extract(text));
-		
-		Instance instance = new DenseInstance(1, features);
-		instance.setDataset(instances);
-		
-		for(double d : features) System.out.println(d);
-		
-		Classifier cls = classifierList.get(comboClassifier.getSelectedIndex());
-		double result = 0;
-		try
-		{
-			result = cls.classifyInstance(instance);
-//			String resClass = instance.
-			lblResult.setText(instances.classAttribute().value((int)(result + 0.5)));
-		}
-		catch (Exception ex)
-		{
-			ex.printStackTrace();
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			lblResult.setText("Result Label");
-		}
-		
+		lblResult.setText(classify(text));
 		
 		txtArea.setCursor(defaultCursor);
 		frame.setCursor(defaultCursor);
+		
+		test(text);
+	}
+	
+	private void test(String text) {
+		System.out.println("...");
+		
+		Properties props = new Properties();
+		props.setProperty("annotators", "tokenize, ssplit");
+		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+		
+		Annotation ann = new Annotation(text);
+		pipeline.annotate(ann);
+		
+		List<CoreMap> sens = ann.get(CoreAnnotations.SentencesAnnotation.class);
+		int i = 0;
+		for(CoreMap sen : sens)
+		{
+			i++;
+//			System.out.print(i + " " + sen.toString());
+			System.out.println(classify(sen.toString()));
+		}
 	}
 	
 	private void btnLoad_clicked(ActionEvent e) {

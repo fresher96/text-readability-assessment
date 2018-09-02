@@ -52,6 +52,7 @@ public class NlpTest
 		
 		for (CoreMap sentence : sentences)
 		{
+			System.out.println(sentence.toString());
 			// traversing the words in the current sentence
 			// a CoreLabel is a CoreMap with additional token-specific methods
 			for (CoreLabel token : sentence.get(TokensAnnotation.class))
