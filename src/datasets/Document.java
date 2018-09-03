@@ -9,6 +9,16 @@ public class Document
 	private String name;
 	private String path;
 	
+	
+	public Document(){
+	
+	}
+	
+	public Document(String text){
+		setText(text);
+	}
+	
+	
 	public String getText() {
 		return text;
 	}

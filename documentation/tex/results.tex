@@ -1,6 +1,108 @@
 
 
 \chapter{الاختبارات والنتائج}
+todo
+
+\section{نتائج الـ \eng{OSE}}
+todo
+إنّ أفضل نسبة صحّة تم تحقيقها على مجموعة المعطيات هذه هي $78.13\%$،
+باستخدام $155$ ميزة~\cite{vajjala2018}.
+وللأسف لم يتم ذكر معايير أخرى لتقييم نتائجهم غير نسبة الصحّة.
+نسبة الصحّة التي تم تحقيقها في هذا المشروع هي $80.83\%$.
+يبيّن الجدول~\ref{tbl:ose:metrics} قيم المعايير المختلفة المستخدمة لتقييم الأداء.
+لمعرفة دلالاتها انظر إلى الفقرة~\ref{sec:metrics}.
+كما يبيّن الجدول~\ref{tbl:ose:matrix} مصفوفة الحيرة.
+\begin{table}[htb]
+	\centering
+	{
+		\setlength{\tabcolsep}{0.5em} % for the horizontal padding
+		\renewcommand{\arraystretch}{1.4}% for the vertical padding
+		\selectlanguage{english}
+		
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			
+			Level &
+			Precision &
+			Recall &
+			F-Score \\
+			\hline
+			
+			Elementary &
+			0.865 &
+			0.941 &
+			0.901 \\
+			\hline
+			
+			Intermediate &
+			0.742 &
+			0.710 &
+			0.726 \\
+			\hline
+			
+			Advanced &
+			0.811 &
+			0.768 &
+			0.789 \\
+			\hline
+			
+			Average &
+			0.806 &
+			0.808 &
+			0.806 \\
+			\hline
+			
+		\end{tabular}
+	}
+	\caption{%
+		معايير تقييم الأداء لمعطيات الـ \eng{OSE}.
+	}
+	\label{tbl:ose:metrics}
+\end{table}
+
+\begin{table}[htb]
+	\centering
+	{
+		\setlength{\tabcolsep}{0.5em} % for the horizontal padding
+		\renewcommand{\arraystretch}{1.4}% for the vertical padding
+		\selectlanguage{english}
+		
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			
+			\backslashbox{actual}{predicted} &
+			Elementary &
+			Intermediate &
+			Advanced \\
+			\hline
+			
+			Elementary &
+			64 &
+			4 &
+			0 \\
+			\hline
+			
+			Intermediate &
+			10 &
+			49 &
+			10 \\
+			\hline
+			
+			Advanced &
+			0 &
+			13 &
+			43 \\
+			\hline
+			
+			
+		\end{tabular}
+	}
+	\caption{%
+		مصفوفة الحيرة لمعطيات الـ \eng{OSE}.
+	}
+	\label{tbl:ose:matrix}
+\end{table}
 
 
-\section{النتائج على المعطيات \eng{OSE}}
+
+

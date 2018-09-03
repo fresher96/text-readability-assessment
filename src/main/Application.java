@@ -1,9 +1,12 @@
 package main;
 
+import datasets.Document;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
+import featureengineering.cleaners.MakeLowerCaseCleaner;
+import featureengineering.cleaners.TextCleaner;
 import featureengineering.extractors.FeatureExtractor;
 import featureengineering.extractors.PrototypeFeatureExtractorAdapter;
 import shared.Debugger;
@@ -44,56 +47,6 @@ public class Application
 	private Instances instances;
 	
 	public Application() {
-		
-		prototype.FeatureExtractor prototypeFeatures = new prototype.FeatureExtractor();
-		
-		prototype.TraditionalFeatureSet traditionalFeatureSet = new prototype.TraditionalFeatureSet();
-		traditionalFeatureSet.addAllFeatures();
-		prototypeFeatures.featureSetList.add(traditionalFeatureSet);
-		
-		Properties props = new Properties();
-		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse");
-		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
-		prototype.NlpFeatureSet nlpFeatureSet = new prototype.NlpFeatureSet(pipeline);
-		prototypeFeatures.featureSetList.add(nlpFeatureSet);
-		
-		featureExtractor = new PrototypeFeatureExtractorAdapter(prototypeFeatures);
-		
-		
-		// loading classifiers
-		classifierList = new ArrayList<>();
-		try
-		{
-			String modelsDirectory = PropertiesManager.getInstance().get("ModelsDirectory");
-			List<File> modelList = FileUtils.getFiles(modelsDirectory);
-			
-			if(modelList.size() == 0) throw new Exception("no models found");
-			
-			for (File model : modelList)
-			{
-				String name = model.getName();
-				
-				Object[] o = SerializationHelper.readAll(modelsDirectory + name);
-				Classifier cls = (Classifier) o[0];
-				instances = (Instances) o[1];
-				System.out.println(instances);
-				
-				classifierList.add(cls);
-				
-				if (!name.endsWith(".model")) throw new Exception("couldn't load model " + modelsDirectory + name);
-				
-				name = name.substring(0, name.length() - 6);
-				
-				comboClassifier.addItem(name);
-			}
-		}
-		catch (Exception ex)
-		{
-			ex.printStackTrace();
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error Loading Classifiers", JOptionPane.ERROR_MESSAGE);
-			System.exit(0);
-		}
-		
 		btnLoad.addActionListener(new ActionListener()
 		{
 			@Override
@@ -111,34 +64,25 @@ public class Application
 		});
 	}
 	
-	public <T, E extends T> List<E> cast(List<T> list) {
-		List<E> ret = new ArrayList<>();
-		for (T el : list)
-		{
-			ret.add((E) el);
-		}
-		return ret;
-	}
-	
-	public double[] castToDoubleArray(List<Object> list) {
+	private double[] castToDoubleArray(List<Object> list) {
 		double[] ret = new double[list.size()];
 		int index = -1;
 		for (Object el : list)
 		{
 			index++;
-			ret[index] = (double)list.get(index);
+			ret[index] = (double) list.get(index);
 		}
 		return ret;
 	}
 	
-	
-	private String classify(String text){
+	private String classify(String text) {
 		
+		text = clean(text);
 		double[] features = castToDoubleArray(featureExtractor.extract(text));
 		
 		Instance instance = new DenseInstance(1, features);
 		instance.setDataset(instances);
-		
+
 //		for(double d : features) System.out.println(d);
 		
 		Classifier cls = classifierList.get(comboClassifier.getSelectedIndex());
@@ -146,17 +90,23 @@ public class Application
 		try
 		{
 			double result = cls.classifyInstance(instance);
-//			String resClass = instance.
-			ret = instances.classAttribute().value((int)(result + 0.5));
+			ret = instances.classAttribute().value((int) (result + 0.5));
 		}
 		catch (Exception ex)
 		{
 			ex.printStackTrace();
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			err(ex.getMessage());
 			ret = "error, retry later";
 		}
 		
 		return ret;
+	}
+	
+	private String clean(String text) {
+		Document doc = new Document(text);
+		TextCleaner cleaner = new MakeLowerCaseCleaner();
+		cleaner.clean(doc);
+		return doc.getText();
 	}
 	
 	private void btnClassify_clicked(ActionEvent e) {
@@ -169,34 +119,12 @@ public class Application
 		
 		txtArea.setCursor(defaultCursor);
 		frame.setCursor(defaultCursor);
-		
-		test(text);
-	}
-	
-	private void test(String text) {
-		System.out.println("...");
-		
-		Properties props = new Properties();
-		props.setProperty("annotators", "tokenize, ssplit");
-		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
-		
-		Annotation ann = new Annotation(text);
-		pipeline.annotate(ann);
-		
-		List<CoreMap> sens = ann.get(CoreAnnotations.SentencesAnnotation.class);
-		int i = 0;
-		for(CoreMap sen : sens)
-		{
-			i++;
-//			System.out.print(i + " " + sen.toString());
-			System.out.println(classify(sen.toString()));
-		}
 	}
 	
 	private void btnLoad_clicked(ActionEvent e) {
 		
+		// if the path doesn't exist, then home directory will be used
 		JFileChooser fileChooser = new JFileChooser("D:\\work space\\datasets\\OSE_cleaned\\5_texts_final\\1_Intermediate\\");
-//		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Text Files (*.txt)", "txt"));
 		
@@ -212,25 +140,93 @@ public class Application
 		catch (IOException ex)
 		{
 			ex.printStackTrace();
-			JOptionPane.showMessageDialog(null, ex.getMessage(), "couldn't open the file", JOptionPane.ERROR_MESSAGE);
+			err(ex.getMessage(), "couldn't open the file");
 		}
 	}
 	
+	private void loadExtractor() {
+		prototype.FeatureExtractor prototypeFeatures = new prototype.FeatureExtractor();
+		
+		prototype.TraditionalFeatureSet traditionalFeatureSet = new prototype.TraditionalFeatureSet();
+		traditionalFeatureSet.addAllFeatures();
+		prototypeFeatures.featureSetList.add(traditionalFeatureSet);
+		
+		Properties props = new Properties();
+		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, parse");
+		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
+		prototype.NlpFeatureSet nlpFeatureSet = new prototype.NlpFeatureSet(pipeline);
+		prototypeFeatures.featureSetList.add(nlpFeatureSet);
+		
+		featureExtractor = new PrototypeFeatureExtractorAdapter(prototypeFeatures);
+	}
+	
+	private void loadClassifiers() {
+		classifierList = new ArrayList<>();
+		instances = null;
+		try
+		{
+			String modelsDirectory = PropertiesManager.getInstance().get("ModelsDirectory");
+			List<File> modelList = FileUtils.getFiles(modelsDirectory);
+			
+			if (modelList.size() == 0) throw new Exception("no models found");
+			
+			for (File model : modelList)
+			{
+				String name = model.getName();
+				
+				Object[] o = SerializationHelper.readAll(modelsDirectory + name);
+				Classifier cls = (Classifier) o[0];
+				if (instances == null) instances = (Instances) o[1];
+				
+				classifierList.add(cls);
+				
+				if (!name.endsWith(".model")) throw new Exception("couldn't load model " + modelsDirectory + name);
+				
+				name = name.substring(0, name.length() - 6);
+				comboClassifier.addItem(name);
+			}
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+			err(ex.getMessage(), "Error Loading Classifiers");
+			System.exit(0);
+		}
+	}
+	
+	private void loadFrame() {
+		frame = new JFrame("Text Readability Assessment");
+		frame.setContentPane(pnlMain);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.pack();
+		frame.setSize(500, 500);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
+	
+	private void err(String msg) {
+		err(msg, "Unexpected Error");
+	}
+	
+	private void err(String msg, String title) {
+		JOptionPane.showMessageDialog(null, msg, title, JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void run() {
+		try
+		{
+			loadExtractor();
+			loadClassifiers();
+			loadFrame();
+		}
+		catch (Exception ex)
+		{
+			err(ex.getMessage());
+		}
+	}
 	
 	public static void main(String[] args) {
-		
-		Application application = new Application();
-		
-		application.frame = new JFrame("Text Readability Assessment");
-		application.frame.setContentPane(application.pnlMain);
-		application.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		application.frame.pack();
-		application.frame.setSize(500, 500);
-		application.frame.setLocationRelativeTo(null);
-		application.frame.setVisible(true);
-		
-//		frame.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//		application.pnlMain.setCursor(new Cursor(Cursor.WAIT_CURSOR));
-//		application.txtArea.setCursor(new Cursor(Cursor.WAIT_CURSOR));
+		Application app = new Application();
+		app.run();
 	}
 }
