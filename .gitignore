@@ -86,7 +86,7 @@ src/*/*/*/*/*/*/*/*.plantuml
 
 # temp
 /etc/models/
-
+/to_submit/
 
 
 
