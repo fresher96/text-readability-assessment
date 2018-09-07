@@ -65,6 +65,7 @@ fabric.properties
 
 /libs/
 /models/
+/documentation/presentation/
 
 /etc/*.csv
 !OneStopEnglishCorpus_authors_features.csv

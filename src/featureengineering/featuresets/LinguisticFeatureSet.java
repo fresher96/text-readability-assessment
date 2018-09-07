@@ -31,11 +31,7 @@ public class LinguisticFeatureSet implements FeatureSet<NlpSentence>
 		List<Object> ret = new ArrayList<>();
 		
 		ret.add((double) clauses.wordCount() / (double) clauses.count());
-//		ret.add((double) clauses.wordCount() / (double) clauses.count());
 		ret.add((double) TUnits.wordCount() / (double) TUnits.count());
-		
-		ret.add((double) clauses.wordCount() / (double) clauses.count());
-		
 		
 		return ret;
 	}
