@@ -1,5 +1,43 @@
 
 
-\chapter*{الملخص}
+\section*{الملخص}
 \addcontentsline{toc}{section}{الملخص}
-نص
+تُعد القراءة نشاط مهم نمارسه في حياتنا اليومية،
+سواء للمطالعة أو قراءة الأخبار أو التعلم أو غيرها.
+فيهتم هذا المشروع ببناء مُصنّف قادر على تقييم مقروئية النصوص المكتوبة باللغة الانكليزية.
+وتصنيفها وفق عدّة مستويات (سهل، متوسط، صعب).
+علماً بأن عدد هذه المستويات والتباين بين صعوبتها يتعلق بالمعطيات التي تم استخدامها لبناء هذا المصنّف.
+تتمحور منهجية العمل حول استخراج مجموعة من الميزات من هذه النصوص.
+ميزات تقليدية (مثل طول النص)، ومفرداتية (تعبّر عن تنوع المفردات المستخدمة)، ونحوية (تعكس الصياغة والتراكيب المستخدمة).
+ثمّ استخدام خوارزميات تعلم الآلة (تم استخدام الـ \eng{SVM} بشكل أساسي) لتدريب وبناء مصنّف باستخدام هذه الميزات.
+تم استخدام مجموعة المعطيات \eng{One Stop English Corpus} والحصول على نسبة صِحّة $80.83\%$.
+علماً أن أعلى نسبة صِحّة تم الحصول عليها باستخدام هذه المعطيات هي $78.13\%$.
+وأيضاً خلال المشروع تم بناء مكتبة بلغة جافا لاستخراج الميزات من النصوص.
+فيمكن بسهولة استخدامها لاستخراج الميزات التي تم تنجيزها من نص ما، أو توسيع هذه المكتبة بتعريف ميزات جديدة.
+
+
+\vfill
+\selectlanguage{english}
+\section*{Abstract}
+
+Reading is an important activity in our daily lives.
+We read the news, we read to learn, etc.
+This project aims to build a classifier to automatically assess text readability for texts written in English.
+By classifying them into different levels (easy, medium, and hard).
+Noting that, the number of levels and the variance of their difficulty depends on the data used to build the classifier.
+The methodology is to extract certain set of features from these texts.
+Traditional features (e.g. text length), lexical features (measure vocabulary being used),
+and syntactic features (measure sentence complexity).
+Then using machine learning algorithms (SVM mainly) to train and build a classifier using these features.
+Using One Stop English Corpus as the dataset, we achieved an accuracy of $80.83\%$.
+Given that the best achieved accuracy on this dataset is $70.13\%$.
+Also, we implemented a library in java to extract features from texts.
+It can be easily used to extract the features we implemented from a given text.
+It also can be extended by implementing new features.
+
+\selectlanguage{arabic}
+
+
+
+
+

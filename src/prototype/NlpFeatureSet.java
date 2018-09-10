@@ -137,7 +137,7 @@ public class NlpFeatureSet extends FeatureSet
 			nComplexNominal += count("NP !> NP [<< JJ|POS|PP|S|VBG |<< (NP $++ NP !$+ CC)]", tree, tpc);
 			nComplexNominal += count("SBAR [$+ VP | > VP] & [<# WHNP |<# (IN < That|that|For|for) |<, S]", tree, tpc);
 			nComplexNominal += count("S < (VP <# VBG|TO) $+ VP", tree, tpc);
-			nVerbPhrase += count("ADJP|ADVP|NP|VP < CC", tree, tpc);
+			nVerbPhrase += count("VP > S|SQ|SINV", tree, tpc);
 			
 			/* others */
 			

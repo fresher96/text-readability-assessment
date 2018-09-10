@@ -39,7 +39,7 @@ public class VerbPhraseCountFeature implements Feature<NlpSentence>
 		
 		StanfordNlpParseTreeAdapter treeAdapter = (StanfordNlpParseTreeAdapter)nlpParseTree;
 		
-		apply(treeAdapter, "ADJP|ADVP|NP|VP < CC");
+		apply(treeAdapter, "VP > S|SQ|SINV");
 	}
 	
 	private void apply(StanfordNlpParseTreeAdapter treeAdapter, String pattern) {
