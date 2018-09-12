@@ -337,7 +337,7 @@ $$ \mathrm{F1-score} = 2 \cdot \frac{ \mathrm{Precision} \cdot \mathrm{Recall}}
 
 التحليل الصرفي \eng{Morphological Analysis} وهو المرحلة التي يجري فيها تحليل الكلمة إلى مكوناتها الأساسية.
 يُنفّذ هذا التحليل على مستوى الكلمة دون النظر إلى السياق.
-بشكل أساسي هناك مرحليتن لهذا التحليل. التقطيع \eng{Tokenization} والتشذيب \eng{Stemming}.
+بشكل أساسي هناك مرحليتن لهذا التحليل. التقطيع \eng{Tokenization} والتجذير \eng{Stemming}.
 
 خرج مرحلة التقطيع هو الرموز التي تكون الجملة \eng{Tokens}.
 أي مثلاً إنّ الجملة \\
@@ -346,7 +346,7 @@ $$ \mathrm{F1-score} = 2 \cdot \frac{ \mathrm{Precision} \cdot \mathrm{Recall}}
 \centerline{ \eng{ \{Google | inc. | is | huge | .\} } }
 لاحظ أن النقطة الأخيرة تعتبر رمز منفصل بينما النقطة في الكلمة \eng{inc.} ليست رمز منفصل.
 
-خرج مرحلة التشذيب هو جذر الكلمة، بالإضافة إلى السوابق واللواحق، ومعلومات أخرى تختلف باختلاف اللغة.
+خرج مرحلة التجذير هو جذر الكلمة، بالإضافة إلى السوابق واللواحق، ومعلومات أخرى تختلف باختلاف اللغة.
 مثلاً إن جذر الكلمات
 \eng{fish, fishing, fished, fisher}
 هو \eng{fish}.
@@ -361,16 +361,16 @@ $$ \mathrm{F1-score} = 2 \cdot \frac{ \mathrm{Precision} \cdot \mathrm{Recall}}
 الخرج الناتج يكون النمط النحوي لهذه الكلمة (اسم، فعل، صفة، إلخ).
 
 \item
-التكتيل \eng{Chunking} وهو تقسيم الجملة إلى عبارات أصغر؛ أي عبارات اسمية، أو عبارات فعلية، إلخ.
+التقطيع الجمل \eng{Chunking} وهو تقسيم الجملة إلى عبارات أصغر؛ أي عبارات اسمية، أو عبارات فعلية، إلخ.
 يوضح الشكل~\ref{fig:nlp:chunking} مثال على ذلك.
 
  \begin{figure}[htb]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/nlp-chunking2.PNG}
 	\caption[%
-		مثال عن عملية التكتيل.
+		مثال عن عملية التقطيع الجمل.
 	]{%
-		عمليّة التكتيل للجملة
+		عمليّة التقطيع الجمل للجملة
 		\eng{He reckons the current account deficit will narrow to only \# 1.8 billion in September}%
 %		\eng{He reckons the current account deficit will narrow to only \#}%
 		. تم تقسيم هذه الجملة إلى جمل فعلية
