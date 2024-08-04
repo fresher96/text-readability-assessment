@@ -213,9 +213,6 @@ public class Prototype
 	
 	public void processDir(String path, int labelIdx) throws IOException {
 		
-		
-		//featuresCsvFile.println("hi \r\n how are you,nigga,wigga");
-		
 		File folder = new File(path);
 		List<File> listOfFiles = Arrays.asList(folder.listFiles());
 		
